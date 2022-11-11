@@ -1,0 +1,673 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BA7BD1AA291E3EE200231570 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1A9291E3EE200231570 /* AppDelegate.swift */; };
+		BA7BD1AC291E3EE200231570 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1AB291E3EE200231570 /* SceneDelegate.swift */; };
+		BA7BD1AE291E3EE200231570 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1AD291E3EE200231570 /* ViewController.swift */; };
+		BA7BD1B3291E3EE400231570 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA7BD1B2291E3EE400231570 /* Assets.xcassets */; };
+		BA7BD1B6291E3EE400231570 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA7BD1B4291E3EE400231570 /* LaunchScreen.storyboard */; };
+		BA7BD1C1291E3EE400231570 /* WalkieTalkieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1C0291E3EE400231570 /* WalkieTalkieTests.swift */; };
+		BA7BD1CB291E3EE400231570 /* WalkieTalkieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1CA291E3EE400231570 /* WalkieTalkieUITests.swift */; };
+		BA7BD1CD291E3EE400231570 /* WalkieTalkieUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1CC291E3EE400231570 /* WalkieTalkieUITestsLaunchTests.swift */; };
+		BA7BD1E0291E3FD900231570 /* SecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA7BD1DC291E3FD800231570 /* SecondViewController.xib */; };
+		BA7BD1E1291E3FD900231570 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1DD291E3FD800231570 /* FirstViewController.swift */; };
+		BA7BD1E2291E3FD900231570 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1DE291E3FD900231570 /* SecondViewController.swift */; };
+		BA7BD1E3291E3FD900231570 /* FirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA7BD1DF291E3FD900231570 /* FirstViewController.xib */; };
+		BA7BD1E8291E400300231570 /* SecondScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1E4291E400300231570 /* SecondScreenViewModel.swift */; };
+		BA7BD1E9291E400300231570 /* SecondScreenViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1E5291E400300231570 /* SecondScreenViewModelProtocol.swift */; };
+		BA7BD1EA291E400300231570 /* FirstScreenViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1E6291E400300231570 /* FirstScreenViewModelProtocol.swift */; };
+		BA7BD1EB291E400300231570 /* FirstScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1E7291E400300231570 /* FirstScreenViewModel.swift */; };
+		BA7BD1F1291E401200231570 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1EC291E401200231570 /* AppModel.swift */; };
+		BA7BD1F2291E401200231570 /* CounterModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1ED291E401200231570 /* CounterModelProtocol.swift */; };
+		BA7BD1F3291E401200231570 /* CounterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1EE291E401200231570 /* CounterModel.swift */; };
+		BA7BD1F4291E401200231570 /* AppModelConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1EF291E401200231570 /* AppModelConfigurator.swift */; };
+		BA7BD1F5291E401200231570 /* AppModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1F0291E401200231570 /* AppModelProtocol.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BA7BD1BD291E3EE400231570 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BA7BD19E291E3EE200231570 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BA7BD1A5291E3EE200231570;
+			remoteInfo = WalkieTalkie;
+		};
+		BA7BD1C7291E3EE400231570 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BA7BD19E291E3EE200231570 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BA7BD1A5291E3EE200231570;
+			remoteInfo = WalkieTalkie;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BA7BD1A6291E3EE200231570 /* WalkieTalkie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkieTalkie.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA7BD1A9291E3EE200231570 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BA7BD1AB291E3EE200231570 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		BA7BD1AD291E3EE200231570 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BA7BD1B2291E3EE400231570 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BA7BD1B5291E3EE400231570 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BA7BD1B7291E3EE400231570 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA7BD1BC291E3EE400231570 /* WalkieTalkieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalkieTalkieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA7BD1C0291E3EE400231570 /* WalkieTalkieTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkieTalkieTests.swift; sourceTree = "<group>"; };
+		BA7BD1C6291E3EE400231570 /* WalkieTalkieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalkieTalkieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA7BD1CA291E3EE400231570 /* WalkieTalkieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkieTalkieUITests.swift; sourceTree = "<group>"; };
+		BA7BD1CC291E3EE400231570 /* WalkieTalkieUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkieTalkieUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		BA7BD1DC291E3FD800231570 /* SecondViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecondViewController.xib; sourceTree = "<group>"; };
+		BA7BD1DD291E3FD800231570 /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		BA7BD1DE291E3FD900231570 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		BA7BD1DF291E3FD900231570 /* FirstViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstViewController.xib; sourceTree = "<group>"; };
+		BA7BD1E4291E400300231570 /* SecondScreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondScreenViewModel.swift; sourceTree = "<group>"; };
+		BA7BD1E5291E400300231570 /* SecondScreenViewModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondScreenViewModelProtocol.swift; sourceTree = "<group>"; };
+		BA7BD1E6291E400300231570 /* FirstScreenViewModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstScreenViewModelProtocol.swift; sourceTree = "<group>"; };
+		BA7BD1E7291E400300231570 /* FirstScreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstScreenViewModel.swift; sourceTree = "<group>"; };
+		BA7BD1EC291E401200231570 /* AppModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		BA7BD1ED291E401200231570 /* CounterModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterModelProtocol.swift; sourceTree = "<group>"; };
+		BA7BD1EE291E401200231570 /* CounterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterModel.swift; sourceTree = "<group>"; };
+		BA7BD1EF291E401200231570 /* AppModelConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModelConfigurator.swift; sourceTree = "<group>"; };
+		BA7BD1F0291E401200231570 /* AppModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModelProtocol.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BA7BD1A3291E3EE200231570 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA7BD1B9291E3EE400231570 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA7BD1C3291E3EE400231570 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BA7BD19D291E3EE200231570 = {
+			isa = PBXGroup;
+			children = (
+				BA7BD1A8291E3EE200231570 /* WalkieTalkie */,
+				BA7BD1BF291E3EE400231570 /* WalkieTalkieTests */,
+				BA7BD1C9291E3EE400231570 /* WalkieTalkieUITests */,
+				BA7BD1A7291E3EE200231570 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BA7BD1A7291E3EE200231570 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BA7BD1A6291E3EE200231570 /* WalkieTalkie.app */,
+				BA7BD1BC291E3EE400231570 /* WalkieTalkieTests.xctest */,
+				BA7BD1C6291E3EE400231570 /* WalkieTalkieUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BA7BD1A8291E3EE200231570 /* WalkieTalkie */ = {
+			isa = PBXGroup;
+			children = (
+				BA7BD1DB291E3F6A00231570 /* Models */,
+				BA7BD1DA291E3F6200231570 /* ViewModels */,
+				BA7BD1D9291E3F5B00231570 /* Views */,
+				BA7BD1A9291E3EE200231570 /* AppDelegate.swift */,
+				BA7BD1AB291E3EE200231570 /* SceneDelegate.swift */,
+				BA7BD1AD291E3EE200231570 /* ViewController.swift */,
+				BA7BD1B2291E3EE400231570 /* Assets.xcassets */,
+				BA7BD1B4291E3EE400231570 /* LaunchScreen.storyboard */,
+				BA7BD1B7291E3EE400231570 /* Info.plist */,
+			);
+			path = WalkieTalkie;
+			sourceTree = "<group>";
+		};
+		BA7BD1BF291E3EE400231570 /* WalkieTalkieTests */ = {
+			isa = PBXGroup;
+			children = (
+				BA7BD1C0291E3EE400231570 /* WalkieTalkieTests.swift */,
+			);
+			path = WalkieTalkieTests;
+			sourceTree = "<group>";
+		};
+		BA7BD1C9291E3EE400231570 /* WalkieTalkieUITests */ = {
+			isa = PBXGroup;
+			children = (
+				BA7BD1CA291E3EE400231570 /* WalkieTalkieUITests.swift */,
+				BA7BD1CC291E3EE400231570 /* WalkieTalkieUITestsLaunchTests.swift */,
+			);
+			path = WalkieTalkieUITests;
+			sourceTree = "<group>";
+		};
+		BA7BD1D9291E3F5B00231570 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BA7BD1DD291E3FD800231570 /* FirstViewController.swift */,
+				BA7BD1DF291E3FD900231570 /* FirstViewController.xib */,
+				BA7BD1DE291E3FD900231570 /* SecondViewController.swift */,
+				BA7BD1DC291E3FD800231570 /* SecondViewController.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BA7BD1DA291E3F6200231570 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				BA7BD1E7291E400300231570 /* FirstScreenViewModel.swift */,
+				BA7BD1E6291E400300231570 /* FirstScreenViewModelProtocol.swift */,
+				BA7BD1E4291E400300231570 /* SecondScreenViewModel.swift */,
+				BA7BD1E5291E400300231570 /* SecondScreenViewModelProtocol.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		BA7BD1DB291E3F6A00231570 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BA7BD1EC291E401200231570 /* AppModel.swift */,
+				BA7BD1EF291E401200231570 /* AppModelConfigurator.swift */,
+				BA7BD1F0291E401200231570 /* AppModelProtocol.swift */,
+				BA7BD1EE291E401200231570 /* CounterModel.swift */,
+				BA7BD1ED291E401200231570 /* CounterModelProtocol.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BA7BD1A5291E3EE200231570 /* WalkieTalkie */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BA7BD1D0291E3EE400231570 /* Build configuration list for PBXNativeTarget "WalkieTalkie" */;
+			buildPhases = (
+				BA7BD1A2291E3EE200231570 /* Sources */,
+				BA7BD1A3291E3EE200231570 /* Frameworks */,
+				BA7BD1A4291E3EE200231570 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WalkieTalkie;
+			productName = WalkieTalkie;
+			productReference = BA7BD1A6291E3EE200231570 /* WalkieTalkie.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BA7BD1BB291E3EE400231570 /* WalkieTalkieTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BA7BD1D3291E3EE400231570 /* Build configuration list for PBXNativeTarget "WalkieTalkieTests" */;
+			buildPhases = (
+				BA7BD1B8291E3EE400231570 /* Sources */,
+				BA7BD1B9291E3EE400231570 /* Frameworks */,
+				BA7BD1BA291E3EE400231570 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BA7BD1BE291E3EE400231570 /* PBXTargetDependency */,
+			);
+			name = WalkieTalkieTests;
+			productName = WalkieTalkieTests;
+			productReference = BA7BD1BC291E3EE400231570 /* WalkieTalkieTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		BA7BD1C5291E3EE400231570 /* WalkieTalkieUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BA7BD1D6291E3EE400231570 /* Build configuration list for PBXNativeTarget "WalkieTalkieUITests" */;
+			buildPhases = (
+				BA7BD1C2291E3EE400231570 /* Sources */,
+				BA7BD1C3291E3EE400231570 /* Frameworks */,
+				BA7BD1C4291E3EE400231570 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BA7BD1C8291E3EE400231570 /* PBXTargetDependency */,
+			);
+			name = WalkieTalkieUITests;
+			productName = WalkieTalkieUITests;
+			productReference = BA7BD1C6291E3EE400231570 /* WalkieTalkieUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BA7BD19E291E3EE200231570 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1400;
+				LastUpgradeCheck = 1400;
+				TargetAttributes = {
+					BA7BD1A5291E3EE200231570 = {
+						CreatedOnToolsVersion = 14.0.1;
+					};
+					BA7BD1BB291E3EE400231570 = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = BA7BD1A5291E3EE200231570;
+					};
+					BA7BD1C5291E3EE400231570 = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = BA7BD1A5291E3EE200231570;
+					};
+				};
+			};
+			buildConfigurationList = BA7BD1A1291E3EE200231570 /* Build configuration list for PBXProject "WalkieTalkie" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BA7BD19D291E3EE200231570;
+			productRefGroup = BA7BD1A7291E3EE200231570 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BA7BD1A5291E3EE200231570 /* WalkieTalkie */,
+				BA7BD1BB291E3EE400231570 /* WalkieTalkieTests */,
+				BA7BD1C5291E3EE400231570 /* WalkieTalkieUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BA7BD1A4291E3EE200231570 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA7BD1E0291E3FD900231570 /* SecondViewController.xib in Resources */,
+				BA7BD1E3291E3FD900231570 /* FirstViewController.xib in Resources */,
+				BA7BD1B6291E3EE400231570 /* LaunchScreen.storyboard in Resources */,
+				BA7BD1B3291E3EE400231570 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA7BD1BA291E3EE400231570 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA7BD1C4291E3EE400231570 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BA7BD1A2291E3EE200231570 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA7BD1AE291E3EE200231570 /* ViewController.swift in Sources */,
+				BA7BD1AA291E3EE200231570 /* AppDelegate.swift in Sources */,
+				BA7BD1F3291E401200231570 /* CounterModel.swift in Sources */,
+				BA7BD1E8291E400300231570 /* SecondScreenViewModel.swift in Sources */,
+				BA7BD1F1291E401200231570 /* AppModel.swift in Sources */,
+				BA7BD1AC291E3EE200231570 /* SceneDelegate.swift in Sources */,
+				BA7BD1E9291E400300231570 /* SecondScreenViewModelProtocol.swift in Sources */,
+				BA7BD1F4291E401200231570 /* AppModelConfigurator.swift in Sources */,
+				BA7BD1E2291E3FD900231570 /* SecondViewController.swift in Sources */,
+				BA7BD1E1291E3FD900231570 /* FirstViewController.swift in Sources */,
+				BA7BD1EA291E400300231570 /* FirstScreenViewModelProtocol.swift in Sources */,
+				BA7BD1F2291E401200231570 /* CounterModelProtocol.swift in Sources */,
+				BA7BD1EB291E400300231570 /* FirstScreenViewModel.swift in Sources */,
+				BA7BD1F5291E401200231570 /* AppModelProtocol.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA7BD1B8291E3EE400231570 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA7BD1C1291E3EE400231570 /* WalkieTalkieTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA7BD1C2291E3EE400231570 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA7BD1CB291E3EE400231570 /* WalkieTalkieUITests.swift in Sources */,
+				BA7BD1CD291E3EE400231570 /* WalkieTalkieUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BA7BD1BE291E3EE400231570 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BA7BD1A5291E3EE200231570 /* WalkieTalkie */;
+			targetProxy = BA7BD1BD291E3EE400231570 /* PBXContainerItemProxy */;
+		};
+		BA7BD1C8291E3EE400231570 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BA7BD1A5291E3EE200231570 /* WalkieTalkie */;
+			targetProxy = BA7BD1C7291E3EE400231570 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BA7BD1B4291E3EE400231570 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BA7BD1B5291E3EE400231570 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BA7BD1CE291E3EE400231570 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BA7BD1CF291E3EE400231570 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BA7BD1D1291E3EE400231570 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A43ZVNV86W;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WalkieTalkie/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ds.walkietalkie.WalkieTalkie;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BA7BD1D2291E3EE400231570 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A43ZVNV86W;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WalkieTalkie/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ds.walkietalkie.WalkieTalkie;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		BA7BD1D4291E3EE400231570 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A43ZVNV86W;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ds.walkietalkie.WalkieTalkieTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WalkieTalkie.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WalkieTalkie";
+			};
+			name = Debug;
+		};
+		BA7BD1D5291E3EE400231570 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A43ZVNV86W;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ds.walkietalkie.WalkieTalkieTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WalkieTalkie.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WalkieTalkie";
+			};
+			name = Release;
+		};
+		BA7BD1D7291E3EE400231570 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A43ZVNV86W;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ds.walkietalkie.WalkieTalkieUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = WalkieTalkie;
+			};
+			name = Debug;
+		};
+		BA7BD1D8291E3EE400231570 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A43ZVNV86W;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ds.walkietalkie.WalkieTalkieUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = WalkieTalkie;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BA7BD1A1291E3EE200231570 /* Build configuration list for PBXProject "WalkieTalkie" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BA7BD1CE291E3EE400231570 /* Debug */,
+				BA7BD1CF291E3EE400231570 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BA7BD1D0291E3EE400231570 /* Build configuration list for PBXNativeTarget "WalkieTalkie" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BA7BD1D1291E3EE400231570 /* Debug */,
+				BA7BD1D2291E3EE400231570 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BA7BD1D3291E3EE400231570 /* Build configuration list for PBXNativeTarget "WalkieTalkieTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BA7BD1D4291E3EE400231570 /* Debug */,
+				BA7BD1D5291E3EE400231570 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BA7BD1D6291E3EE400231570 /* Build configuration list for PBXNativeTarget "WalkieTalkieUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BA7BD1D7291E3EE400231570 /* Debug */,
+				BA7BD1D8291E3EE400231570 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BA7BD19E291E3EE200231570 /* Project object */;
+}
