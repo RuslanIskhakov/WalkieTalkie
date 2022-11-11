@@ -3,6 +3,7 @@
 //  WalkieTalkie
 //
 //  Created by Ruslan Iskhakov on 11.11.2022.
+//  based on https://github.com/jayesh15111988/SwiftWebSocket/tree/master
 //
 
 import Foundation
@@ -47,6 +48,7 @@ class SwiftWebSocketServer {
                 newConnection.receiveMessage { (data, context, isComplete, error) in
                     if let data = data, let context = context {
                         print("Received a new message from client")
+                        try! self.handleMessageFromClient(data: data, context: context, stringVal: "", connection: newConnection)
                         receive()
                     }
                 }
@@ -164,17 +166,17 @@ class SwiftWebSocketServer {
     }
 }
 
-struct SocketQuoteResponse: Encodable {
+struct SocketQuoteResponse: Codable {
     let t: String
     let body: QuoteResponseBody
 }
 
-struct QuoteResponseBody: Encodable {
+struct QuoteResponseBody: Codable {
     let securityId: String
     let currentPrice: String
 }
 
-struct ConnectionAck: Encodable {
+struct ConnectionAck: Codable {
     let t: String
     let connectionId: Int
 }

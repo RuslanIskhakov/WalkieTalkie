@@ -11,7 +11,8 @@ class AppModelConfigurator {
     static func configure() -> AppModelProtocol {
         AppModel(
             counterModel: CounterModel(),
-            serverModel: ServerModel()
+            serverModel: SocketServerModel(),
+            clientModel: SocketClientModel()
         )
     }
 }

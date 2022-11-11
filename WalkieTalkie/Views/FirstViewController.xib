@@ -19,30 +19,41 @@
             <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DUS-fs-K6e">
-                    <rect key="frame" x="130.66666666666669" y="404.66666666666669" width="128.66666666666669" height="34.666666666666686"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="Show Second"/>
-                    <connections>
-                        <action selector="showSecond:" destination="-1" eventType="touchUpInside" id="WiN-ZB-QgQ"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wSn-Hy-crG">
-                    <rect key="frame" x="119" y="458" width="152" height="35"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="Start TCP Server"/>
-                    <connections>
-                        <action selector="startServerTap:" destination="-1" eventType="touchUpInside" id="2o4-zP-jzz"/>
-                    </connections>
-                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="nNt-Dy-baK">
+                    <rect key="frame" x="119.33333333333333" y="351.66666666666669" width="151.33333333333337" height="141"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DUS-fs-K6e">
+                            <rect key="frame" x="0.0" y="0.0" width="151.33333333333334" height="34.333333333333336"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Show Second"/>
+                            <connections>
+                                <action selector="showSecond:" destination="-1" eventType="touchUpInside" id="WiN-ZB-QgQ"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wSn-Hy-crG">
+                            <rect key="frame" x="0.0" y="53.333333333333314" width="151.33333333333334" height="34.333333333333343"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Start TCP Server"/>
+                            <connections>
+                                <action selector="startServerTap:" destination="-1" eventType="touchUpInside" id="2o4-zP-jzz"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eta-6v-F5u">
+                            <rect key="frame" x="0.0" y="106.66666666666663" width="151.33333333333334" height="34.333333333333343"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Start TCP Client"/>
+                            <connections>
+                                <action selector="startClientTap:" destination="-1" eventType="touchUpInside" id="hAv-fj-4P0"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="wSn-Hy-crG" firstAttribute="top" secondItem="DUS-fs-K6e" secondAttribute="bottom" constant="18.666666666666629" id="Xfc-zq-WVM"/>
-                <constraint firstItem="DUS-fs-K6e" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Xqb-yC-bbR"/>
-                <constraint firstItem="DUS-fs-K6e" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="hGZ-1Q-sqo"/>
-                <constraint firstItem="wSn-Hy-crG" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="pxm-0S-1v5"/>
+                <constraint firstItem="nNt-Dy-baK" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Aul-CY-vp0"/>
+                <constraint firstItem="nNt-Dy-baK" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="P2G-K7-llJ"/>
             </constraints>
             <point key="canvasLocation" x="129" y="21"/>
         </view>

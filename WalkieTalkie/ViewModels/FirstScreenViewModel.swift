@@ -24,4 +24,8 @@ class FirstScreenViewModel: FirstScreenViewModelProtocol {
     func startServerTap() {
         self.appModel.serverModel.startServer()
     }
+
+    func startClientTap() {
+        self.appModel.clientModel.startClient()
+    }
 }

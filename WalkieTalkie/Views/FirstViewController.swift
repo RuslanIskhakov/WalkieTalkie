@@ -33,4 +33,7 @@ class FirstViewController: UIViewController {
         self.viewModel?.startServerTap()
     }
 
+    @IBAction func startClientTap(_ sender: Any) {
+        self.viewModel?.startClientTap()
+    }
 }

@@ -1,5 +1,5 @@
 //
-//  ServerModelProtocol.swift
+//  SpcketServerModelProtocol.swift
 //  WalkieTalkie
 //
 //  Created by Ruslan Iskhakov on 11.11.2022.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ServerModelProtocol {
+protocol SocketServerModelProtocol {
     var appModel: AppModelProtocol? {get set}
     func startServer()
 }
