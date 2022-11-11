@@ -10,7 +10,8 @@ import Foundation
 class AppModelConfigurator {
     static func configure() -> AppModelProtocol {
         AppModel(
-            counterModel: CounterModel()
+            counterModel: CounterModel(),
+            serverModel: ServerModel()
         )
     }
 }

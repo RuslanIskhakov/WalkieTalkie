@@ -20,4 +20,8 @@ class FirstScreenViewModel: FirstScreenViewModelProtocol {
     func showSecondTap() {
         self.showSecondEvent?()
     }
+
+    func startServerTap() {
+        self.appModel.serverModel.startServer()
+    }
 }

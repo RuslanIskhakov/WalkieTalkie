@@ -11,4 +11,5 @@ protocol FirstScreenViewModelProtocol {
     init(with appModel: AppModelProtocol)
     var showSecondEvent: (() -> ())? {get set}
     func showSecondTap()
+    func startServerTap()
 }

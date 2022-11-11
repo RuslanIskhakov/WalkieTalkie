@@ -31,6 +31,9 @@
 		BA7BD1F4291E401200231570 /* AppModelConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1EF291E401200231570 /* AppModelConfigurator.swift */; };
 		BA7BD1F5291E401200231570 /* AppModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1F0291E401200231570 /* AppModelProtocol.swift */; };
 		BA7BD1F7291E4B9900231570 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1F6291E4B9900231570 /* BaseViewController.swift */; };
+		BA7BD1FB291E4D5B00231570 /* SwiftWebSocketServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1FA291E4D5B00231570 /* SwiftWebSocketServer.swift */; };
+		BA7BD1FD291E591800231570 /* ServerModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1FC291E591800231570 /* ServerModelProtocol.swift */; };
+		BA7BD1FF291E593D00231570 /* ServerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1FE291E593D00231570 /* ServerModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +86,9 @@
 		BA7BD1EF291E401200231570 /* AppModelConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModelConfigurator.swift; sourceTree = "<group>"; };
 		BA7BD1F0291E401200231570 /* AppModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModelProtocol.swift; sourceTree = "<group>"; };
 		BA7BD1F6291E4B9900231570 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		BA7BD1FA291E4D5B00231570 /* SwiftWebSocketServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftWebSocketServer.swift; sourceTree = "<group>"; };
+		BA7BD1FC291E591800231570 /* ServerModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerModelProtocol.swift; sourceTree = "<group>"; };
+		BA7BD1FE291E593D00231570 /* ServerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +154,7 @@
 		BA7BD1A8291E3EE200231570 /* WalkieTalkie */ = {
 			isa = PBXGroup;
 			children = (
+				BA7BD1F8291E4D3100231570 /* IO */,
 				BA7BD1DB291E3F6A00231570 /* Models */,
 				BA7BD1DA291E3F6200231570 /* ViewModels */,
 				BA7BD1D9291E3F5B00231570 /* Views */,
@@ -209,8 +216,26 @@
 				BA7BD1F0291E401200231570 /* AppModelProtocol.swift */,
 				BA7BD1EE291E401200231570 /* CounterModel.swift */,
 				BA7BD1ED291E401200231570 /* CounterModelProtocol.swift */,
+				BA7BD1FC291E591800231570 /* ServerModelProtocol.swift */,
+				BA7BD1FE291E593D00231570 /* ServerModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		BA7BD1F8291E4D3100231570 /* IO */ = {
+			isa = PBXGroup;
+			children = (
+				BA7BD1F9291E4D5100231570 /* WebSockets */,
+			);
+			path = IO;
+			sourceTree = "<group>";
+		};
+		BA7BD1F9291E4D5100231570 /* WebSockets */ = {
+			isa = PBXGroup;
+			children = (
+				BA7BD1FA291E4D5B00231570 /* SwiftWebSocketServer.swift */,
+			);
+			path = WebSockets;
 			sourceTree = "<group>";
 		};
 		CBA2AC746141A26A96549D5B /* Frameworks */ = {
@@ -439,11 +464,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA7BD1FF291E593D00231570 /* ServerModel.swift in Sources */,
+				BA7BD1FB291E4D5B00231570 /* SwiftWebSocketServer.swift in Sources */,
 				BA7BD1AE291E3EE200231570 /* ViewController.swift in Sources */,
 				BA7BD1AA291E3EE200231570 /* AppDelegate.swift in Sources */,
 				BA7BD1F3291E401200231570 /* CounterModel.swift in Sources */,
 				BA7BD1E8291E400300231570 /* SecondScreenViewModel.swift in Sources */,
 				BA7BD1F1291E401200231570 /* AppModel.swift in Sources */,
+				BA7BD1FD291E591800231570 /* ServerModelProtocol.swift in Sources */,
 				BA7BD1F7291E4B9900231570 /* BaseViewController.swift in Sources */,
 				BA7BD1AC291E3EE200231570 /* SceneDelegate.swift in Sources */,
 				BA7BD1E9291E400300231570 /* SecondScreenViewModelProtocol.swift in Sources */,

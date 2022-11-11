@@ -9,4 +9,5 @@ import Foundation
 
 protocol AppModelProtocol: AnyObject {
     var counterModel: CounterModelProtocol {get}
+    var serverModel: ServerModelProtocol {get}
 }

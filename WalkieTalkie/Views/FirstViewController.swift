@@ -29,4 +29,8 @@ class FirstViewController: UIViewController {
         self.viewModel?.showSecondTap()
     }
 
+    @IBAction func startServerTap(_ sender: Any) {
+        self.viewModel?.startServerTap()
+    }
+
 }
