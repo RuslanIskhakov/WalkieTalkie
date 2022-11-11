@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import RxSwift
 
-class SecondViewController: UIViewController {
+class SecondViewController: BaseViewController {
 
     @IBOutlet weak var counterLabel: UILabel!
 
@@ -19,9 +20,12 @@ class SecondViewController: UIViewController {
         self.title = "Second"
 
         self.viewModel = SecondScreenViewModel(with: AppDelegate.appModel)
-        self.viewModel?.showCounterValueEvent = {[unowned self] value in
-            self.counterLabel.text = "Counter: \(value)"
-        }
+        self.viewModel?.showCounterValueEvent
+            .observe(on: MainScheduler.instance)
+            .subscribe(on: MainScheduler.instance)
+            .subscribe(onNext: {[unowned self] value in
+                self.counterLabel.text = "Counter: \(value)"
+            }).disposed(by: self.disposeBag)
     }
 
     deinit {

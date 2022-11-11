@@ -5,10 +5,10 @@
 //  Created by Ruslan Iskhakov on 09.11.2022.
 //
 
-import Foundation
+import RxRelay
 
 protocol SecondScreenViewModelProtocol {
     init(with appModel: AppModelProtocol)
-    var showCounterValueEvent: ((Int) -> ())? {get set}
+    var showCounterValueEvent: BehaviorRelay<Int> {get}
     func incrementTap()
 }

@@ -5,32 +5,22 @@
 //  Created by Ruslan Iskhakov on 09.11.2022.
 //
 
-import Foundation
+import RxRelay
 
 class SecondScreenViewModel: SecondScreenViewModelProtocol {
 
     private let appModel: AppModelProtocol
 
-    var showCounterValueEvent: ((Int) -> ())? {
-        didSet {
-            self.showCounterValueEvent?(self.counterValue)
-        }
-    }
-
-    private var counterValue: Int {
-        didSet {
-            self.showCounterValueEvent?(self.counterValue)
-        }
-    }
+    let showCounterValueEvent = BehaviorRelay<Int>(value: 0)
 
     required init(with appModel: AppModelProtocol) {
         self.appModel = appModel
-        self.counterValue = self.appModel.counterModel.counter
+        self.showCounterValueEvent.accept(self.appModel.counterModel.counter)
     }
 
     func incrementTap() {
         self.appModel.counterModel.increment()
-        self.counterValue = self.appModel.counterModel.counter
+        self.showCounterValueEvent.accept(self.appModel.counterModel.counter)
     }
 
     deinit {

@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		66E1E8EB0767C61F2B7000D9 /* Pods_WalkieTalkieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A68529E100EC5B3C4B004641 /* Pods_WalkieTalkieTests.framework */; };
+		9368C2BDE5BB58ACED3375B0 /* Pods_WalkieTalkie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54849E8B6805C8AE8E3CEF30 /* Pods_WalkieTalkie.framework */; };
 		BA7BD1AA291E3EE200231570 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1A9291E3EE200231570 /* AppDelegate.swift */; };
 		BA7BD1AC291E3EE200231570 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1AB291E3EE200231570 /* SceneDelegate.swift */; };
 		BA7BD1AE291E3EE200231570 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1AD291E3EE200231570 /* ViewController.swift */; };
@@ -28,6 +30,7 @@
 		BA7BD1F3291E401200231570 /* CounterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1EE291E401200231570 /* CounterModel.swift */; };
 		BA7BD1F4291E401200231570 /* AppModelConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1EF291E401200231570 /* AppModelConfigurator.swift */; };
 		BA7BD1F5291E401200231570 /* AppModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1F0291E401200231570 /* AppModelProtocol.swift */; };
+		BA7BD1F7291E4B9900231570 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1F6291E4B9900231570 /* BaseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		308C34F732BB124DFA25451C /* Pods-WalkieTalkieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkieTalkieTests.release.xcconfig"; path = "Target Support Files/Pods-WalkieTalkieTests/Pods-WalkieTalkieTests.release.xcconfig"; sourceTree = "<group>"; };
+		52964BADAF307CA81E65D2C8 /* Pods-WalkieTalkie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkieTalkie.debug.xcconfig"; path = "Target Support Files/Pods-WalkieTalkie/Pods-WalkieTalkie.debug.xcconfig"; sourceTree = "<group>"; };
+		54849E8B6805C8AE8E3CEF30 /* Pods_WalkieTalkie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkieTalkie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B7610FA94B54BE90C22E3FE /* Pods-WalkieTalkie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkieTalkie.release.xcconfig"; path = "Target Support Files/Pods-WalkieTalkie/Pods-WalkieTalkie.release.xcconfig"; sourceTree = "<group>"; };
+		96BA9815C60FC8384FB3FBD8 /* Pods-WalkieTalkieTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkieTalkieTests.debug.xcconfig"; path = "Target Support Files/Pods-WalkieTalkieTests/Pods-WalkieTalkieTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A68529E100EC5B3C4B004641 /* Pods_WalkieTalkieTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkieTalkieTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA7BD1A6291E3EE200231570 /* WalkieTalkie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkieTalkie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA7BD1A9291E3EE200231570 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA7BD1AB291E3EE200231570 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +82,7 @@
 		BA7BD1EE291E401200231570 /* CounterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterModel.swift; sourceTree = "<group>"; };
 		BA7BD1EF291E401200231570 /* AppModelConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModelConfigurator.swift; sourceTree = "<group>"; };
 		BA7BD1F0291E401200231570 /* AppModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModelProtocol.swift; sourceTree = "<group>"; };
+		BA7BD1F6291E4B9900231570 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9368C2BDE5BB58ACED3375B0 /* Pods_WalkieTalkie.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66E1E8EB0767C61F2B7000D9 /* Pods_WalkieTalkieTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +112,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		40C3CF5A7F9710E0CE10408B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				52964BADAF307CA81E65D2C8 /* Pods-WalkieTalkie.debug.xcconfig */,
+				7B7610FA94B54BE90C22E3FE /* Pods-WalkieTalkie.release.xcconfig */,
+				96BA9815C60FC8384FB3FBD8 /* Pods-WalkieTalkieTests.debug.xcconfig */,
+				308C34F732BB124DFA25451C /* Pods-WalkieTalkieTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		BA7BD19D291E3EE200231570 = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +130,8 @@
 				BA7BD1BF291E3EE400231570 /* WalkieTalkieTests */,
 				BA7BD1C9291E3EE400231570 /* WalkieTalkieUITests */,
 				BA7BD1A7291E3EE200231570 /* Products */,
+				40C3CF5A7F9710E0CE10408B /* Pods */,
+				CBA2AC746141A26A96549D5B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -160,6 +185,7 @@
 				BA7BD1DF291E3FD900231570 /* FirstViewController.xib */,
 				BA7BD1DE291E3FD900231570 /* SecondViewController.swift */,
 				BA7BD1DC291E3FD800231570 /* SecondViewController.xib */,
+				BA7BD1F6291E4B9900231570 /* BaseViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -187,6 +213,15 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		CBA2AC746141A26A96549D5B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				54849E8B6805C8AE8E3CEF30 /* Pods_WalkieTalkie.framework */,
+				A68529E100EC5B3C4B004641 /* Pods_WalkieTalkieTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -194,9 +229,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BA7BD1D0291E3EE400231570 /* Build configuration list for PBXNativeTarget "WalkieTalkie" */;
 			buildPhases = (
+				03A41253D7C6229C420DDEA0 /* [CP] Check Pods Manifest.lock */,
 				BA7BD1A2291E3EE200231570 /* Sources */,
 				BA7BD1A3291E3EE200231570 /* Frameworks */,
 				BA7BD1A4291E3EE200231570 /* Resources */,
+				ACED50F1EF3C7F953A5B72FF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -211,9 +248,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BA7BD1D3291E3EE400231570 /* Build configuration list for PBXNativeTarget "WalkieTalkieTests" */;
 			buildPhases = (
+				D4DC14E5383CA0F4A134F305 /* [CP] Check Pods Manifest.lock */,
 				BA7BD1B8291E3EE400231570 /* Sources */,
 				BA7BD1B9291E3EE400231570 /* Frameworks */,
 				BA7BD1BA291E3EE400231570 /* Resources */,
+				73F07F59E8669C8162788C94 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -267,7 +306,7 @@
 				};
 			};
 			buildConfigurationList = BA7BD1A1291E3EE200231570 /* Build configuration list for PBXProject "WalkieTalkie" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -314,6 +353,87 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		03A41253D7C6229C420DDEA0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WalkieTalkie-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		73F07F59E8669C8162788C94 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WalkieTalkieTests/Pods-WalkieTalkieTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WalkieTalkieTests/Pods-WalkieTalkieTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WalkieTalkieTests/Pods-WalkieTalkieTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ACED50F1EF3C7F953A5B72FF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WalkieTalkie/Pods-WalkieTalkie-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WalkieTalkie/Pods-WalkieTalkie-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WalkieTalkie/Pods-WalkieTalkie-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D4DC14E5383CA0F4A134F305 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WalkieTalkieTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BA7BD1A2291E3EE200231570 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -324,6 +444,7 @@
 				BA7BD1F3291E401200231570 /* CounterModel.swift in Sources */,
 				BA7BD1E8291E400300231570 /* SecondScreenViewModel.swift in Sources */,
 				BA7BD1F1291E401200231570 /* AppModel.swift in Sources */,
+				BA7BD1F7291E4B9900231570 /* BaseViewController.swift in Sources */,
 				BA7BD1AC291E3EE200231570 /* SceneDelegate.swift in Sources */,
 				BA7BD1E9291E400300231570 /* SecondScreenViewModelProtocol.swift in Sources */,
 				BA7BD1F4291E401200231570 /* AppModelConfigurator.swift in Sources */,
@@ -496,6 +617,7 @@
 		};
 		BA7BD1D1291E3EE400231570 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 52964BADAF307CA81E65D2C8 /* Pods-WalkieTalkie.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -509,7 +631,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -525,6 +647,7 @@
 		};
 		BA7BD1D2291E3EE400231570 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7B7610FA94B54BE90C22E3FE /* Pods-WalkieTalkie.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -538,7 +661,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -554,6 +677,7 @@
 		};
 		BA7BD1D4291E3EE400231570 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96BA9815C60FC8384FB3FBD8 /* Pods-WalkieTalkieTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -574,6 +698,7 @@
 		};
 		BA7BD1D5291E3EE400231570 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 308C34F732BB124DFA25451C /* Pods-WalkieTalkieTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
