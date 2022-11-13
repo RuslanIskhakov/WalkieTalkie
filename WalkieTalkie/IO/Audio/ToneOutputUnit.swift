@@ -62,7 +62,17 @@ final class ToneOutputUnit: NSObject {
 
                 let audioSession = AVAudioSession.sharedInstance()
 
-                try audioSession.setCategory(AVAudioSession.Category.soloAmbient) // play and record
+                try audioSession.setCategory(AVAudioSession.Category.playAndRecord) // play and record
+
+//                if let availableInputs = audioSession.availableInputs,
+//                      let builtInMicInput = availableInputs.first(where: { $0.portType == .builtInMic })
+//                {
+//                    do {
+//                        try audioSession.setPreferredInput(builtInMicInput)
+//                    } catch {
+//                        print("dstest Unable to set the built-in mic as the preferred input.")
+//                    }
+//                }
 
                 var preferredIOBufferDuration = 4.0 * 0.0058      // 5.8 milliseconds = 256 samples
                 let hwSRate = audioSession.sampleRate           // get native hardware rate
@@ -109,19 +119,82 @@ final class ToneOutputUnit: NSObject {
 
                 try bus0.setFormat(audioFormat!)  //      for speaker bus
 
-                auAudioUnit.outputProvider = { (    //  AURenderPullInputBlock?
+                auAudioUnit.outputProvider = { [unowned self] (    //  AURenderPullInputBlock?
                     actionFlags,
                     timestamp,
                     frameCount,
                     inputBusNumber,
                     inputDataList ) -> AUAudioUnitStatus in
 
+                    print("dstest samples - 1: \(frameCount)")
+
+//                    let err : OSStatus = self.auAudioUnit.renderBlock (actionFlags,
+//                                               timestamp,
+//                                               frameCount,
+//                                               1,
+//                                               inputData,
+//                                               .none)
+//                    if err == noErr {
+//                        // save samples from current input buffer to circular buffer
+//                        print("dstest samples - 2: \(frameCount)")
+//                    } else {
+//                        print("dstest samples - 3: \(frameCount) error: \(err.description)")
+//                    }
+//                    let err2 : AUAudioUnitStatus = noErr
+//                    return err2
+
                     self.fillSpeakerBuffer(inputDataList: inputDataList, frameCount: frameCount)
                     return(0)
                 }
+
+//                auAudioUnit.inputHandler = {[weak self] (
+//                    actionFlags,
+//                    timestamp,
+//                    frameCount,
+//                    inputBusNumber)
+//                    in
+//                    guard let self else { return }
+//
+//                    print("dstest inputHandler \(frameCount) \(inputBusNumber)")
+////                    var bufferList = AudioBufferList(
+////                        mNumberBuffers: 1,
+////                        mBuffers: AudioBuffer(
+////                            mNumberChannels: audioFormat!.channelCount,
+////                            mDataByteSize: 0,
+////                            mData: nil))
+////
+////                    let err : OSStatus = self.auAudioUnit.renderBlock (
+////                        actionFlags,
+////                        timestamp,
+////                        frameCount,
+////                        inputBusNumber,
+////                        &bufferList
+////                    ) { (    //  AURenderPullInputBlock?
+////                        actionFlags,
+////                        timestamp,
+////                        frameCount,
+////                        inputBusNumber,
+////                        inputDataList ) -> AUAudioUnitStatus
+////                        in
+////
+////                        print("dstest from mic")
+////
+////                        return(0)
+////                    }
+////                    if err == noErr {
+////                        // save samples from current input buffer to circular buffer
+////                        print("dstet inputData = \(bufferList.mBuffers.mDataByteSize) and frameCount: \(frameCount)")
+//////                            if !self.isMuteState {
+//////                                self.recordMicrophoneInputSamples(
+//////                                    inputDataList:  &bufferList,
+//////                                    frameCount: UInt32(frameCount) )
+//////                            }
+////                    }
+//                }
             }
 
             auAudioUnit.isOutputEnabled = true
+            auAudioUnit.isInputEnabled = true
             toneCount   =   0
 
             try auAudioUnit.allocateRenderResources()  //  v2 AudioUnitInitialize()

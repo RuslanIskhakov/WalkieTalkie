@@ -26,11 +26,23 @@ class AudioModel: AudioModelProtocol {
 
     }
 
+    private let recorder = RecordAudio()
+
     func tryIt() {
 
-        let toneOutputUnit = ToneOutputUnit()
-        toneOutputUnit.start()
-        toneOutputUnit.setFrequency(freq: 4000)
-        toneOutputUnit.setToneTime(t: 10)
+//        let toneOutputUnit = ToneOutputUnit()
+//        toneOutputUnit.start()
+//        toneOutputUnit.setFrequency(freq: 1000)
+//        toneOutputUnit.setToneTime(t: 2)
+
+
+        self.queue.async {[unowned self] in
+            self.queue.asyncAfter(deadline: .now() + .seconds(2)) {[unowned self] in
+                self.recorder.stopRecording()
+            }
+            self.recorder.startRecording()
+        }
+
+
     }
 }
