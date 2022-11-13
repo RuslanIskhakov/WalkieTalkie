@@ -30,10 +30,6 @@ class FirstScreenViewModel: FirstScreenViewModelProtocol {
     }
 
     func tryAudioTap() {
-        //self.appModel.audioModel.tryIt()
-        let toneOutputUnit = ToneOutputUnit()
-        toneOutputUnit.enableSpeaker()
-        toneOutputUnit.setFrequency(freq: 4000)
-        toneOutputUnit.setToneTime(t: 10)
+        self.appModel.audioModel.tryIt()
     }
 }

@@ -52,7 +52,7 @@ final class ToneOutputUnit: NSObject {
         toneCount = Int32(t * sampleRate);
     }
 
-    func enableSpeaker() {
+    func start() {
 
         if audioRunning { return }           // return if RemoteIO is already running
 
@@ -62,7 +62,7 @@ final class ToneOutputUnit: NSObject {
 
                 let audioSession = AVAudioSession.sharedInstance()
 
-                try audioSession.setCategory(AVAudioSession.Category.soloAmbient)
+                try audioSession.setCategory(AVAudioSession.Category.soloAmbient) // play and record
 
                 var preferredIOBufferDuration = 4.0 * 0.0058      // 5.8 milliseconds = 256 samples
                 let hwSRate = audioSession.sampleRate           // get native hardware rate
@@ -104,7 +104,7 @@ final class ToneOutputUnit: NSObject {
                 let audioFormat = AVAudioFormat(
                     commonFormat: AVAudioCommonFormat.pcmFormatInt16,   // short int samples
                     sampleRate: Double(sampleRate),
-                    channels:AVAudioChannelCount(2),
+                    channels:AVAudioChannelCount(1),
                     interleaved: true )                                 // interleaved stereo
 
                 try bus0.setFormat(audioFormat!)  //      for speaker bus
@@ -157,20 +157,20 @@ final class ToneOutputUnit: NSObject {
                 let sz = Int(mBuffers.mDataByteSize)
 
                 var a  = self.phY        // capture from object for use inside block
-                let d  = 2.0 * M_PI * self.f0 / self.sampleRate     // phase delta
+                let d  = 2.0 * .pi * self.f0 / self.sampleRate     // phase delta
 
                 let bufferPointer = UnsafeMutableRawPointer(mBuffers.mData)
                 if var bptr = bufferPointer {
                     for i in 0..<(count) {
                         let u  = sin(a)             // create a sinewave
-                        a += d ; if (a > 2.0 * M_PI) { a -= 2.0 * M_PI }
+                        a += d ; if (a > 2.0 * .pi) { a -= 2.0 * .pi }
                         let x = Int16(v * u + 0.5)      // scale & round
 
                         if (i < (sz / 2)) {
                             bptr.assumingMemoryBound(to: Int16.self).pointee = x
                             bptr += 2   // increment by 2 bytes for next Int16 item
-                            bptr.assumingMemoryBound(to: Int16.self).pointee = x
-                            bptr += 2   // stereo, so fill both Left & Right channels
+//                            bptr.assumingMemoryBound(to: Int16.self).pointee = x
+//                            bptr += 2   // stereo, so fill both Left & Right channels
                         }
                     }
                 }
