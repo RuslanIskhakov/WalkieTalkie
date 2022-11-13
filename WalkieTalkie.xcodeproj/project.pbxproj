@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		66E1E8EB0767C61F2B7000D9 /* Pods_WalkieTalkieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A68529E100EC5B3C4B004641 /* Pods_WalkieTalkieTests.framework */; };
 		9368C2BDE5BB58ACED3375B0 /* Pods_WalkieTalkie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54849E8B6805C8AE8E3CEF30 /* Pods_WalkieTalkie.framework */; };
+		BA457984292106BE00ED781E /* ToneOutputUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA457983292106BE00ED781E /* ToneOutputUnit.swift */; };
 		BA7BD1AA291E3EE200231570 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1A9291E3EE200231570 /* AppDelegate.swift */; };
 		BA7BD1AC291E3EE200231570 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1AB291E3EE200231570 /* SceneDelegate.swift */; };
 		BA7BD1AE291E3EE200231570 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1AD291E3EE200231570 /* ViewController.swift */; };
@@ -67,6 +68,7 @@
 		7B7610FA94B54BE90C22E3FE /* Pods-WalkieTalkie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkieTalkie.release.xcconfig"; path = "Target Support Files/Pods-WalkieTalkie/Pods-WalkieTalkie.release.xcconfig"; sourceTree = "<group>"; };
 		96BA9815C60FC8384FB3FBD8 /* Pods-WalkieTalkieTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkieTalkieTests.debug.xcconfig"; path = "Target Support Files/Pods-WalkieTalkieTests/Pods-WalkieTalkieTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A68529E100EC5B3C4B004641 /* Pods_WalkieTalkieTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkieTalkieTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA457983292106BE00ED781E /* ToneOutputUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToneOutputUnit.swift; sourceTree = "<group>"; };
 		BA7BD1A6291E3EE200231570 /* WalkieTalkie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkieTalkie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA7BD1A9291E3EE200231570 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA7BD1AB291E3EE200231570 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				BA805E89291FCF9C008F1E0D /* WalkieTalkie-Bridging-Header.h */,
 				BA805E96291FDB55008F1E0D /* AudioTest.h */,
 				BA805E97291FDB55008F1E0D /* AudioTest.m */,
+				BA457983292106BE00ED781E /* ToneOutputUnit.swift */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 				BA7BD1AC291E3EE200231570 /* SceneDelegate.swift in Sources */,
 				BA805E8B291FCF9D008F1E0D /* Novocaine.m in Sources */,
 				BA7BD1E9291E400300231570 /* SecondScreenViewModelProtocol.swift in Sources */,
+				BA457984292106BE00ED781E /* ToneOutputUnit.swift in Sources */,
 				BA7BD1F4291E401200231570 /* AppModelConfigurator.swift in Sources */,
 				BA805E8F291FD078008F1E0D /* AudioModelProtocol.swift in Sources */,
 				BA805E91291FD09D008F1E0D /* AudioModel.swift in Sources */,
