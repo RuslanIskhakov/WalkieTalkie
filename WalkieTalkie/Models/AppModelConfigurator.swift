@@ -12,7 +12,8 @@ class AppModelConfigurator {
         AppModel(
             counterModel: CounterModel(),
             serverModel: SocketServerModel(),
-            clientModel: SocketClientModel()
+            clientModel: SocketClientModel(),
+            audioModel: AudioModel()
         )
     }
 }

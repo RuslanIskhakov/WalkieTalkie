@@ -33,6 +33,10 @@ class FirstViewController: UIViewController {
         self.viewModel?.startServerTap()
     }
 
+    @IBAction func tryAudioTap(_ sender: Any) {
+        self.viewModel?.tryAudioTap()
+    }
+
     @IBAction func startClientTap(_ sender: Any) {
         self.viewModel?.startClientTap()
     }

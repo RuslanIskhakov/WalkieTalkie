@@ -20,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="nNt-Dy-baK">
-                    <rect key="frame" x="119.33333333333333" y="351.66666666666669" width="151.33333333333337" height="141"/>
+                    <rect key="frame" x="119.33333333333333" y="325" width="151.33333333333337" height="194.33333333333337"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DUS-fs-K6e">
                             <rect key="frame" x="0.0" y="0.0" width="151.33333333333334" height="34.333333333333336"/>
@@ -39,11 +39,19 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eta-6v-F5u">
-                            <rect key="frame" x="0.0" y="106.66666666666663" width="151.33333333333334" height="34.333333333333343"/>
+                            <rect key="frame" x="0.0" y="106.66666666666669" width="151.33333333333334" height="34.333333333333343"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="Start TCP Client"/>
                             <connections>
                                 <action selector="startClientTap:" destination="-1" eventType="touchUpInside" id="hAv-fj-4P0"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRS-Db-wzm">
+                            <rect key="frame" x="0.0" y="160" width="151.33333333333334" height="34.333333333333343"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Try Audio"/>
+                            <connections>
+                                <action selector="tryAudioTap:" destination="-1" eventType="touchUpInside" id="7bY-dA-Szf"/>
                             </connections>
                         </button>
                     </subviews>
