@@ -7,7 +7,7 @@
 
 import RxRelay
 
-class SecondScreenViewModel: SecondScreenViewModelProtocol {
+class SecondScreenViewModel: BaseViewModel, SecondScreenViewModelProtocol {
 
     private let appModel: AppModelProtocol
 
@@ -15,7 +15,16 @@ class SecondScreenViewModel: SecondScreenViewModelProtocol {
         self.appModel = appModel
     }
 
-    deinit {
-        print("dstest deinit SecondScreenViewModel")
+    let wkState = BehaviorRelay<WalkieTalkieState>(value: .idle)
+    let connectivityState = BehaviorRelay<ConnectivityState>(value: .ok)
+
+    func pttTouchDown() {
+        self.connectivityState.accept(.noConnection)
+        self.wkState.accept(.transmitting)
+    }
+
+    func pttTouchUp() {
+        self.connectivityState.accept(.ok)
+        self.wkState.accept(.idle)
     }
 }

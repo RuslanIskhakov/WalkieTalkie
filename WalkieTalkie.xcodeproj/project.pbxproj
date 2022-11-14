@@ -16,6 +16,7 @@
 		BA7B1F5B2922715400621B63 /* BaseModelInitialisable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B1F5A2922715400621B63 /* BaseModelInitialisable.swift */; };
 		BA7B1F5D29227FF200621B63 /* AppSettingsModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B1F5C29227FF200621B63 /* AppSettingsModelProtocol.swift */; };
 		BA7B1F5F2922802800621B63 /* AppSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B1F5E2922802800621B63 /* AppSettingsModel.swift */; };
+		BA7B1F612922897700621B63 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B1F602922897700621B63 /* BaseViewModel.swift */; };
 		BA7BD1AA291E3EE200231570 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1A9291E3EE200231570 /* AppDelegate.swift */; };
 		BA7BD1AC291E3EE200231570 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1AB291E3EE200231570 /* SceneDelegate.swift */; };
 		BA7BD1AE291E3EE200231570 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1AD291E3EE200231570 /* ViewController.swift */; };
@@ -77,6 +78,7 @@
 		BA7B1F5A2922715400621B63 /* BaseModelInitialisable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModelInitialisable.swift; sourceTree = "<group>"; };
 		BA7B1F5C29227FF200621B63 /* AppSettingsModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsModelProtocol.swift; sourceTree = "<group>"; };
 		BA7B1F5E2922802800621B63 /* AppSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsModel.swift; sourceTree = "<group>"; };
+		BA7B1F602922897700621B63 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		BA7BD1A6291E3EE200231570 /* WalkieTalkie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkieTalkie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA7BD1A9291E3EE200231570 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA7BD1AB291E3EE200231570 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				BA7BD1E6291E400300231570 /* FirstScreenViewModelProtocol.swift */,
 				BA7BD1E4291E400300231570 /* SecondScreenViewModel.swift */,
 				BA7BD1E5291E400300231570 /* SecondScreenViewModelProtocol.swift */,
+				BA7B1F602922897700621B63 /* BaseViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -534,6 +537,7 @@
 				BA7BD203291ED74D00231570 /* SocketCleintModelProtocol.swift in Sources */,
 				BA7BD1E1291E3FD900231570 /* FirstViewController.swift in Sources */,
 				BA7B1F5B2922715400621B63 /* BaseModelInitialisable.swift in Sources */,
+				BA7B1F612922897700621B63 /* BaseViewModel.swift in Sources */,
 				BA7BD205291ED76600231570 /* SocketClientModel.swift in Sources */,
 				BA7BD1EA291E400300231570 /* FirstScreenViewModelProtocol.swift in Sources */,
 				BA7BD1EB291E400300231570 /* FirstScreenViewModel.swift in Sources */,

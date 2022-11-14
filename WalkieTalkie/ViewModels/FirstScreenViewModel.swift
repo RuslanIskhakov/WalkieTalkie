@@ -8,7 +8,7 @@
 import RxSwift
 import RxRelay
 
-class FirstScreenViewModel: FirstScreenViewModelProtocol {
+class FirstScreenViewModel: BaseViewModel, FirstScreenViewModelProtocol {
 
     let refreshButtonEnabled = BehaviorRelay<Bool>(value: true)
 
