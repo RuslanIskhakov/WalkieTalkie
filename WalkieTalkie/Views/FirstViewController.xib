@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="ipAddressLabel" destination="gpS-wc-8SV" id="0Ce-Yb-Ffg"/>
                 <outlet property="networkStateLabel" destination="vSs-Ce-CTm" id="5c7-9S-FvV"/>
+                <outlet property="peerIPTextField" destination="hdv-k5-vWr" id="A6H-e5-pUl"/>
                 <outlet property="refreshButton" destination="fIk-5b-1i4" id="gxK-Dc-5HZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -23,24 +24,45 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7re-Et-MQk">
-                    <rect key="frame" x="153" y="47" width="84.333333333333314" height="40.666666666666657"/>
+                    <rect key="frame" x="120" y="46.999999999999993" width="150" height="115.33333333333331"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IP address:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vSs-Ce-CTm">
-                            <rect key="frame" x="0.0" y="0.0" width="84.333333333333329" height="20.333333333333332"/>
+                            <rect key="frame" x="0.0" y="0.0" width="150" height="20.333333333333332"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpS-wc-8SV">
-                            <rect key="frame" x="0.0" y="20.333333333333329" width="84.333333333333329" height="20.333333333333329"/>
+                            <rect key="frame" x="0.0" y="20.333333333333329" width="150" height="20.333333333333329"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OiW-E6-Q1c">
+                            <rect key="frame" x="0.0" y="40.666666666666671" width="150" height="20.333333333333329"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Peer IP address:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L2r-Tn-c7t">
+                            <rect key="frame" x="0.0" y="61.000000000000007" width="150" height="20.333333333333336"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hdv-k5-vWr">
+                            <rect key="frame" x="0.0" y="81.333333333333343" width="150" height="34"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="34" id="FF0-kJ-PF8"/>
+                                <constraint firstAttribute="width" constant="150" id="aP5-U2-oNt"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                        </textField>
                     </subviews>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fIk-5b-1i4">
-                    <rect key="frame" x="261.33333333333331" y="50.333333333333329" width="47" height="34.333333333333329"/>
+                    <rect key="frame" x="294" y="87.666666666666671" width="47" height="34.333333333333329"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" image="arrow.clockwise" catalog="system"/>
                     <connections>

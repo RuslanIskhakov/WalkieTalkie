@@ -13,6 +13,7 @@ protocol FirstScreenViewModelProtocol {
     var refreshButtonEnabled: BehaviorRelay<Bool> {get}
     var networkStateText: BehaviorRelay<String> {get}
     var ipAddressText: BehaviorRelay<String> {get}
+    var peerIPAddressPrefix: BehaviorRelay<String> {get}
     func configureView()
     func showSecondTap()
     func startServerTap()

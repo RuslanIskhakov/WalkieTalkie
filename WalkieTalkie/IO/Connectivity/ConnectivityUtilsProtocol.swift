@@ -10,4 +10,5 @@ import Foundation
 protocol ConnectivityUtilsProtocol {
     var appModel: AppModelProtocol? {get set}
     func getIP() -> String?
+    func getPeerIpAddressPrefix(for ipAddress: String) -> String
 }

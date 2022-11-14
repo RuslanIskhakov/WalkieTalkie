@@ -46,4 +46,13 @@ class ConnectivityUtils: BaseIOInitialisable, ConnectivityUtilsProtocol {
 
                 return address
     }
+
+    func getPeerIpAddressPrefix(for ipAddress: String) -> String {
+        let octets = ipAddress.split(separator: ".")
+        var result = ""
+
+        for i in 0..<min(3, octets.count) {result += octets[i] + "."}
+
+        return result
+    }
 }

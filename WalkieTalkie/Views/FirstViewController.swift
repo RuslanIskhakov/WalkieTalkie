@@ -12,7 +12,8 @@ class FirstViewController: BaseViewController {
     @IBOutlet weak var networkStateLabel: UILabel!
     @IBOutlet weak var ipAddressLabel: UILabel!
     @IBOutlet weak var refreshButton: UIButton!
-
+    @IBOutlet weak var peerIPTextField: UITextField!
+    
     private var viewModel: FirstScreenViewModelProtocol?
 
     override func viewDidLoad() {
@@ -57,6 +58,14 @@ class FirstViewController: BaseViewController {
             .subscribe(onNext: {[weak self] text in
                 guard let self else { return }
                 self.ipAddressLabel.text = text
+            }).disposed(by: self.disposeBag)
+
+        self.viewModel?.peerIPAddressPrefix
+            .observe(on: MainScheduler.instance)
+            .subscribe(on: MainScheduler.instance)
+            .subscribe(onNext: {[weak self] text in
+                guard let self else { return }
+                self.peerIPTextField.text = text
             }).disposed(by: self.disposeBag)
     }
 
