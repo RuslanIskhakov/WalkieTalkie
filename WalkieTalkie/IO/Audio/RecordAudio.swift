@@ -30,7 +30,7 @@ final class RecordAudio: NSObject {
     var sampleRate : Double = 44100.0    // default audio sample rate
 
     let circBuffSize = 32768        // lock-free circular fifo/buffer size
-    var circBuffer   = [Float](repeating: 0, count: 32768)  // for incoming samples
+    var circBuffer   = [Int16](repeating: 0, count: 32768)  // for incoming samples
     var circInIdx  : Int =  0
     var audioLevel : Float  = 0.0
 
@@ -103,6 +103,7 @@ final class RecordAudio: NSObject {
                 if hwSRate == 48000.0 { sampleRate = 48000.0 }  // set session to hardware rate
                 if hwSRate == 48000.0 { preferredIOBufferDuration = 0.0053 }
                 let desiredSampleRate = sampleRate
+                print("dstest2 samplerate 1: \(sampleRate)")
                 try audioSession.setPreferredSampleRate(desiredSampleRate)
                 try audioSession.setPreferredIOBufferDuration(preferredIOBufferDuration)
 
@@ -153,7 +154,7 @@ final class RecordAudio: NSObject {
                                      UInt32(MemoryLayout<UInt32>.size))
 
         // Set format to 32-bit Floats, linear PCM
-        let nc = 2  // 2 channel stereo
+        let nc = 1  // 2 channel stereo
         var streamFormatDesc:AudioStreamBasicDescription = AudioStreamBasicDescription(
             mSampleRate:        Double(sampleRate),
             mFormatID:          kAudioFormatLinearPCM,
@@ -216,7 +217,7 @@ final class RecordAudio: NSObject {
         var bufferList = AudioBufferList(
             mNumberBuffers: 1,
             mBuffers: AudioBuffer(
-                mNumberChannels: UInt32(2),
+                mNumberChannels: UInt32(1),
                 mDataByteSize: 16,
                 mData: nil))
 
@@ -247,25 +248,18 @@ final class RecordAudio: NSObject {
         // let data      = UnsafePointer<Int16>(mBuffers.mData)
         let bufferPointer = UnsafeMutableRawPointer(mBuffers.mData)
         if let bptr = bufferPointer {
-            let dataArray = bptr.assumingMemoryBound(to: Float.self)
-            var sum : Float = 0.0
+            let dataArray = bptr.assumingMemoryBound(to: Int16.self)
             var j = self.circInIdx
-            let m = self.circBuffSize
-            for i in 0..<(count/2) {
-                let x = Float(dataArray[i+i  ])   // copy left  channel sample
-                let y = Float(dataArray[i+i+1])   // copy right channel sample
-                self.circBuffer[j    ] = x
-                self.circBuffer[j + 1] = y
-                j += 2 ; if j >= m { j = 0 }                // into circular buffer
-                sum += x * x + y * y
+            if j < self.circBuffer.count {
+                for i in 0..<count {
+                    let x = dataArray[i]   // copy left  channel sample
+                    //let y = Float(dataArray[i+i+1])   // copy right channel sample
+                    self.circBuffer[j    ] = x
+                    //self.circBuffer[j + 1] = y
+                    j += 1               // into circular buffer
+                }
             }
             self.circInIdx = j              // circular index will always be less than size
-            // measuredMicVol_1 = sqrt( Float(sum) / Float(count) ) // scaled volume
-            if sum > 0.0 && count > 0 {
-                let tmp = 5.0 * (logf(sum / Float(count)) + 20.0)
-                let r : Float = 0.2
-                audioLevel = r * tmp + (1.0 - r) * audioLevel
-            }
         }
         print("dstest put \(count) frames into buffer")
     }
@@ -318,7 +312,7 @@ final class RecordAudio_v2: NSObject {
     var sampleRate : Double =  48000.0      // desired audio sample rate
 
     let circBuffSize        =  32768        // lock-free circular fifo/buffer size
-    var circBuffer          = [Float](repeating: 0, count: 32768)
+    var circBuffer          = [Int16](repeating: 0, count: 32768)
     var circInIdx  : Int    =  0            // sample input  index
     var circOutIdx : Int    =  0            // sample output index
 
@@ -346,7 +340,7 @@ final class RecordAudio_v2: NSObject {
         let audioFormat = AVAudioFormat(
             commonFormat: AVAudioCommonFormat.pcmFormatInt16,   // pcmFormatInt16, pcmFormatFloat32,
             sampleRate: Double(sampleRate),                     // 44100.0 48000.0
-            channels:AVAudioChannelCount(2),                    // 1 or 2
+            channels:AVAudioChannelCount(1),                    // 1 or 2
             interleaved: true )                                 // true for interleaved stereo
 
         if (auAudioUnit == nil) {
@@ -367,6 +361,7 @@ final class RecordAudio_v2: NSObject {
 
                 (actionFlags, timestamp, frameCount, inputBusNumber, inputData) -> AUAudioUnitStatus in
 
+                print("dstest v2-1 \(frameCount)")
                 if let block = self.renderBlock {       // AURenderBlock?
                     let err : OSStatus = block(actionFlags,
                                                timestamp,
@@ -374,6 +369,7 @@ final class RecordAudio_v2: NSObject {
                                                1,
                                                inputData,
                                                .none)
+                    print("dstest v2-2 \(err)")
                     if err == noErr {
                         // save samples from current input buffer to circular buffer
                         self.recordMicrophoneInputSamples(
@@ -384,6 +380,8 @@ final class RecordAudio_v2: NSObject {
                 let err2 : AUAudioUnitStatus = noErr
                 return err2
             }
+
+            print("dstest v2 is recording")
 
             do {
                 circInIdx   =   0                       // initialize circular buffer pointers
@@ -426,25 +424,23 @@ final class RecordAudio_v2: NSObject {
 
         var j = self.circInIdx          // current circular array input index
         let n = self.circBuffSize
-        var audioLevelSum : Float = 0.0
-        if let bptr = bufferPointer?.assumingMemoryBound(to: Int16.self) {
-            for i in 0..<(count/2) {
+        print("dstest v2-3 \(count)")
+        if let bptr = bufferPointer?.assumingMemoryBound(to: Int16.self), j < self.circBuffer.count {
+            print("dstest v2-4")
+            for i in 0..<count {
                 // Save samples in circular buffer for latter processing
-                let x = Float(bptr[i+i  ])
-                let y = Float(bptr[i+i+1])
+                let x = bptr[i    ]
+                //let y = Float(bptr[i+i+1])
                 self.circBuffer[j    ] = x // Stereo Left
-                self.circBuffer[j + 1] = y // Stereo Right
-                j += 2 ; if j >= n { j = 0 }                // Circular buffer looping
+                //self.circBuffer[j + 1] = y // Stereo Right
+                j += 1              // Circular buffer looping
                 // Microphone Input Analysis
-                audioLevelSum += x * x + y * y
 
             }
+            print("dstest put(2) \(count) frames into buffer")
         }
         OSMemoryBarrier();              // from libkern/OSAtomic.h
         self.circInIdx = j              // circular index will always be less than size
-        if audioLevelSum > 0.0 && count > 0 {
-            audioLevel = logf(audioLevelSum / Float(count))
-        }
     }
 
     // set up and activate Audio Session

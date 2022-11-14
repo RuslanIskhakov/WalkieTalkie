@@ -32,6 +32,8 @@ final class ToneOutputUnit: NSObject {
     private var phY =     0.0       // save phase of sine wave to prevent clicking
     private var interrupted = false     // for restart from audio interruption notification
 
+    var samples = Array<Int16>()
+
     func startToneForDuration(time : Double) {
         if audioRunning {                    // make sure to call enableSpeaker() first
             if toneCount == 0 {         // only play a tone if the last tone has stopped
@@ -48,8 +50,8 @@ final class ToneOutputUnit: NSObject {
         v0 = vol * 32766.0
     }
 
-    func setToneTime(t : Double) {
-        toneCount = Int32(t * sampleRate);
+    func setToneTime(t : Int) {
+        toneCount = Int32(t);
     }
 
     func start() {
@@ -62,7 +64,7 @@ final class ToneOutputUnit: NSObject {
 
                 let audioSession = AVAudioSession.sharedInstance()
 
-                try audioSession.setCategory(AVAudioSession.Category.playAndRecord) // play and record
+                try audioSession.setCategory(AVAudioSession.Category.playback) // play and record
 
 //                if let availableInputs = audioSession.availableInputs,
 //                      let builtInMicInput = availableInputs.first(where: { $0.portType == .builtInMic })
@@ -79,6 +81,7 @@ final class ToneOutputUnit: NSObject {
                 if hwSRate == 48000.0 { sampleRate = 48000.0 }  // set session to hardware rate
                 if hwSRate == 48000.0 { preferredIOBufferDuration = 4.0 * 0.0053 }
                 let desiredSampleRate = sampleRate
+                print("dstest2 samplerate 2: \(sampleRate)")
                 try audioSession.setPreferredSampleRate(desiredSampleRate)
                 try audioSession.setPreferredIOBufferDuration(preferredIOBufferDuration)
 
@@ -126,7 +129,7 @@ final class ToneOutputUnit: NSObject {
                     inputBusNumber,
                     inputDataList ) -> AUAudioUnitStatus in
 
-                    print("dstest samples - 1: \(frameCount)")
+                    //print("dstest samples - 1: \(frameCount)")
 
 //                    let err : OSStatus = self.auAudioUnit.renderBlock (actionFlags,
 //                                               timestamp,
@@ -194,7 +197,6 @@ final class ToneOutputUnit: NSObject {
             }
 
             auAudioUnit.isOutputEnabled = true
-            auAudioUnit.isInputEnabled = true
             toneCount   =   0
 
             try auAudioUnit.allocateRenderResources()  //  v2 AudioUnitInitialize()
@@ -226,18 +228,14 @@ final class ToneOutputUnit: NSObject {
             {
                 // audioStalled = false
 
-                var v  = self.v0 ; if v > 32767 { v = 32767 }
                 let sz = Int(mBuffers.mDataByteSize)
-
-                var a  = self.phY        // capture from object for use inside block
-                let d  = 2.0 * .pi * self.f0 / self.sampleRate     // phase delta
 
                 let bufferPointer = UnsafeMutableRawPointer(mBuffers.mData)
                 if var bptr = bufferPointer {
                     for i in 0..<(count) {
-                        let u  = sin(a)             // create a sinewave
-                        a += d ; if (a > 2.0 * .pi) { a -= 2.0 * .pi }
-                        let x = Int16(v * u + 0.5)      // scale & round
+                        let x = self.samples[index]
+                        index += 1
+                        if index >= samples.count {index = 0}
 
                         if (i < (sz / 2)) {
                             bptr.assumingMemoryBound(to: Int16.self).pointee = x
@@ -248,7 +246,6 @@ final class ToneOutputUnit: NSObject {
                     }
                 }
 
-                self.phY        =   a                   // save sinewave phase
                 self.toneCount  -=  Int32(frameCount)   // decrement time remaining
             } else {
                 // audioStalled = true
@@ -256,6 +253,8 @@ final class ToneOutputUnit: NSObject {
             }
         }
     }
+
+    private var index = 0
 
     func stop() {
         if (audioRunning) {
