@@ -9,6 +9,5 @@ import RxRelay
 
 protocol SecondScreenViewModelProtocol {
     init(with appModel: AppModelProtocol)
-    var showCounterValueEvent: BehaviorRelay<Int> {get}
-    func incrementTap()
+
 }

@@ -9,7 +9,6 @@ import Foundation
 
 class AppModel: BaseModelInitialisable, AppModelProtocol {
 
-    var counterModel: CounterModelProtocol
     var serverModel: SocketServerModelProtocol
     var clientModel: SocketClientModelProtocol
     var audioModel: AudioModelProtocol
@@ -17,7 +16,6 @@ class AppModel: BaseModelInitialisable, AppModelProtocol {
     var appSettingsModel: AppSettingsModelProtocol
 
     init(
-        counterModel: CounterModelProtocol,
         serverModel: SocketServerModelProtocol,
         clientModel: SocketClientModelProtocol,
         audioModel: AudioModelProtocol,
@@ -25,7 +23,6 @@ class AppModel: BaseModelInitialisable, AppModelProtocol {
         appSettingsModel: AppSettingsModelProtocol
     ) {
 
-        self.counterModel = counterModel
         self.serverModel = serverModel
         self.clientModel = clientModel
         self.audioModel = audioModel
@@ -34,7 +31,6 @@ class AppModel: BaseModelInitialisable, AppModelProtocol {
 
         super.init()
 
-        self.counterModel.appModel = self
         self.serverModel.appModel = self
         self.clientModel.appModel = self
         self.audioModel.appModel = self

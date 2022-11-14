@@ -33,8 +33,6 @@
 		BA7BD1EA291E400300231570 /* FirstScreenViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1E6291E400300231570 /* FirstScreenViewModelProtocol.swift */; };
 		BA7BD1EB291E400300231570 /* FirstScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1E7291E400300231570 /* FirstScreenViewModel.swift */; };
 		BA7BD1F1291E401200231570 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1EC291E401200231570 /* AppModel.swift */; };
-		BA7BD1F2291E401200231570 /* CounterModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1ED291E401200231570 /* CounterModelProtocol.swift */; };
-		BA7BD1F3291E401200231570 /* CounterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1EE291E401200231570 /* CounterModel.swift */; };
 		BA7BD1F4291E401200231570 /* AppModelConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1EF291E401200231570 /* AppModelConfigurator.swift */; };
 		BA7BD1F5291E401200231570 /* AppModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1F0291E401200231570 /* AppModelProtocol.swift */; };
 		BA7BD1F7291E4B9900231570 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1F6291E4B9900231570 /* BaseViewController.swift */; };
@@ -100,8 +98,6 @@
 		BA7BD1E6291E400300231570 /* FirstScreenViewModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstScreenViewModelProtocol.swift; sourceTree = "<group>"; };
 		BA7BD1E7291E400300231570 /* FirstScreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstScreenViewModel.swift; sourceTree = "<group>"; };
 		BA7BD1EC291E401200231570 /* AppModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
-		BA7BD1ED291E401200231570 /* CounterModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterModelProtocol.swift; sourceTree = "<group>"; };
-		BA7BD1EE291E401200231570 /* CounterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterModel.swift; sourceTree = "<group>"; };
 		BA7BD1EF291E401200231570 /* AppModelConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModelConfigurator.swift; sourceTree = "<group>"; };
 		BA7BD1F0291E401200231570 /* AppModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModelProtocol.swift; sourceTree = "<group>"; };
 		BA7BD1F6291E4B9900231570 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -247,8 +243,6 @@
 				BA7BD1EC291E401200231570 /* AppModel.swift */,
 				BA7BD1EF291E401200231570 /* AppModelConfigurator.swift */,
 				BA7BD1F0291E401200231570 /* AppModelProtocol.swift */,
-				BA7BD1EE291E401200231570 /* CounterModel.swift */,
-				BA7BD1ED291E401200231570 /* CounterModelProtocol.swift */,
 				BA7BD1FC291E591800231570 /* SocketServerModelProtocol.swift */,
 				BA7BD1FE291E593D00231570 /* SocketServerModel.swift */,
 				BA7BD202291ED74D00231570 /* SocketCleintModelProtocol.swift */,
@@ -521,7 +515,6 @@
 				BA7BD1FB291E4D5B00231570 /* SwiftWebSocketServer.swift in Sources */,
 				BA7BD1AE291E3EE200231570 /* ViewController.swift in Sources */,
 				BA7BD1AA291E3EE200231570 /* AppDelegate.swift in Sources */,
-				BA7BD1F3291E401200231570 /* CounterModel.swift in Sources */,
 				BA7BD1E8291E400300231570 /* SecondScreenViewModel.swift in Sources */,
 				BA7BD1F1291E401200231570 /* AppModel.swift in Sources */,
 				BA7BD1FD291E591800231570 /* SocketServerModelProtocol.swift in Sources */,
@@ -543,7 +536,6 @@
 				BA7B1F5B2922715400621B63 /* BaseModelInitialisable.swift in Sources */,
 				BA7BD205291ED76600231570 /* SocketClientModel.swift in Sources */,
 				BA7BD1EA291E400300231570 /* FirstScreenViewModelProtocol.swift in Sources */,
-				BA7BD1F2291E401200231570 /* CounterModelProtocol.swift in Sources */,
 				BA7BD1EB291E400300231570 /* FirstScreenViewModel.swift in Sources */,
 				BA7BD201291ECF9500231570 /* SwiftWebSocketClient.swift in Sources */,
 				BA7BD1F5291E401200231570 /* AppModelProtocol.swift in Sources */,

@@ -10,7 +10,6 @@ import Foundation
 class AppModelConfigurator {
     static func configure() -> AppModelProtocol {
         AppModel(
-            counterModel: CounterModel(),
             serverModel: SocketServerModel(),
             clientModel: SocketClientModel(),
             audioModel: AudioModel(),
