@@ -27,7 +27,7 @@
                         <constraint firstAttribute="width" secondItem="oSK-EC-b4x" secondAttribute="height" multiplier="1:1" id="6UV-Nw-oCO"/>
                     </constraints>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="Говорить">
+                    <buttonConfiguration key="configuration" style="plain" title="Нажимать">
                         <fontDescription key="titleFontDescription" type="boldSystem" pointSize="42"/>
                     </buttonConfiguration>
                     <userDefinedRuntimeAttributes>

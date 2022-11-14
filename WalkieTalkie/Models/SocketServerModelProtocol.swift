@@ -10,4 +10,5 @@ import Foundation
 protocol SocketServerModelProtocol {
     var appModel: AppModelProtocol? {get set}
     func startServer()
+    func stopServer()
 }

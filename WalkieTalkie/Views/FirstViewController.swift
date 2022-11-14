@@ -60,17 +60,6 @@ class FirstViewController: BaseViewController {
             }).disposed(by: self.disposeBag)
     }
 
-    @IBAction func startServerTap(_ sender: Any) {
-        self.viewModel?.startServerTap()
-    }
-
-    @IBAction func tryAudioTap(_ sender: Any) {
-        self.viewModel?.tryAudioTap()
-    }
-
-    @IBAction func startClientTap(_ sender: Any) {
-        self.viewModel?.startClientTap()
-    }
     @IBAction func refreshTap(_ sender: Any) {
         self.viewModel?.refreshTap()
     }

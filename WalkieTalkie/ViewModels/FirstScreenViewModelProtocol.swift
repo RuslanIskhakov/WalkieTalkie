@@ -15,9 +15,6 @@ protocol FirstScreenViewModelProtocol {
     var peerIPAddressPrefix: BehaviorRelay<String> {get}
     func configureView()
     func showSecondTap()
-    func startServerTap()
-    func startClientTap()
-    func tryAudioTap()
     func refreshTap()
     func setPeerIPAddress(_ ipAddress: String)
 }

@@ -18,6 +18,14 @@ class SecondScreenViewModel: BaseViewModel, SecondScreenViewModelProtocol {
     let wkState = BehaviorRelay<WalkieTalkieState>(value: .idle)
     let connectivityState = BehaviorRelay<ConnectivityState>(value: .ok)
 
+    func viewDidAppear() {
+        //self.appModel.serverModel.startServer()
+    }
+
+    func viewWillDisappear() {
+
+    }
+
     func pttTouchDown() {
         self.connectivityState.accept(.noConnection)
         self.wkState.accept(.transmitting)

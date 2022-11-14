@@ -19,4 +19,10 @@ class SocketServerModel: BaseModelInitialisable, SocketServerModelProtocol {
         self.server = SwiftWebSocketServer(port: 8080)
         self.server?.startServer()
     }
+
+    func stopServer() {
+        print("SocketServerModel.stopServer()")
+
+        //self.server?.sto
+    }
 }

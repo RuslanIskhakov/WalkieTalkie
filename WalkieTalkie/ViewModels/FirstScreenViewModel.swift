@@ -34,18 +34,6 @@ class FirstScreenViewModel: BaseViewModel, FirstScreenViewModelProtocol {
         self.showSecondEvent?()
     }
 
-    func startServerTap() {
-        self.appModel.serverModel.startServer()
-    }
-
-    func startClientTap() {
-        self.appModel.clientModel.startClient()
-    }
-
-    func tryAudioTap() {
-        self.appModel.audioModel.tryIt()
-    }
-
     func refreshTap() {
         self.refreshIPAddress()
     }

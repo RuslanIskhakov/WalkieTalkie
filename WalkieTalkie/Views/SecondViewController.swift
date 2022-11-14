@@ -26,6 +26,18 @@ class SecondViewController: BaseViewController {
         self.setupBindings()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        self.viewModel?.viewDidAppear()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        self.viewModel?.viewWillDisappear()
+    }
+
     private func setupBindings() {
 
         self.viewModel?.wkState
