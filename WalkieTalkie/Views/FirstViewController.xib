@@ -11,6 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FirstViewController" customModule="WalkieTalkie" customModuleProvider="target">
             <connections>
+                <outlet property="ipAddressLabel" destination="gpS-wc-8SV" id="0Ce-Yb-Ffg"/>
+                <outlet property="networkStateLabel" destination="vSs-Ce-CTm" id="5c7-9S-FvV"/>
+                <outlet property="refreshButton" destination="fIk-5b-1i4" id="gxK-Dc-5HZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,6 +22,31 @@
             <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7re-Et-MQk">
+                    <rect key="frame" x="153" y="47" width="84.333333333333314" height="40.666666666666657"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IP address:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vSs-Ce-CTm">
+                            <rect key="frame" x="0.0" y="0.0" width="84.333333333333329" height="20.333333333333332"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpS-wc-8SV">
+                            <rect key="frame" x="0.0" y="20.333333333333329" width="84.333333333333329" height="20.333333333333329"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fIk-5b-1i4">
+                    <rect key="frame" x="261.33333333333331" y="50.333333333333329" width="47" height="34.333333333333329"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" image="arrow.clockwise" catalog="system"/>
+                    <connections>
+                        <action selector="refreshTap:" destination="-1" eventType="touchUpInside" id="Xra-bH-dCQ"/>
+                    </connections>
+                </button>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="nNt-Dy-baK">
                     <rect key="frame" x="119.33333333333333" y="325" width="151.33333333333337" height="194.33333333333337"/>
                     <subviews>
@@ -60,13 +88,18 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="7re-Et-MQk" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="350-uy-XFo"/>
                 <constraint firstItem="nNt-Dy-baK" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Aul-CY-vp0"/>
+                <constraint firstItem="7re-Et-MQk" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="HbW-C3-Yge"/>
+                <constraint firstItem="fIk-5b-1i4" firstAttribute="leading" secondItem="7re-Et-MQk" secondAttribute="trailing" constant="24" id="Mk1-Ms-D6r"/>
                 <constraint firstItem="nNt-Dy-baK" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="P2G-K7-llJ"/>
+                <constraint firstItem="fIk-5b-1i4" firstAttribute="centerY" secondItem="7re-Et-MQk" secondAttribute="centerY" id="zdV-C8-doa"/>
             </constraints>
             <point key="canvasLocation" x="129" y="21"/>
         </view>
     </objects>
     <resources>
+        <image name="arrow.clockwise" catalog="system" width="113" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -5,9 +5,18 @@
 //  Created by Ruslan Iskhakov on 09.11.2022.
 //
 
-import Foundation
+import RxSwift
+import RxRelay
 
 class FirstScreenViewModel: FirstScreenViewModelProtocol {
+
+    let refreshButtonEnabled = BehaviorRelay<Bool>(value: true)
+
+    let networkStateText = BehaviorRelay<String>(value: "IP address:")
+
+    let ipAddressText = BehaviorRelay<String>(value: "-")
+
+
 
     private let appModel: AppModelProtocol
 
@@ -32,4 +41,9 @@ class FirstScreenViewModel: FirstScreenViewModelProtocol {
     func tryAudioTap() {
         self.appModel.audioModel.tryIt()
     }
+
+    func refreshTap() {
+
+    }
+
 }
