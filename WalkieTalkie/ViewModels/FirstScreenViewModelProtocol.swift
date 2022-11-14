@@ -13,4 +13,5 @@ protocol FirstScreenViewModelProtocol {
     func showSecondTap()
     func startServerTap()
     func startClientTap()
+    func tryAudioTap()
 }

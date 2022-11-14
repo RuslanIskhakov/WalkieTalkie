@@ -28,4 +28,8 @@ class FirstScreenViewModel: FirstScreenViewModelProtocol {
     func startClientTap() {
         self.appModel.clientModel.startClient()
     }
+
+    func tryAudioTap() {
+        self.appModel.audioModel.tryIt()
+    }
 }
