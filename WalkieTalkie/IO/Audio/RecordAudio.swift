@@ -322,8 +322,8 @@ final class RecordAudio_v2: NSObject {
 
     var sampleRate : Double =  48000.0      // desired audio sample rate
 
-    let circBuffSize        =  32768        // lock-free circular fifo/buffer size
-    var circBuffer          = [Float](repeating: 0, count: 32768)
+    let circBuffSize        =  100000        // lock-free circular fifo/buffer size
+    var circBuffer          = [Int16](repeating: 0, count: 100000)
     var circInIdx  : Int    =  0            // sample input  index
     var circOutIdx : Int    =  0            // sample output index
 
@@ -349,7 +349,7 @@ final class RecordAudio_v2: NSObject {
         guard micPermissionGranted && audioSessionActive else { return }
 
         let audioFormat = AVAudioFormat(
-            commonFormat: AVAudioCommonFormat.pcmFormatFloat32,   // pcmFormatInt16, pcmFormatFloat32,
+            commonFormat: AVAudioCommonFormat.pcmFormatInt16,   // pcmFormatInt16, pcmFormatFloat32,
             sampleRate: Double(sampleRate),                     // 44100.0 48000.0
             channels: 1,                                         // 1 or 2
             interleaved: true )                                 // true for interleaved stereo
@@ -432,28 +432,22 @@ final class RecordAudio_v2: NSObject {
         // let data      = UnsafePointer<Int16>(mBuffers.mData)
         let bufferPointer = UnsafeMutableRawPointer(mBuffers.mData)
         if let bptr = bufferPointer {
-            let dataArray = bptr.assumingMemoryBound(to: Float32.self)
-            var sum : Float32 = 0.0
+            let dataArray = bptr.assumingMemoryBound(to: Int16.self)
             var j = self.circInIdx
             let m = self.circBuffSize
-            for i in 0..<Int(frameCount/mBuffers.mNumberChannels) {
-                for ch in 0..<Int(mBuffers.mNumberChannels) {
-                    let x = Float32(dataArray[i+ch])   // copy channel sample
-                    self.circBuffer[j+ch] = x
-                    sum += x*x;
+            if j < self.circBuffer.count {
+                for i in 0..<Int(frameCount/mBuffers.mNumberChannels) {
+                    for ch in 0..<Int(mBuffers.mNumberChannels) {
+                        let x = Int16(dataArray[i+ch])   // copy channel sample
+                        self.circBuffer[j+ch] = x
+                    }
+                    
+                    j += Int(mBuffers.mNumberChannels) ;                // into circular buffer
                 }
-
-                j += Int(mBuffers.mNumberChannels) ;
-                if j >= m { j = 0 }                // into circular buffer
             }
             print("dstest v2 frames: \(frameCount)")
             self.circInIdx = j              // circular index will always be less than size
             // measuredMicVol_1 = sqrt( Float(sum) / Float(count) ) // scaled volume
-            if sum > 0.0 && frameCount > 0 {
-                let tmp = 5.0 * (logf(sum / Float32(frameCount)) + 20.0)
-                let r : Float32 = 0.2
-                audioLevel = r * tmp + (1.0 - r) * audioLevel
-            }
         }
     }
 

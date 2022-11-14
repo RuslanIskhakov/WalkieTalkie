@@ -41,9 +41,9 @@ class AudioModel: AudioModelProtocol {
             self.queue.asyncAfter(deadline: .now() + .seconds(2)) {[unowned self] in
                 self.recorder.stopRecording()
 
-                var samples = Array<Int16>()
-                //samples.append(contentsOf: self.recorder.circBuffer[0..<self.recorder.circInIdx])
-                //samples.append(contentsOf: self.recorder.circBuffer[self.recorder.circInIdx..<self.recorder.circBuffSize])
+//                var samples = Array<Int16>()
+//                samples.append(contentsOf: self.recorder.circBuffer[0..<self.recorder.circInIdx])
+//                samples.append(contentsOf: self.recorder.circBuffer[self.recorder.circInIdx..<self.recorder.circBuffSize])
 
                 print("dstest recorded: \(self.recorder.circInIdx)")
 
@@ -57,8 +57,8 @@ class AudioModel: AudioModelProtocol {
 
                 self.toneOutputUnit = ToneOutputUnit()
                 self.toneOutputUnit.start()
-                self.toneOutputUnit.samples = samples
-                toneOutputUnit.setToneTime(t: samples.count)
+                self.toneOutputUnit.samples = self.recorder.circBuffer
+                toneOutputUnit.setToneTime(t: self.recorder.circBuffer.count)
 
             }
             self.recorder = RecordAudio_v2()
