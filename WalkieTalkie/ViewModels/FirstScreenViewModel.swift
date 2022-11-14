@@ -14,7 +14,7 @@ class FirstScreenViewModel: FirstScreenViewModelProtocol {
 
     let networkStateText = BehaviorRelay<String>(value: "")
 
-    let ipAddressText = BehaviorRelay<String>(value: "")
+    let ipAddressText = BehaviorRelay<String>(value: "IP-адрес:")
 
     let peerIPAddressPrefix = BehaviorRelay<String>(value: "")
 
@@ -52,17 +52,26 @@ class FirstScreenViewModel: FirstScreenViewModelProtocol {
         self.refreshIPAddress()
     }
 
+    func setPeerIPAddress(_ ipAddress: String) {
+        var settings = self.appModel.appSettingsModel
+        settings.peerIPAddress = ipAddress
+    }
+
 }
 
 private extension FirstScreenViewModel {
 
     func refreshIPAddress() {
         if let ipAddress = self.appModel.connectivityUtils.getIP() {
-            self.networkStateText.accept("IP Address:")
             self.ipAddressText.accept(ipAddress)
-            self.peerIPAddressPrefix.accept(self.appModel.connectivityUtils.getPeerIpAddressPrefix(for: ipAddress))
+            let peerPrefix = self.appModel.connectivityUtils.getPeerIpAddressPrefix(for: ipAddress)
+            let peerIPAddress = self.appModel.appSettingsModel.peerIPAddress
+            self.peerIPAddressPrefix.accept(
+                peerIPAddress.starts(with: peerPrefix) ?
+                peerIPAddress :
+                peerPrefix
+            )
         } else {
-            self.networkStateText.accept("IP Address:")
             self.ipAddressText.accept("No network")
         }
     }

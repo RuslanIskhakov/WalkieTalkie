@@ -14,6 +14,8 @@
 		BA7B1F5729226F8A00621B63 /* ConnectivityUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B1F5629226F8A00621B63 /* ConnectivityUtils.swift */; };
 		BA7B1F59292270D300621B63 /* BaseIOInitialisable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B1F58292270D300621B63 /* BaseIOInitialisable.swift */; };
 		BA7B1F5B2922715400621B63 /* BaseModelInitialisable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B1F5A2922715400621B63 /* BaseModelInitialisable.swift */; };
+		BA7B1F5D29227FF200621B63 /* AppSettingsModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B1F5C29227FF200621B63 /* AppSettingsModelProtocol.swift */; };
+		BA7B1F5F2922802800621B63 /* AppSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B1F5E2922802800621B63 /* AppSettingsModel.swift */; };
 		BA7BD1AA291E3EE200231570 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1A9291E3EE200231570 /* AppDelegate.swift */; };
 		BA7BD1AC291E3EE200231570 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1AB291E3EE200231570 /* SceneDelegate.swift */; };
 		BA7BD1AE291E3EE200231570 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1AD291E3EE200231570 /* ViewController.swift */; };
@@ -75,6 +77,8 @@
 		BA7B1F5629226F8A00621B63 /* ConnectivityUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityUtils.swift; sourceTree = "<group>"; };
 		BA7B1F58292270D300621B63 /* BaseIOInitialisable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseIOInitialisable.swift; sourceTree = "<group>"; };
 		BA7B1F5A2922715400621B63 /* BaseModelInitialisable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModelInitialisable.swift; sourceTree = "<group>"; };
+		BA7B1F5C29227FF200621B63 /* AppSettingsModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsModelProtocol.swift; sourceTree = "<group>"; };
+		BA7B1F5E2922802800621B63 /* AppSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsModel.swift; sourceTree = "<group>"; };
 		BA7BD1A6291E3EE200231570 /* WalkieTalkie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkieTalkie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA7BD1A9291E3EE200231570 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA7BD1AB291E3EE200231570 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -252,6 +256,8 @@
 				BA805E8E291FD078008F1E0D /* AudioModelProtocol.swift */,
 				BA805E90291FD09D008F1E0D /* AudioModel.swift */,
 				BA7B1F5A2922715400621B63 /* BaseModelInitialisable.swift */,
+				BA7B1F5C29227FF200621B63 /* AppSettingsModelProtocol.swift */,
+				BA7B1F5E2922802800621B63 /* AppSettingsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -519,11 +525,13 @@
 				BA7BD1E8291E400300231570 /* SecondScreenViewModel.swift in Sources */,
 				BA7BD1F1291E401200231570 /* AppModel.swift in Sources */,
 				BA7BD1FD291E591800231570 /* SocketServerModelProtocol.swift in Sources */,
+				BA7B1F5D29227FF200621B63 /* AppSettingsModelProtocol.swift in Sources */,
 				BA7BD1F7291E4B9900231570 /* BaseViewController.swift in Sources */,
 				BA7BD1AC291E3EE200231570 /* SceneDelegate.swift in Sources */,
 				BA7BD1E9291E400300231570 /* SecondScreenViewModelProtocol.swift in Sources */,
 				BA457984292106BE00ED781E /* AudioProcessor.swift in Sources */,
 				BA7BD1F4291E401200231570 /* AppModelConfigurator.swift in Sources */,
+				BA7B1F5F2922802800621B63 /* AppSettingsModel.swift in Sources */,
 				BA7B1F59292270D300621B63 /* BaseIOInitialisable.swift in Sources */,
 				BA805E8F291FD078008F1E0D /* AudioModelProtocol.swift in Sources */,
 				BA805E91291FD09D008F1E0D /* AudioModel.swift in Sources */,

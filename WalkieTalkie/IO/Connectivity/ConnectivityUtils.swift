@@ -11,7 +11,6 @@ class ConnectivityUtils: BaseIOInitialisable, ConnectivityUtilsProtocol {
 
     var appModel: AppModelProtocol?
 
-
     func getIP() -> String? {
         var address: String?
                 var ifaddr: UnsafeMutablePointer<ifaddrs>?

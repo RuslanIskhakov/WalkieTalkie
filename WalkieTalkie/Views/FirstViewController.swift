@@ -85,6 +85,7 @@ class FirstViewController: BaseViewController {
     }
 
     @IBAction func walkNTalkTap(_ sender: Any) {
+        self.viewModel?.setPeerIPAddress(self.peerIPTextField.text ?? "")
         self.viewModel?.showSecondTap()
     }
     

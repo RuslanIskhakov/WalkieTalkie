@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SocketServerModel: SocketServerModelProtocol {
+class SocketServerModel: BaseModelInitialisable, SocketServerModelProtocol {
 
     weak var appModel: AppModelProtocol?
 

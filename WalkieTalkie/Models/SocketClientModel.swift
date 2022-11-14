@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SocketClientModel: SocketClientModelProtocol {
+class SocketClientModel: BaseModelInitialisable, SocketClientModelProtocol {
     weak var appModel: AppModelProtocol?
 
     private var client: SwiftWebSocketClient?

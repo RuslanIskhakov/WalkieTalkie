@@ -14,13 +14,15 @@ class AppModel: BaseModelInitialisable, AppModelProtocol {
     var clientModel: SocketClientModelProtocol
     var audioModel: AudioModelProtocol
     var connectivityUtils: ConnectivityUtilsProtocol
+    var appSettingsModel: AppSettingsModelProtocol
 
     init(
         counterModel: CounterModelProtocol,
         serverModel: SocketServerModelProtocol,
         clientModel: SocketClientModelProtocol,
         audioModel: AudioModelProtocol,
-        connectivityUtils: ConnectivityUtilsProtocol
+        connectivityUtils: ConnectivityUtilsProtocol,
+        appSettingsModel: AppSettingsModelProtocol
     ) {
 
         self.counterModel = counterModel
@@ -28,6 +30,7 @@ class AppModel: BaseModelInitialisable, AppModelProtocol {
         self.clientModel = clientModel
         self.audioModel = audioModel
         self.connectivityUtils = connectivityUtils
+        self.appSettingsModel = appSettingsModel
 
         super.init()
 
@@ -36,5 +39,6 @@ class AppModel: BaseModelInitialisable, AppModelProtocol {
         self.clientModel.appModel = self
         self.audioModel.appModel = self
         self.connectivityUtils.appModel = self
+        self.appSettingsModel.appModel = self
     }
 }

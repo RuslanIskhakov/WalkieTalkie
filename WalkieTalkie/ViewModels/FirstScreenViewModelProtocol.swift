@@ -20,4 +20,5 @@ protocol FirstScreenViewModelProtocol {
     func startClientTap()
     func tryAudioTap()
     func refreshTap()
+    func setPeerIPAddress(_ ipAddress: String)
 }

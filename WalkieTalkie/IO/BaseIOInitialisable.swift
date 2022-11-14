@@ -7,8 +7,8 @@
 
 import Foundation
 
-class BaseIOInitialisable {
-    init() {
+class BaseIOInitialisable: NSObject {
+    override init() {
         print("\(String(describing: type(of: self))) initialised")
     }
 }

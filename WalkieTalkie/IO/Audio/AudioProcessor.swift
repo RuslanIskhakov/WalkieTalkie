@@ -1,21 +1,17 @@
 //
 //  AudioProcessor.swift
 //
-//  This is a Swift 3 class (which should be instantiated as a singleton object)
-//    that can play a single tone of arbitrary tone and frequency on iOS devices
-//    using run-time sinewave synthesis and the Audio Unit v3 API with RemoteIO.
 //
-//  Created by Ronald Nicholson  rhn@nicholson.com  on 2/20/2016.
-//    revised 2016-Sep-08 for Swift 3
+//  Based on code: https://gist.github.com/hotpaw2
+//  by Ronald Nicholson  rhn@nicholson.com
 //  http://www.nicholson.com/rhn/
 //  Copyright © 2016 Ronald H Nicholson, Jr. All rights reserved.
-//  Distribution: BSD 2-clause license
 //
 import Foundation
 import AudioUnit
 import AVFoundation
 
-final class AudioProcessor: NSObject {
+final class AudioProcessor: BaseIOInitialisable {
 
     var auAudioUnit: AUAudioUnit! = nil     // placeholder for RemoteIO Audio Unit
 

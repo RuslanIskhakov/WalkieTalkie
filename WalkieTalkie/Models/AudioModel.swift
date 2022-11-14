@@ -7,7 +7,7 @@
 
 import Foundation
 
-class AudioModel: AudioModelProtocol {
+class AudioModel: BaseModelInitialisable, AudioModelProtocol {
 
     enum AudioState {
         case idle
@@ -21,10 +21,6 @@ class AudioModel: AudioModelProtocol {
     private let queue = DispatchQueue(label: "AudioModel", qos: .utility)
 
     private var state: AudioState = .idle
-
-    init() {
-
-    }
 
     private var audioProcessor = AudioProcessor()
 
