@@ -42,8 +42,8 @@ class AudioModel: AudioModelProtocol {
                 self.recorder.stopRecording()
 
                 var samples = Array<Int16>()
-                samples.append(contentsOf: self.recorder.circBuffer[0..<self.recorder.circInIdx])
-                samples.append(contentsOf: self.recorder.circBuffer[self.recorder.circInIdx..<self.recorder.circBuffSize])
+                //samples.append(contentsOf: self.recorder.circBuffer[0..<self.recorder.circInIdx])
+                //samples.append(contentsOf: self.recorder.circBuffer[self.recorder.circInIdx..<self.recorder.circBuffSize])
 
                 print("dstest recorded: \(self.recorder.circInIdx)")
 
