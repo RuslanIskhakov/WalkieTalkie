@@ -12,8 +12,6 @@ class FirstScreenViewModel: BaseViewModel, FirstScreenViewModelProtocol {
 
     let refreshButtonEnabled = BehaviorRelay<Bool>(value: true)
 
-    let networkStateText = BehaviorRelay<String>(value: "")
-
     let ipAddressText = BehaviorRelay<String>(value: "IP-адрес:")
 
     let peerIPAddressPrefix = BehaviorRelay<String>(value: "")

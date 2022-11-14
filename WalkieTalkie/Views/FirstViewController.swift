@@ -9,7 +9,6 @@ import UIKit
 import RxSwift
 
 class FirstViewController: BaseViewController {
-    @IBOutlet weak var networkStateLabel: UILabel!
     @IBOutlet weak var ipAddressLabel: UILabel!
     @IBOutlet weak var refreshButton: UIButton!
     @IBOutlet weak var peerIPTextField: UITextField!
@@ -42,14 +41,6 @@ class FirstViewController: BaseViewController {
             .subscribe(onNext: {[weak self] value in
                 guard let self else { return }
                 self.refreshButton.isEnabled = value
-            }).disposed(by: self.disposeBag)
-
-        self.viewModel?.networkStateText
-            .observe(on: MainScheduler.instance)
-            .subscribe(on: MainScheduler.instance)
-            .subscribe(onNext: {[weak self] text in
-                guard let self else { return }
-                self.networkStateLabel.text = text
             }).disposed(by: self.disposeBag)
 
         self.viewModel?.ipAddressText

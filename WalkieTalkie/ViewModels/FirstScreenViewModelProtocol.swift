@@ -11,7 +11,6 @@ protocol FirstScreenViewModelProtocol {
     init(with appModel: AppModelProtocol)
     var showSecondEvent: (() -> ())? {get set}
     var refreshButtonEnabled: BehaviorRelay<Bool> {get}
-    var networkStateText: BehaviorRelay<String> {get}
     var ipAddressText: BehaviorRelay<String> {get}
     var peerIPAddressPrefix: BehaviorRelay<String> {get}
     func configureView()
