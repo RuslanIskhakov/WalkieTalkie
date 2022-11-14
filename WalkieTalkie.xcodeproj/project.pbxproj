@@ -10,6 +10,10 @@
 		66E1E8EB0767C61F2B7000D9 /* Pods_WalkieTalkieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A68529E100EC5B3C4B004641 /* Pods_WalkieTalkieTests.framework */; };
 		9368C2BDE5BB58ACED3375B0 /* Pods_WalkieTalkie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54849E8B6805C8AE8E3CEF30 /* Pods_WalkieTalkie.framework */; };
 		BA457984292106BE00ED781E /* AudioProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA457983292106BE00ED781E /* AudioProcessor.swift */; };
+		BA7B1F5529226F5E00621B63 /* ConnectivityUtilsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B1F5429226F5E00621B63 /* ConnectivityUtilsProtocol.swift */; };
+		BA7B1F5729226F8A00621B63 /* ConnectivityUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B1F5629226F8A00621B63 /* ConnectivityUtils.swift */; };
+		BA7B1F59292270D300621B63 /* BaseIOInitialisable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B1F58292270D300621B63 /* BaseIOInitialisable.swift */; };
+		BA7B1F5B2922715400621B63 /* BaseModelInitialisable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B1F5A2922715400621B63 /* BaseModelInitialisable.swift */; };
 		BA7BD1AA291E3EE200231570 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1A9291E3EE200231570 /* AppDelegate.swift */; };
 		BA7BD1AC291E3EE200231570 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1AB291E3EE200231570 /* SceneDelegate.swift */; };
 		BA7BD1AE291E3EE200231570 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1AD291E3EE200231570 /* ViewController.swift */; };
@@ -67,6 +71,10 @@
 		96BA9815C60FC8384FB3FBD8 /* Pods-WalkieTalkieTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkieTalkieTests.debug.xcconfig"; path = "Target Support Files/Pods-WalkieTalkieTests/Pods-WalkieTalkieTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A68529E100EC5B3C4B004641 /* Pods_WalkieTalkieTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkieTalkieTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA457983292106BE00ED781E /* AudioProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioProcessor.swift; sourceTree = "<group>"; };
+		BA7B1F5429226F5E00621B63 /* ConnectivityUtilsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityUtilsProtocol.swift; sourceTree = "<group>"; };
+		BA7B1F5629226F8A00621B63 /* ConnectivityUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityUtils.swift; sourceTree = "<group>"; };
+		BA7B1F58292270D300621B63 /* BaseIOInitialisable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseIOInitialisable.swift; sourceTree = "<group>"; };
+		BA7B1F5A2922715400621B63 /* BaseModelInitialisable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModelInitialisable.swift; sourceTree = "<group>"; };
 		BA7BD1A6291E3EE200231570 /* WalkieTalkie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkieTalkie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA7BD1A9291E3EE200231570 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA7BD1AB291E3EE200231570 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -139,6 +147,15 @@
 				308C34F732BB124DFA25451C /* Pods-WalkieTalkieTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		BA7B1F5329226F2E00621B63 /* Connectivity */ = {
+			isa = PBXGroup;
+			children = (
+				BA7B1F5429226F5E00621B63 /* ConnectivityUtilsProtocol.swift */,
+				BA7B1F5629226F8A00621B63 /* ConnectivityUtils.swift */,
+			);
+			path = Connectivity;
 			sourceTree = "<group>";
 		};
 		BA7BD19D291E3EE200231570 = {
@@ -234,6 +251,7 @@
 				BA7BD204291ED76600231570 /* SocketClientModel.swift */,
 				BA805E8E291FD078008F1E0D /* AudioModelProtocol.swift */,
 				BA805E90291FD09D008F1E0D /* AudioModel.swift */,
+				BA7B1F5A2922715400621B63 /* BaseModelInitialisable.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -241,8 +259,10 @@
 		BA7BD1F8291E4D3100231570 /* IO */ = {
 			isa = PBXGroup;
 			children = (
+				BA7B1F5329226F2E00621B63 /* Connectivity */,
 				BA805E88291FCF6E008F1E0D /* Audio */,
 				BA7BD1F9291E4D5100231570 /* WebSockets */,
+				BA7B1F58292270D300621B63 /* BaseIOInitialisable.swift */,
 			);
 			path = IO;
 			sourceTree = "<group>";
@@ -504,11 +524,15 @@
 				BA7BD1E9291E400300231570 /* SecondScreenViewModelProtocol.swift in Sources */,
 				BA457984292106BE00ED781E /* AudioProcessor.swift in Sources */,
 				BA7BD1F4291E401200231570 /* AppModelConfigurator.swift in Sources */,
+				BA7B1F59292270D300621B63 /* BaseIOInitialisable.swift in Sources */,
 				BA805E8F291FD078008F1E0D /* AudioModelProtocol.swift in Sources */,
 				BA805E91291FD09D008F1E0D /* AudioModel.swift in Sources */,
 				BA7BD1E2291E3FD900231570 /* SecondViewController.swift in Sources */,
+				BA7B1F5729226F8A00621B63 /* ConnectivityUtils.swift in Sources */,
+				BA7B1F5529226F5E00621B63 /* ConnectivityUtilsProtocol.swift in Sources */,
 				BA7BD203291ED74D00231570 /* SocketCleintModelProtocol.swift in Sources */,
 				BA7BD1E1291E3FD900231570 /* FirstViewController.swift in Sources */,
+				BA7B1F5B2922715400621B63 /* BaseModelInitialisable.swift in Sources */,
 				BA7BD205291ED76600231570 /* SocketClientModel.swift in Sources */,
 				BA7BD1EA291E400300231570 /* FirstScreenViewModelProtocol.swift in Sources */,
 				BA7BD1F2291E401200231570 /* CounterModelProtocol.swift in Sources */,

@@ -12,9 +12,9 @@ class FirstScreenViewModel: FirstScreenViewModelProtocol {
 
     let refreshButtonEnabled = BehaviorRelay<Bool>(value: true)
 
-    let networkStateText = BehaviorRelay<String>(value: "IP address:")
+    let networkStateText = BehaviorRelay<String>(value: "")
 
-    let ipAddressText = BehaviorRelay<String>(value: "-")
+    let ipAddressText = BehaviorRelay<String>(value: "")
 
 
 
@@ -25,6 +25,10 @@ class FirstScreenViewModel: FirstScreenViewModelProtocol {
     }
 
     var showSecondEvent: (() -> ())?
+
+    func configureView() {
+        self.refreshIPAddress()
+    }
 
     func showSecondTap() {
         self.showSecondEvent?()
@@ -43,7 +47,20 @@ class FirstScreenViewModel: FirstScreenViewModelProtocol {
     }
 
     func refreshTap() {
-
+        self.refreshIPAddress()
     }
 
+}
+
+private extension FirstScreenViewModel {
+
+    func refreshIPAddress() {
+        if let ipAddress = self.appModel.connectivityUtils.getIP() {
+            self.networkStateText.accept("IP Address:")
+            self.ipAddressText.accept(ipAddress)
+        } else {
+            self.networkStateText.accept("IP Address:")
+            self.ipAddressText.accept("No network")
+        }
+    }
 }

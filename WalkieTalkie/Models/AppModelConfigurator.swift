@@ -13,7 +13,8 @@ class AppModelConfigurator {
             counterModel: CounterModel(),
             serverModel: SocketServerModel(),
             clientModel: SocketClientModel(),
-            audioModel: AudioModel()
+            audioModel: AudioModel(),
+            connectivityUtils: ConnectivityUtils()
         )
     }
 }

@@ -12,4 +12,5 @@ protocol AppModelProtocol: AnyObject {
     var serverModel: SocketServerModelProtocol {get}
     var clientModel: SocketClientModelProtocol {get}
     var audioModel: AudioModelProtocol {get}
+    var connectivityUtils: ConnectivityUtilsProtocol {get}
 }

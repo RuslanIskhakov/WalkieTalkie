@@ -18,13 +18,15 @@ class FirstViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "First"
+        self.title = ""
 
         self.viewModel = FirstScreenViewModel(with: AppDelegate.appModel)
         self.setupBindings()
 
         self.refreshButton.setTitle("", for: .normal)
         self.refreshButton.setTitle("", for: .disabled)
+
+        self.viewModel?.configureView()
     }
 
     private func setupBindings() {
