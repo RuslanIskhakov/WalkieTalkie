@@ -69,10 +69,6 @@ class FirstViewController: BaseViewController {
             }).disposed(by: self.disposeBag)
     }
 
-    @IBAction func showSecond(_ sender: Any) {
-        self.viewModel?.showSecondTap()
-    }
-
     @IBAction func startServerTap(_ sender: Any) {
         self.viewModel?.startServerTap()
     }
@@ -87,4 +83,9 @@ class FirstViewController: BaseViewController {
     @IBAction func refreshTap(_ sender: Any) {
         self.viewModel?.refreshTap()
     }
+
+    @IBAction func walkNTalkTap(_ sender: Any) {
+        self.viewModel?.showSecondTap()
+    }
+    
 }
