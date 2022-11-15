@@ -11,18 +11,18 @@ class SocketServerModel: BaseModelInitialisable, SocketServerModelProtocol {
 
     weak var appModel: AppModelProtocol?
 
-    private var server: SwiftWebSocketServer?
+    private var server: WebSocketServer?
 
     func startServer() {
         print("SocketServerModel.startServer()")
 
-        self.server = SwiftWebSocketServer(port: 8080)
+        self.server = WebSocketServer(port: 8080)
         self.server?.startServer()
     }
 
     func stopServer() {
         print("SocketServerModel.stopServer()")
 
-        //self.server?.sto
+        self.server?.stopServer()
     }
 }

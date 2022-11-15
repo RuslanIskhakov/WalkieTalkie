@@ -19,11 +19,11 @@ class SecondScreenViewModel: BaseViewModel, SecondScreenViewModelProtocol {
     let connectivityState = BehaviorRelay<ConnectivityState>(value: .ok)
 
     func viewDidAppear() {
-        //self.appModel.serverModel.startServer()
+        self.appModel.serverModel.startServer()
     }
 
     func viewWillDisappear() {
-
+        self.appModel.serverModel.stopServer()
     }
 
     func pttTouchDown() {

@@ -37,7 +37,7 @@
 		BA7BD1F4291E401200231570 /* AppModelConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1EF291E401200231570 /* AppModelConfigurator.swift */; };
 		BA7BD1F5291E401200231570 /* AppModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1F0291E401200231570 /* AppModelProtocol.swift */; };
 		BA7BD1F7291E4B9900231570 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1F6291E4B9900231570 /* BaseViewController.swift */; };
-		BA7BD1FB291E4D5B00231570 /* SwiftWebSocketServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1FA291E4D5B00231570 /* SwiftWebSocketServer.swift */; };
+		BA7BD1FB291E4D5B00231570 /* WebSocketServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1FA291E4D5B00231570 /* WebSocketServer.swift */; };
 		BA7BD1FD291E591800231570 /* SocketServerModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1FC291E591800231570 /* SocketServerModelProtocol.swift */; };
 		BA7BD1FF291E593D00231570 /* SocketServerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1FE291E593D00231570 /* SocketServerModel.swift */; };
 		BA7BD201291ECF9500231570 /* SwiftWebSocketClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD200291ECF9500231570 /* SwiftWebSocketClient.swift */; };
@@ -45,6 +45,7 @@
 		BA7BD205291ED76600231570 /* SocketClientModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD204291ED76600231570 /* SocketClientModel.swift */; };
 		BA805E8F291FD078008F1E0D /* AudioModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA805E8E291FD078008F1E0D /* AudioModelProtocol.swift */; };
 		BA805E91291FD09D008F1E0D /* AudioModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA805E90291FD09D008F1E0D /* AudioModel.swift */; };
+		BA8863F52923787800709971 /* WebSocketServerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8863F42923787800709971 /* WebSocketServerProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,7 +104,7 @@
 		BA7BD1EF291E401200231570 /* AppModelConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModelConfigurator.swift; sourceTree = "<group>"; };
 		BA7BD1F0291E401200231570 /* AppModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModelProtocol.swift; sourceTree = "<group>"; };
 		BA7BD1F6291E4B9900231570 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		BA7BD1FA291E4D5B00231570 /* SwiftWebSocketServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftWebSocketServer.swift; sourceTree = "<group>"; };
+		BA7BD1FA291E4D5B00231570 /* WebSocketServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketServer.swift; sourceTree = "<group>"; };
 		BA7BD1FC291E591800231570 /* SocketServerModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketServerModelProtocol.swift; sourceTree = "<group>"; };
 		BA7BD1FE291E593D00231570 /* SocketServerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketServerModel.swift; sourceTree = "<group>"; };
 		BA7BD200291ECF9500231570 /* SwiftWebSocketClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftWebSocketClient.swift; sourceTree = "<group>"; };
@@ -111,6 +112,7 @@
 		BA7BD204291ED76600231570 /* SocketClientModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketClientModel.swift; sourceTree = "<group>"; };
 		BA805E8E291FD078008F1E0D /* AudioModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioModelProtocol.swift; sourceTree = "<group>"; };
 		BA805E90291FD09D008F1E0D /* AudioModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioModel.swift; sourceTree = "<group>"; };
+		BA8863F42923787800709971 /* WebSocketServerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketServerProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,7 +275,8 @@
 		BA7BD1F9291E4D5100231570 /* WebSockets */ = {
 			isa = PBXGroup;
 			children = (
-				BA7BD1FA291E4D5B00231570 /* SwiftWebSocketServer.swift */,
+				BA8863F42923787800709971 /* WebSocketServerProtocol.swift */,
+				BA7BD1FA291E4D5B00231570 /* WebSocketServer.swift */,
 				BA7BD200291ECF9500231570 /* SwiftWebSocketClient.swift */,
 			);
 			path = WebSockets;
@@ -515,7 +518,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA7BD1FF291E593D00231570 /* SocketServerModel.swift in Sources */,
-				BA7BD1FB291E4D5B00231570 /* SwiftWebSocketServer.swift in Sources */,
+				BA7BD1FB291E4D5B00231570 /* WebSocketServer.swift in Sources */,
 				BA7BD1AE291E3EE200231570 /* ViewController.swift in Sources */,
 				BA7BD1AA291E3EE200231570 /* AppDelegate.swift in Sources */,
 				BA7BD1E8291E400300231570 /* SecondScreenViewModel.swift in Sources */,
@@ -542,6 +545,7 @@
 				BA7BD1EA291E400300231570 /* FirstScreenViewModelProtocol.swift in Sources */,
 				BA7BD1EB291E400300231570 /* FirstScreenViewModel.swift in Sources */,
 				BA7BD201291ECF9500231570 /* SwiftWebSocketClient.swift in Sources */,
+				BA8863F52923787800709971 /* WebSocketServerProtocol.swift in Sources */,
 				BA7BD1F5291E401200231570 /* AppModelProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

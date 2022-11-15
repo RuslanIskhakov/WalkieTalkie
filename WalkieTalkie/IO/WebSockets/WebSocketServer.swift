@@ -1,5 +1,5 @@
 //
-//  SwiftWebSocketServer.swift
+//  WebSocketServer.swift
 //  WalkieTalkie
 //
 //  Created by Ruslan Iskhakov on 11.11.2022.
@@ -9,13 +9,13 @@
 import Foundation
 import Network
 
-class SwiftWebSocketServer {
+class WebSocketServer: BaseIOInitialisable, WebSocketServerProtocol {
     var listener: NWListener
     var connectedClients: [NWConnection] = []
     var timer: Timer?
     let serverQueue = DispatchQueue(label: "ServerQueue")
 
-    init(port: UInt16) {
+    required init(port: UInt16) {
 
         let parameters = NWParameters(tls: nil)
         parameters.allowLocalEndpointReuse = true
@@ -88,7 +88,12 @@ class SwiftWebSocketServer {
         startTimer()
     }
 
-    func startTimer() {
+    func stopServer() {
+        timer?.invalidate()
+        listener.cancel()
+    }
+
+    private func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true, block: { timer in
 
             guard !self.connectedClients.isEmpty else {
@@ -101,7 +106,7 @@ class SwiftWebSocketServer {
         timer?.fire()
     }
 
-    func sendMessageToAllClients() {
+    private func sendMessageToAllClients() {
         let data = getTradingQuoteData()
         for (index, client) in self.connectedClients.enumerated() {
             print("Sending message to client number \(index)")
@@ -109,7 +114,7 @@ class SwiftWebSocketServer {
         }
     }
 
-    func sendMessageToClient(data: Data, client: NWConnection) throws {
+    private func sendMessageToClient(data: Data, client: NWConnection) throws {
         let metadata = NWProtocolWebSocket.Metadata(opcode: .binary)
         let context = NWConnection.ContentContext(identifier: "context", metadata: [metadata])
 
@@ -122,12 +127,12 @@ class SwiftWebSocketServer {
         }))
     }
 
-    func getTradingQuoteData() -> Data {
+    private func getTradingQuoteData() -> Data {
         let data = SocketQuoteResponse(t: "trading.quote", body: QuoteResponseBody(securityId: "100", currentPrice: String(Int.random(in: 1...1000))))
         return try! JSONEncoder().encode(data)
     }
 
-    func handleMessageFromClient(data: Data, context: NWConnection.ContentContext, stringVal: String, connection: NWConnection) throws {
+    private func handleMessageFromClient(data: Data, context: NWConnection.ContentContext, stringVal: String, connection: NWConnection) throws {
 
         if let message = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
             if message["subscribeTo"] != nil {
@@ -158,7 +163,7 @@ class SwiftWebSocketServer {
         }
     }
 
-    func sendAckToClient(connection: NWConnection) {
+    private func sendAckToClient(connection: NWConnection) {
         let model = ConnectionAck(t: "connect.ack", connectionId: self.connectedClients.count - 1)
         let data = try! JSONEncoder().encode(model)
 
