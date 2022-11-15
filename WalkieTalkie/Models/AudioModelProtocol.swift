@@ -13,7 +13,7 @@ enum WalkieTalkieState {
     case receiving
 }
 
-protocol AudioModelProtocol {
+protocol AudioModelProtocol: WebSocketServerDelegate {
     var appModel: AppModelProtocol? {get set}
     var wkState: BehaviorRelay<WalkieTalkieState> {get set}
 }

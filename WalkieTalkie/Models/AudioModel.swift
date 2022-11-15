@@ -19,16 +19,11 @@ class AudioModel: BaseModelInitialisable, AudioModelProtocol {
     private var audioSessionManager: AudioSessionManager?
     private var audioTransforms: AudioTransforms?
 
+    private var timer: Timer?
+
     override init() {
         super.init()
-        let audioTransforms = AudioTransforms(
-            statusCallback: { [unowned self] () -> WalkieTalkieState in
-                return self.wkState.value
-            },
-            sendCallback: { [unowned self] circledSamplesBuffer in
-                self.appModel?.clientModel.sendData(circledSamplesBuffer)
-            }
-        )
+        let audioTransforms = AudioTransforms(delegate: self)
 
         self.audioTransforms = audioTransforms
         self.audioSessionManager = AudioSessionManager(with: audioTransforms)
@@ -53,8 +48,33 @@ class AudioModel: BaseModelInitialisable, AudioModelProtocol {
                         self.appModel?.clientModel.startClient()
                     }
                 case .receiving:
-                    break
+                    self.setupRxEndTimeout()
+                    self.audioSessionManager?.start()
                 }
             }).disposed(by: self.disposeBag)
+    }
+
+    private func setupRxEndTimeout() {
+        self.timer?.invalidate()
+        DispatchQueue.main.async {[weak self] in
+            guard let self else { return }
+            self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: {[weak self] timer in
+                guard let self else { return }
+                self.wkState.accept(.idle)
+            })
+        }
+    }
+
+    func receivedSamples(_ samples: Array<SampleFormat>) {
+        self.wkState.accept(.receiving)
+        self.audioTransforms?.receivedSamples(samples)
+    }
+}
+
+extension AudioModel: AudioTransformsDelegate {
+    func getStatus() -> WalkieTalkieState { self.wkState.value }
+
+    func sendSamples(_ buffer: CircledSamplesBuffer<SampleFormat>) {
+        self.appModel?.clientModel.sendData(buffer)
     }
 }

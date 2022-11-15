@@ -13,23 +13,24 @@ typealias SampleFormat = Int16
 
 class AudioTransforms: BaseIOInitialisable, AudioSessionManagerDelegate {
 
-    private var statusCallback: (() -> WalkieTalkieState)? = nil
-    private var sendCallback: ((CircledSamplesBuffer<SampleFormat>) -> ())?
+    private weak var delegate: AudioTransformsDelegate?
 
-    var wkState: WalkieTalkieState {return self.statusCallback?() ?? .idle}
+    var wkState: WalkieTalkieState {return self.delegate?.getStatus() ?? .idle}
 
     init(
-        statusCallback: (() -> WalkieTalkieState)? = nil,
-        sendCallback: ((CircledSamplesBuffer<SampleFormat>) -> ())? = nil
+        delegate: AudioTransformsDelegate? = nil
     ) {
-        self.statusCallback = statusCallback
-        self.sendCallback = sendCallback
+        self.delegate = delegate
     }
 
     // for samples captured from microphone
     private var inputBuffer = CircledSamplesBuffer<SampleFormat>(capacity: 65536)
     // for samples to be played
     private var outputBuffer = CircledSamplesBuffer<SampleFormat>(capacity: 65536)
+
+    func receivedSamples(_ samples: Array<SampleFormat>) {
+        self.outputBuffer.putSamples(samples)
+    }
 
     func recordMicrophoneInputSamples(   // process RemoteIO Buffer from mic input
         inputDataList : UnsafeMutablePointer<AudioBufferList>,
@@ -50,7 +51,7 @@ class AudioTransforms: BaseIOInitialisable, AudioSessionManagerDelegate {
             }
             print("Wrote to buffer: \(Int(frameCount/mBuffers.mNumberChannels)) samples")
         }
-        self.sendCallback?(self.inputBuffer)
+        self.delegate?.sendSamples(self.inputBuffer)
     }
 
     func fillSpeakerBuffer(     // process RemoteIO Buffer for output
@@ -69,7 +70,8 @@ class AudioTransforms: BaseIOInitialisable, AudioSessionManagerDelegate {
             let bufferPointer = UnsafeMutableRawPointer(mBuffers.mData)
             if var bptr = bufferPointer {
                 for i in 0..<(count) {
-                    if let x = self.outputBuffer.getSample(), (i < (sz / 2)) {
+                    if (i < (sz / 2)) {
+                        let x = self.outputBuffer.getSample() ?? 0
                         bptr.assumingMemoryBound(to: SampleFormat.self).pointee = x
                         bptr += 2   // increment by 2 bytes for next Int16 item
                     }

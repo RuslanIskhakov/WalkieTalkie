@@ -18,7 +18,10 @@ class SocketServerModel: BaseModelInitialisable, SocketServerModelProtocol {
 
         let portNumber = self.appModel?.appSettingsModel.portNumber ?? "8080"
         let port = UInt16(portNumber) ?? 8080
-        self.server = WebSocketServer(port: port)
+        self.server = WebSocketServer(
+            port: port,
+            delegate: self.appModel?.audioModel
+        )
         self.server?.startServer()
     }
 

@@ -33,6 +33,10 @@ class CircledSamplesBuffer<T: Numeric> {
         //print("dstest writeIndex: \(writeIndex) \(sample)")
     }
 
+    func putSamples(_ samples: Array<T>) {
+        samples.forEach{self.putSample($0)}
+    }
+
     func getSample() -> T? {
         guard self.readIndex != self.writeIndex else { return nil }
 

@@ -10,12 +10,16 @@ import Foundation
 import Network
 
 class WebSocketServer: BaseIOInitialisable {
-    var listener: NWListener
-    var connectedClients: [NWConnection] = []
-    var timer: Timer?
-    let serverQueue = DispatchQueue(label: "ServerQueue")
+    private var listener: NWListener
+    private var connectedClients: [NWConnection] = []
+    private var timer: Timer?
+    private let serverQueue = DispatchQueue(label: "ServerQueue")
 
-    required init(port: UInt16) {
+    private weak var delegate: WebSocketServerDelegate?
+
+    required init(port: UInt16, delegate: WebSocketServerDelegate? = nil) {
+
+        self.delegate = delegate
 
         let parameters = NWParameters(tls: nil)
         parameters.allowLocalEndpointReuse = true
@@ -49,6 +53,7 @@ class WebSocketServer: BaseIOInitialisable {
                     if let data = data, let context = context {
                         if let decodedArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? Array<SampleFormat> {
                             print("Received a new message from client of length:\(decodedArray.count)")
+                            self.delegate?.receivedSamples(decodedArray)
                         } else {
                             print("Cannot decode data")
                         }
