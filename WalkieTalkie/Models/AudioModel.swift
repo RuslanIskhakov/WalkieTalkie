@@ -48,21 +48,25 @@ class AudioModel: BaseModelInitialisable, AudioModelProtocol {
                         self.appModel?.clientModel.startClient()
                     }
                 case .receiving:
-                    self.setupRxEndTimeout()
                     self.audioSessionManager?.start()
                 }
             }).disposed(by: self.disposeBag)
-    }
 
-    private func setupRxEndTimeout() {
-        self.timer?.invalidate()
-        DispatchQueue.main.async {[weak self] in
-            guard let self else { return }
-            self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: {[weak self] timer in
-                guard let self else { return }
-                self.wkState.accept(.idle)
-            })
-        }
+        self.wkState
+            .asObservable()
+            .subscribe(on: SerialDispatchQueueScheduler(qos: .utility))
+            .observe(on: SerialDispatchQueueScheduler(qos: .utility))
+            .filter{$0 == .receiving}
+            .debounce(
+                .milliseconds(1000),
+                scheduler: SerialDispatchQueueScheduler(qos: .utility)
+            )
+            .subscribe(onNext: {value in
+                self.queue.async { [unowned self] in
+                    self.wkState.accept(.idle)
+                }
+            }).disposed(by: self.disposeBag)
+
     }
 
     func receivedSamples(_ samples: Array<SampleFormat>) {

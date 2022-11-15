@@ -13,6 +13,8 @@ typealias SampleFormat = Int16
 
 class AudioTransforms: BaseIOInitialisable, AudioSessionManagerDelegate {
 
+    private let queue = DispatchQueue(label: "AudioTransforms", qos: .utility)
+
     private weak var delegate: AudioTransformsDelegate?
 
     var wkState: WalkieTalkieState {return self.delegate?.getStatus() ?? .idle}
@@ -29,7 +31,7 @@ class AudioTransforms: BaseIOInitialisable, AudioSessionManagerDelegate {
     private var outputBuffer = CircledSamplesBuffer<SampleFormat>(capacity: 65536)
 
     func receivedSamples(_ samples: Array<SampleFormat>) {
-        self.outputBuffer.putSamples(samples)
+        self.queue.sync { self.outputBuffer.putSamples(samples) }
     }
 
     func recordMicrophoneInputSamples(   // process RemoteIO Buffer from mic input
@@ -71,9 +73,11 @@ class AudioTransforms: BaseIOInitialisable, AudioSessionManagerDelegate {
             if var bptr = bufferPointer {
                 for i in 0..<(count) {
                     if (i < (sz / 2)) {
-                        let x = self.outputBuffer.getSample() ?? 0
-                        bptr.assumingMemoryBound(to: SampleFormat.self).pointee = x
-                        bptr += 2   // increment by 2 bytes for next Int16 item
+                        self.queue.sync {
+                            let x = self.outputBuffer.getSample() ?? 0
+                            bptr.assumingMemoryBound(to: SampleFormat.self).pointee = x
+                            bptr += 2   // increment by 2 bytes for next Int16 item
+                        }
                     }
                 }
                 print("Read from buffer: \(count) samples")

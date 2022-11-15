@@ -39,7 +39,10 @@ final class AudioSessionManager: BaseIOInitialisable {
 
                 let audioSession = AVAudioSession.sharedInstance()
 
-                try audioSession.setCategory(AVAudioSession.Category.playAndRecord) // play and record
+                try audioSession.setCategory(
+                    AVAudioSession.Category.playAndRecord,  // play and record
+                    options: [.allowBluetooth, .defaultToSpeaker]
+                )
 
 //                if let availableInputs = audioSession.availableInputs,
 //                      let builtInMicInput = availableInputs.first(where: { $0.portType == .builtInMic })

@@ -39,13 +39,15 @@ class SecondScreenViewModel: BaseViewModel, SecondScreenViewModelProtocol {
 
     func pttTouchUp() {
         self.connectivityState.accept(.ok)
-        self.appModel.audioModel.wkState.accept(.idle)
+
+        if self.appModel.audioModel.wkState.value == .transmitting {
+            self.appModel.audioModel.wkState.accept(.idle)
+        }
     }
 
     private func setupBindings() {
-        self.wkState
-            .asObservable()
-            .bind(to: self.appModel.audioModel.wkState)
+        self.appModel.audioModel.wkState
+            .bind(to: self.wkState)
             .disposed(by: self.disposeBag)
     }
 }
