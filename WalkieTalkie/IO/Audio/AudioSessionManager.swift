@@ -1,5 +1,5 @@
 //
-//  AudioProcessor.swift
+//  AudioSessionManager.swift
 //
 //
 //  Based on code: https://gist.github.com/hotpaw2
@@ -11,7 +11,7 @@ import Foundation
 import AudioUnit
 import AVFoundation
 
-final class AudioProcessor: BaseIOInitialisable {
+final class AudioSessionManager: BaseIOInitialisable {
 
     var auAudioUnit: AUAudioUnit! = nil     // placeholder for RemoteIO Audio Unit
 
@@ -20,40 +20,18 @@ final class AudioProcessor: BaseIOInitialisable {
 
     var sampleRate : Double = 48000.0    // typical audio sample rate
 
-    var f0  =    880.0              // default frequency of tone:   'A' above Concert A
-    var v0  =  16383.0              // default volume of tone:      half full scale
-
-    var toneCount : Int32 = 0       // number of samples of tone to play.  0 for silence
-
-    private var phY =     0.0       // save phase of sine wave to prevent clicking
     private var interrupted = false     // for restart from audio interruption notification
+    private var audioSessionInterruptionObserver: NSObjectProtocol? = nil
 
-    func startToneForDuration(time : Double) {
-        if audioRunning {                    // make sure to call enableSpeaker() first
-            if toneCount == 0 {         // only play a tone if the last tone has stopped
-                toneCount = Int32(round( time / sampleRate ))
-            }
-        }
-    }
+    private weak var delegate: AudioSessionManagerDelegate?
 
-    func setFrequency(freq : Double) {  // audio frequencies below 500 Hz may be
-        f0 = freq                       //   hard to hear from a tiny iPhone speaker.
-    }
-
-    func setToneVolume(vol : Double) {  // 0.0 to 1.0
-        v0 = vol * 32766.0
-    }
-
-    func setToneTime(t : Int) {
-        toneCount = Int32(t);
+    init(with delegate: AudioSessionManagerDelegate? = nil) {
+        self.delegate = delegate
     }
 
     func start() {
 
         if audioRunning { return }           // return if RemoteIO is already running
-
-        self.index = 0
-        self.index2 = 0
 
         if (avActive == false) {
 
@@ -78,9 +56,9 @@ final class AudioProcessor: BaseIOInitialisable {
                 try audioSession.setPreferredSampleRate(sampleRate)
                 try audioSession.setPreferredIOBufferDuration(preferredIOBufferDuration)
 
-                NotificationCenter.default.addObserver(
+                self.audioSessionInterruptionObserver = NotificationCenter.default.addObserver(
                     forName: AVAudioSession.interruptionNotification,
-                    object: nil,
+                    object: self,
                     queue: nil,
                     using: myAudioSessionInterruptionHandler )
 
@@ -125,19 +103,14 @@ final class AudioProcessor: BaseIOInitialisable {
                     inputBusNumber,
                     inputDataList ) -> AUAudioUnitStatus in
 
-                    guard self.index >= self.circBuffer.count else { return (0)}
-                    print("dstest samples for playback: \(frameCount)")
-
-                    self.fillSpeakerBuffer(inputDataList: inputDataList, frameCount: frameCount)
-
-                    if self.index2 >= self.circBuffer.count {self.stop()}
+                    self.delegate?.fillSpeakerBuffer(inputDataList: inputDataList, frameCount: frameCount)
                     return (0)
                 }
 
                 auAudioUnit.inputHandler = {[unowned self]
                     (actionFlags, timestamp, frameCount, inputBusNumber) in
 
-                    guard self.index < self.circBuffer.count else { return }
+                    guard self.delegate?.wkState == .transmitting else { return }
 
                     var bufferList = AudioBufferList(
                         mNumberBuffers: 1,
@@ -154,7 +127,7 @@ final class AudioProcessor: BaseIOInitialisable {
                                                .none)
                     if err == noErr {
                         // save samples from current input buffer to circular buffer
-                        self.recordMicrophoneInputSamples(
+                        self.delegate?.recordMicrophoneInputSamples(
                             inputDataList:  &bufferList,
                             frameCount: UInt32(frameCount) )
                     }
@@ -164,7 +137,6 @@ final class AudioProcessor: BaseIOInitialisable {
 
             auAudioUnit.isOutputEnabled = true
             auAudioUnit.isInputEnabled = true
-            toneCount   =   0
 
             try auAudioUnit.allocateRenderResources()  //  v2 AudioUnitInitialize()
             try auAudioUnit.startHardware()            //  v2 AudioOutputUnitStart()
@@ -173,78 +145,6 @@ final class AudioProcessor: BaseIOInitialisable {
         } catch /* let error as NSError */ {
             // handleError(error, functionName: "AUAudioUnit failed")
             // or assert(false)
-        }
-    }
-
-    var circBuffer = [Int16](repeating: 0, count: 100000)
-    var index = 0
-    var index2 = 0
-
-    // helper functions
-
-    private func recordMicrophoneInputSamples(   // process RemoteIO Buffer from mic input
-        inputDataList : UnsafeMutablePointer<AudioBufferList>,
-        frameCount : UInt32 )
-    {
-        let inputDataPtr = UnsafeMutableAudioBufferListPointer(inputDataList)
-        let mBuffers : AudioBuffer = inputDataPtr[0]
-
-        // Microphone Input Analysis
-        // let data      = UnsafePointer<Int16>(mBuffers.mData)
-        let bufferPointer = UnsafeMutableRawPointer(mBuffers.mData)
-        if let bptr = bufferPointer {
-            let dataArray = bptr.assumingMemoryBound(to: Int16.self)
-            var j = self.index
-            if j < self.circBuffer.count {
-                for i in 0..<Int(frameCount/mBuffers.mNumberChannels) {
-                    for ch in 0..<Int(mBuffers.mNumberChannels) {
-                        let x = Int16(dataArray[i+ch])   // copy channel sample
-                        if j < self.circBuffer.count {self.circBuffer[j+ch] = x}
-                    }
-
-                    j += Int(mBuffers.mNumberChannels) ;                // into circular buffer
-                }
-            }
-            print("dstest input frames: \(frameCount)")
-            self.index = j              // circular index will always be less than size
-        }
-    }
-
-    private func fillSpeakerBuffer(     // process RemoteIO Buffer for output
-        inputDataList : UnsafeMutablePointer<AudioBufferList>,
-        frameCount : UInt32 )
-    {
-        let inputDataPtr = UnsafeMutableAudioBufferListPointer(inputDataList)
-        let nBuffers = inputDataPtr.count
-        if (nBuffers > 0) {
-
-            let mBuffers : AudioBuffer = inputDataPtr[0]
-            let count = Int(frameCount)
-
-            // Speaker Output == play tone at frequency f0
-            if self.v0 > 0
-            {
-                // audioStalled = false
-
-                let sz = Int(mBuffers.mDataByteSize)
-
-                let bufferPointer = UnsafeMutableRawPointer(mBuffers.mData)
-                if var bptr = bufferPointer {
-                    for i in 0..<(count) {
-                        let x = index2 >= self.circBuffer.count ? 0 : self.circBuffer[index2]
-                        index2 += 1
-
-                        if (i < (sz / 2)) {
-                            bptr.assumingMemoryBound(to: Int16.self).pointee = x
-                            bptr += 2   // increment by 2 bytes for next Int16 item
-                        }
-                    }
-                }
-
-            } else {
-                // audioStalled = true
-                memset(mBuffers.mData, 0, Int(mBuffers.mDataByteSize))  // silence
-            }
         }
     }
 
@@ -260,6 +160,10 @@ final class AudioProcessor: BaseIOInitialisable {
             } catch {
             }
             // avActive = false
+        }
+
+        if let observer = self.audioSessionInterruptionObserver {
+            NotificationCenter.default.removeObserver(observer)
         }
     }
 

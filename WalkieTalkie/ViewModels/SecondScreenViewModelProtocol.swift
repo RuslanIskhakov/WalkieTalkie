@@ -7,12 +7,6 @@
 
 import RxRelay
 
-enum WalkieTalkieState {
-    case idle
-    case transmitting
-    case receiving
-}
-
 enum ConnectivityState {
     case ok
     case noConnection
