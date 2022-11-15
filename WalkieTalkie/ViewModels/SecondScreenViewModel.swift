@@ -31,6 +31,8 @@ class SecondScreenViewModel: BaseViewModel, SecondScreenViewModelProtocol {
     }
 
     func pttTouchDown() {
+        guard self.appModel.audioModel.wkState.value == .idle else { return }
+
         self.connectivityState.accept(.noConnection)
         self.appModel.audioModel.wkState.accept(.transmitting)
     }

@@ -48,6 +48,7 @@
 		BA8863F52923787800709971 /* WebSocketServerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8863F42923787800709971 /* WebSocketServerProtocol.swift */; };
 		BA8863F929237C5600709971 /* AudioTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8863F829237C5600709971 /* AudioTransforms.swift */; };
 		BA8863FB29237ECF00709971 /* AudioSessionManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8863FA29237ECF00709971 /* AudioSessionManagerDelegate.swift */; };
+		BA8863FF2923888A00709971 /* CircledSamplesBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8863FE2923888A00709971 /* CircledSamplesBuffer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +118,7 @@
 		BA8863F42923787800709971 /* WebSocketServerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketServerProtocol.swift; sourceTree = "<group>"; };
 		BA8863F829237C5600709971 /* AudioTransforms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTransforms.swift; sourceTree = "<group>"; };
 		BA8863FA29237ECF00709971 /* AudioSessionManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSessionManagerDelegate.swift; sourceTree = "<group>"; };
+		BA8863FE2923888A00709971 /* CircledSamplesBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircledSamplesBuffer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,6 +294,7 @@
 				BA457983292106BE00ED781E /* AudioSessionManager.swift */,
 				BA8863FA29237ECF00709971 /* AudioSessionManagerDelegate.swift */,
 				BA8863F829237C5600709971 /* AudioTransforms.swift */,
+				BA8863FE2923888A00709971 /* CircledSamplesBuffer.swift */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -531,6 +534,7 @@
 				BA7BD1F1291E401200231570 /* AppModel.swift in Sources */,
 				BA7BD1FD291E591800231570 /* SocketServerModelProtocol.swift in Sources */,
 				BA8863F929237C5600709971 /* AudioTransforms.swift in Sources */,
+				BA8863FF2923888A00709971 /* CircledSamplesBuffer.swift in Sources */,
 				BA7B1F5D29227FF200621B63 /* AppSettingsModelProtocol.swift in Sources */,
 				BA7BD1F7291E4B9900231570 /* BaseViewController.swift in Sources */,
 				BA7BD1AC291E3EE200231570 /* SceneDelegate.swift in Sources */,

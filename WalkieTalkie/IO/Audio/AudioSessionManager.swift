@@ -103,6 +103,8 @@ final class AudioSessionManager: BaseIOInitialisable {
                     inputBusNumber,
                     inputDataList ) -> AUAudioUnitStatus in
 
+                    guard self.delegate?.wkState == .receiving else { return (0)}
+
                     self.delegate?.fillSpeakerBuffer(inputDataList: inputDataList, frameCount: frameCount)
                     return (0)
                 }

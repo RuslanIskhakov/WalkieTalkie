@@ -16,5 +16,4 @@ enum WalkieTalkieState {
 protocol AudioModelProtocol {
     var appModel: AppModelProtocol? {get set}
     var wkState: BehaviorRelay<WalkieTalkieState> {get set}
-    func tryIt()
 }

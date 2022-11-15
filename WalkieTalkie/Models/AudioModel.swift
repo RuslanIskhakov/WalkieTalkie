@@ -6,6 +6,7 @@
 //
 
 import RxRelay
+import RxSwift
 
 class AudioModel: BaseModelInitialisable, AudioModelProtocol {
 
@@ -25,12 +26,23 @@ class AudioModel: BaseModelInitialisable, AudioModelProtocol {
         }
         self.audioTransforms = audioTransforms
         self.audioSessionManager = AudioSessionManager(with: audioTransforms)
+
+        self.setupBindings()
     }
 
-    func tryIt() {
-        self.queue.async {[unowned self] in
-            self.audioSessionManager?.start()
-        }
-
+    private func setupBindings() {
+        self.wkState
+            .subscribe(on: SerialDispatchQueueScheduler(qos: .utility))
+            .observe(on: SerialDispatchQueueScheduler(qos: .utility))
+            .subscribe(onNext: { state in
+                switch state {
+                case .idle:
+                    self.queue.async { [unowned self] in self.audioSessionManager?.stop()}
+                case .transmitting:
+                    self.queue.async { [unowned self] in self.audioSessionManager?.start()}
+                case .receiving:
+                    break
+                }
+            }).disposed(by: self.disposeBag)
     }
 }
