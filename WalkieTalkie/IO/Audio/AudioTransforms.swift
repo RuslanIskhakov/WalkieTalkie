@@ -44,7 +44,7 @@ class AudioTransforms: BaseIOInitialisable, AudioSessionManagerDelegate {
         // Microphone Input Analysis
         let bufferPointer = UnsafeMutableRawPointer(mBuffers.mData)
         if let bptr = bufferPointer {
-            let dataArray = bptr.assumingMemoryBound(to: Int16.self)
+            let dataArray = bptr.assumingMemoryBound(to: SampleFormat.self)
             for i in 0..<Int(frameCount/mBuffers.mNumberChannels) {
                 for ch in 0..<Int(mBuffers.mNumberChannels) {
                     let x = SampleFormat(dataArray[i+ch])   // copy channel sample
