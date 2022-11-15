@@ -13,10 +13,21 @@ class SocketClientModel: BaseModelInitialisable, SocketClientModelProtocol {
     private var client: SwiftWebSocketClient?
 
     func startClient() {
-        print("Startting SwiftWebSocketClient")
-        self.client = SwiftWebSocketClient()
+        print("Starting SwiftWebSocketClient")
+        let peerIPAddress = self.appModel?.appSettingsModel.peerIPAddress ?? ""
+        let portNumber = self.appModel?.appSettingsModel.portNumber ?? "8080"
+        self.client = SwiftWebSocketClient(ipAddress: peerIPAddress, port: portNumber)
         self.client?.subscribeToService() {[weak self] str in
             print("Completion: \(str)")
         }
+    }
+
+    func stopClient() {
+        self.client?.closeSocket()
+        self.client = nil
+    }
+
+    func sendData(_ buffer: CircledSamplesBuffer<SampleFormat>) {
+        self.client?.sendData(buffer)
     }
 }

@@ -16,7 +16,9 @@ class SocketServerModel: BaseModelInitialisable, SocketServerModelProtocol {
     func startServer() {
         print("SocketServerModel.startServer()")
 
-        self.server = WebSocketServer(port: 8080)
+        let portNumber = self.appModel?.appSettingsModel.portNumber ?? "8080"
+        let port = UInt16(portNumber) ?? 8080
+        self.server = WebSocketServer(port: port)
         self.server?.startServer()
     }
 

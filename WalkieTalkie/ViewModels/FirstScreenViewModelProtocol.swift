@@ -12,9 +12,11 @@ protocol FirstScreenViewModelProtocol {
     var showSecondEvent: (() -> ())? {get set}
     var refreshButtonEnabled: BehaviorRelay<Bool> {get}
     var ipAddressText: BehaviorRelay<String> {get}
+    var portNumberText: BehaviorRelay<String> {get}
     var peerIPAddressPrefix: BehaviorRelay<String> {get}
     func configureView()
     func showSecondTap()
     func refreshTap()
     func setPeerIPAddress(_ ipAddress: String)
+    func setPortNumber(_ poertNumber: String)
 }

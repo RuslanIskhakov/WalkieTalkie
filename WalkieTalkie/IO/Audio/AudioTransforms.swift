@@ -9,20 +9,27 @@ import Foundation
 import CoreAudioTypes
 import CoreAudio
 
+typealias SampleFormat = Int16
+
 class AudioTransforms: BaseIOInitialisable, AudioSessionManagerDelegate {
 
-    private var callback: (() -> WalkieTalkieState)? = nil
+    private var statusCallback: (() -> WalkieTalkieState)? = nil
+    private var sendCallback: ((CircledSamplesBuffer<SampleFormat>) -> ())?
 
-    var wkState: WalkieTalkieState {return self.callback?() ?? .idle}
+    var wkState: WalkieTalkieState {return self.statusCallback?() ?? .idle}
 
-    init(with callback: (() -> WalkieTalkieState)?) {
-        self.callback = callback
+    init(
+        statusCallback: (() -> WalkieTalkieState)? = nil,
+        sendCallback: ((CircledSamplesBuffer<SampleFormat>) -> ())? = nil
+    ) {
+        self.statusCallback = statusCallback
+        self.sendCallback = sendCallback
     }
 
     // for samples captured from microphone
-    private var inputBuffer = CircledSamplesBuffer<Int16>(capacity: 65536)
+    private var inputBuffer = CircledSamplesBuffer<SampleFormat>(capacity: 65536)
     // for samples to be played
-    private var outputBuffer = CircledSamplesBuffer<Int16>(capacity: 65536)
+    private var outputBuffer = CircledSamplesBuffer<SampleFormat>(capacity: 65536)
 
     func recordMicrophoneInputSamples(   // process RemoteIO Buffer from mic input
         inputDataList : UnsafeMutablePointer<AudioBufferList>,
@@ -37,12 +44,13 @@ class AudioTransforms: BaseIOInitialisable, AudioSessionManagerDelegate {
             let dataArray = bptr.assumingMemoryBound(to: Int16.self)
             for i in 0..<Int(frameCount/mBuffers.mNumberChannels) {
                 for ch in 0..<Int(mBuffers.mNumberChannels) {
-                    let x = Int16(dataArray[i+ch])   // copy channel sample
+                    let x = SampleFormat(dataArray[i+ch])   // copy channel sample
                     self.inputBuffer.putSample(x)
                 }
             }
             print("Wrote to buffer: \(Int(frameCount/mBuffers.mNumberChannels)) samples")
         }
+        self.sendCallback?(self.inputBuffer)
     }
 
     func fillSpeakerBuffer(     // process RemoteIO Buffer for output
@@ -61,9 +69,8 @@ class AudioTransforms: BaseIOInitialisable, AudioSessionManagerDelegate {
             let bufferPointer = UnsafeMutableRawPointer(mBuffers.mData)
             if var bptr = bufferPointer {
                 for i in 0..<(count) {
-                    let x = self.outputBuffer.getSample()
-                    if (i < (sz / 2)) {
-                        bptr.assumingMemoryBound(to: Int16.self).pointee = x
+                    if let x = self.outputBuffer.getSample(), (i < (sz / 2)) {
+                        bptr.assumingMemoryBound(to: SampleFormat.self).pointee = x
                         bptr += 2   // increment by 2 bytes for next Int16 item
                     }
                 }

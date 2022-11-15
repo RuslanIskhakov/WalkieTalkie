@@ -9,7 +9,7 @@
 import Foundation
 import Network
 
-class WebSocketServer: BaseIOInitialisable, WebSocketServerProtocol {
+class WebSocketServer: BaseIOInitialisable {
     var listener: NWListener
     var connectedClients: [NWConnection] = []
     var timer: Timer?
@@ -47,8 +47,12 @@ class WebSocketServer: BaseIOInitialisable, WebSocketServerProtocol {
             func receive() {
                 newConnection.receiveMessage { (data, context, isComplete, error) in
                     if let data = data, let context = context {
-                        print("Received a new message from client")
-                        try! self.handleMessageFromClient(data: data, context: context, stringVal: "", connection: newConnection)
+                        if let decodedArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? Array<SampleFormat> {
+                            print("Received a new message from client of length:\(decodedArray.count)")
+                        } else {
+                            print("Cannot decode data")
+                        }
+                        //try! self.handleMessageFromClient(data: data, context: context, stringVal: "", connection: newConnection)
                         receive()
                     }
                 }
@@ -85,7 +89,7 @@ class WebSocketServer: BaseIOInitialisable, WebSocketServerProtocol {
         }
 
         listener.start(queue: serverQueue)
-        startTimer()
+        //startTimer()
     }
 
     func stopServer() {

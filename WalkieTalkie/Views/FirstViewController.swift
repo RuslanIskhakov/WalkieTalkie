@@ -12,6 +12,7 @@ class FirstViewController: BaseViewController {
     @IBOutlet weak var ipAddressLabel: UILabel!
     @IBOutlet weak var refreshButton: UIButton!
     @IBOutlet weak var peerIPTextField: UITextField!
+    @IBOutlet weak var portNumberTextField: UITextField!
     
     private var viewModel: FirstScreenViewModelProtocol?
 
@@ -51,6 +52,14 @@ class FirstViewController: BaseViewController {
                 self.ipAddressLabel.text = text
             }).disposed(by: self.disposeBag)
 
+        self.viewModel?.portNumberText
+            .observe(on: MainScheduler.instance)
+            .subscribe(on: MainScheduler.instance)
+            .subscribe(onNext: {[weak self] text in
+                guard let self else { return }
+                self.portNumberTextField.text = text
+            }).disposed(by: self.disposeBag)
+
         self.viewModel?.peerIPAddressPrefix
             .observe(on: MainScheduler.instance)
             .subscribe(on: MainScheduler.instance)
@@ -66,6 +75,7 @@ class FirstViewController: BaseViewController {
 
     @IBAction func walkNTalkTap(_ sender: Any) {
         self.viewModel?.setPeerIPAddress(self.peerIPTextField.text ?? "")
+        self.viewModel?.setPortNumber(self.portNumberTextField.text ?? "")
         self.viewModel?.showSecondTap()
     }
     

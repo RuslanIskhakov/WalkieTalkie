@@ -10,21 +10,29 @@ import Foundation
 
 final class SwiftWebSocketClient: NSObject {
 
-    var webSocket: URLSessionWebSocketTask?
+    private let queue = DispatchQueue(label: "SwiftWebSocketClient", qos: .utility)
+
+    private var webSocket: URLSessionWebSocketTask?
 
     var opened = false
 
-    private var urlString = "ws://192.168.1.200:8080"
+    private var urlString = ""
 
     var connectionId = -1
+
+    init(ipAddress: String, port: String) {
+        self.urlString = "ws://\(ipAddress):\(port)"
+        print("SwiftWebSocketClient init: \(self.urlString)")
+    }
 
     func subscribeToService(with completion: @escaping (String?) -> Void) {
         if !opened {
             openWebSocket()
+            print("SwiftWebSocketClient: socket is opened \(self.webSocket?.state)")
         }
 
         guard let webSocket = webSocket else {
-            completion(nil)
+            completion("webSocket is nil!!!")
             return
         }
 
@@ -34,28 +42,30 @@ final class SwiftWebSocketClient: NSObject {
 
             switch result {
             case .failure(let error):
-                completion(nil)
+                completion(error.localizedDescription)
             case .success(let webSocketTaskMessage):
                 switch webSocketTaskMessage {
                 case .string:
-                    completion(nil)
+                    completion("")
                 case .data(let data):
                     if let messageType = self.getMessageType(from: data) {
                         switch(messageType) {
                         case .connected:
-                            self.subscribeToServer(completion: completion)
+                            completion("dstest Connected")
+                            //self.subscribeToServer(completion: completion)
                         case .failed:
                             self.opened = false
-                            completion(nil)
+                            completion("dstest Failed")
                         case .tradingQuote:
                             if let currentQuote = self.getCurrentQuoteResponseData(from: data) {
                                 completion(currentQuote.body.currentPrice)
                             } else {
-                                completion(nil)
+                                completion("excepted trading quote")
                             }
                         case .connectionAck:
                             let ack = try! JSONDecoder().decode(ConnectionAck.self, from: data)
                             self.connectionId = ack.connectionId
+                            completion("dstest .connectionAck")
                         }
                     }
 
@@ -67,14 +77,30 @@ final class SwiftWebSocketClient: NSObject {
         })
     }
 
-    func getMessageType(from jsonData: Data) -> MessageType? {
+    func sendData(_ buffer: CircledSamplesBuffer<SampleFormat>) {
+        //print("dstest sendData: \(buffer.available)")
+        guard let webSocket = webSocket else {
+            return
+        }
+
+        let encodedData = NSKeyedArchiver.archivedData(withRootObject: buffer.getAllSamples())
+
+        webSocket.send(URLSessionWebSocketTask.Message.data(encodedData)) { error in
+            if let error = error {
+                print("Failed to send data with Error \(error.localizedDescription)")
+            }
+        }
+
+    }
+
+    private func getMessageType(from jsonData: Data) -> MessageType? {
         if let messageType = (try? JSONDecoder().decode(GenericSocketResponse.self, from: jsonData))?.t {
             return MessageType(rawValue: messageType)
         }
         return nil
     }
 
-    func getCurrentQuoteResponseData(from jsonData: Data) -> SocketQuoteResponse? {
+    private func getCurrentQuoteResponseData(from jsonData: Data) -> SocketQuoteResponse? {
         do {
             return try JSONDecoder().decode(SocketQuoteResponse.self, from: jsonData)
         } catch {
@@ -82,7 +108,7 @@ final class SwiftWebSocketClient: NSObject {
         }
     }
 
-    func subscriptionPayload(for productID: String) -> String? {
+    private func subscriptionPayload(for productID: String) -> String? {
         let payload = ["subscribeTo": "trading.product.\(productID)"]
         if let jsonData = try? JSONSerialization.data(withJSONObject: payload, options: []) {
             return String(data: jsonData, encoding: .utf8)
@@ -124,6 +150,7 @@ final class SwiftWebSocketClient: NSObject {
         webSocket?.cancel(with: .goingAway, reason: nil)
         opened = false
         webSocket = nil
+        print("SwiftWebSocketClient: socket is closed")
     }
 }
 

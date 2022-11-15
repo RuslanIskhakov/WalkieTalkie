@@ -21,9 +21,15 @@ class AudioModel: BaseModelInitialisable, AudioModelProtocol {
 
     override init() {
         super.init()
-        let audioTransforms = AudioTransforms() {[unowned self] () -> WalkieTalkieState in
-            return self.wkState.value
-        }
+        let audioTransforms = AudioTransforms(
+            statusCallback: { [unowned self] () -> WalkieTalkieState in
+                return self.wkState.value
+            },
+            sendCallback: { [unowned self] circledSamplesBuffer in
+                self.appModel?.clientModel.sendData(circledSamplesBuffer)
+            }
+        )
+
         self.audioTransforms = audioTransforms
         self.audioSessionManager = AudioSessionManager(with: audioTransforms)
 
@@ -37,9 +43,15 @@ class AudioModel: BaseModelInitialisable, AudioModelProtocol {
             .subscribe(onNext: { state in
                 switch state {
                 case .idle:
-                    self.queue.async { [unowned self] in self.audioSessionManager?.stop()}
+                    self.queue.async { [unowned self] in
+                        self.appModel?.clientModel.stopClient()
+                        self.audioSessionManager?.stop()
+                    }
                 case .transmitting:
-                    self.queue.async { [unowned self] in self.audioSessionManager?.start()}
+                    self.queue.async { [unowned self] in
+                        self.audioSessionManager?.start()
+                        self.appModel?.clientModel.startClient()
+                    }
                 case .receiving:
                     break
                 }

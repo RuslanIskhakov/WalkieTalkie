@@ -16,7 +16,7 @@ class FirstScreenViewModel: BaseViewModel, FirstScreenViewModelProtocol {
 
     let peerIPAddressPrefix = BehaviorRelay<String>(value: "")
 
-
+    let portNumberText = BehaviorRelay<String>(value: "")
 
     private let appModel: AppModelProtocol
 
@@ -43,6 +43,11 @@ class FirstScreenViewModel: BaseViewModel, FirstScreenViewModelProtocol {
         settings.peerIPAddress = ipAddress
     }
 
+    func setPortNumber(_ poertNumber: String) {
+        var settings = self.appModel.appSettingsModel
+        settings.portNumber = poertNumber
+    }
+
 }
 
 private extension FirstScreenViewModel {
@@ -60,5 +65,7 @@ private extension FirstScreenViewModel {
         } else {
             self.ipAddressText.accept("No network")
         }
+
+        self.portNumberText.accept(self.appModel.appSettingsModel.portNumber)
     }
 }

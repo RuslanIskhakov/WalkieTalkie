@@ -15,6 +15,12 @@ class CircledSamplesBuffer<T: Numeric> {
     private var writeIndex = 0
     private var readIndex = 0
 
+    var available: Int {
+        self.writeIndex >= self.readIndex ?
+        self.writeIndex - self.readIndex :
+        self.capacity - self.readIndex + self.writeIndex
+    }
+
     init(capacity: Int) {
         self.capacity = capacity
         self.samples = Array(repeating: T.zero, count: capacity)
@@ -27,10 +33,27 @@ class CircledSamplesBuffer<T: Numeric> {
         //print("dstest writeIndex: \(writeIndex) \(sample)")
     }
 
-    func getSample() -> T {
+    func getSample() -> T? {
+        guard self.readIndex != self.writeIndex else { return nil }
+
         let sample = self.samples[self.readIndex]
         self.readIndex += 1;
         if self.readIndex >= self.capacity {self.readIndex = 0}
         return sample
+    }
+
+    func getAllSamples() -> Array<T> {
+        var result = Array<T>()
+
+        if (self.writeIndex >= self.readIndex) {
+            result.append(contentsOf: self.samples[self.readIndex..<self.writeIndex])
+        } else {
+            result.append(contentsOf: self.samples[self.readIndex..<self.capacity])
+            result.append(contentsOf: self.samples[0..<self.writeIndex])
+        }
+
+        self.readIndex = self.writeIndex
+
+        return result
     }
 }

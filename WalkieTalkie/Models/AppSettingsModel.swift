@@ -12,6 +12,7 @@ class AppSettingsModel: BaseModelInitialisable, AppSettingsModelProtocol {
     private let defaults = UserDefaults.standard
 
     private let peerIPAddressKey = "peeripaddress"
+    private let portNumberKey = "portnumber"
 
     var appModel: AppModelProtocol?
     var peerIPAddress: String {
@@ -20,6 +21,15 @@ class AppSettingsModel: BaseModelInitialisable, AppSettingsModelProtocol {
         }
         get {
             return self.defaults.string(forKey: self.peerIPAddressKey) ?? ""
+        }
+    }
+
+    var portNumber: String {
+        set {
+            self.defaults.set(newValue, forKey: self.portNumberKey)
+        }
+        get {
+            return self.defaults.string(forKey: self.portNumberKey) ?? "8080"
         }
     }
     

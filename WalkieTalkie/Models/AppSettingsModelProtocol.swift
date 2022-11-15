@@ -10,4 +10,5 @@ import Foundation
 protocol AppSettingsModelProtocol {
     var appModel: AppModelProtocol? {get set}
     var peerIPAddress: String {get set}
+    var portNumber: String {get set}
 }
