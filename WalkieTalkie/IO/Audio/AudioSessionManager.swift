@@ -41,7 +41,7 @@ final class AudioSessionManager: BaseIOInitialisable {
 
                 try audioSession.setCategory(
                     AVAudioSession.Category.playAndRecord,  // play and record
-                    options: [.allowBluetooth, .defaultToSpeaker]
+                    options: [.allowBluetooth]
                 )
 
 //                if let availableInputs = audioSession.availableInputs,
