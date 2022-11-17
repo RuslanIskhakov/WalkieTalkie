@@ -28,6 +28,9 @@ class FirstViewController: BaseViewController {
         self.refreshButton.setTitle("", for: .disabled)
 
         self.viewModel?.configureView()
+
+        self.peerIPTextField.delegate = self
+        self.portNumberTextField.delegate = self
     }
 
     private func setupBindings() {
@@ -79,4 +82,18 @@ class FirstViewController: BaseViewController {
         self.viewModel?.showSecondTap()
     }
     
+}
+
+extension FirstViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let rightButton = UIBarButtonItem(title: "OK", style: .done, target: self, action: #selector(dismissKeyboard))
+        navigationItem.rightBarButtonItem = rightButton
+    }
+
+    @objc
+    func dismissKeyboard() {
+        self.peerIPTextField.resignFirstResponder()
+        self.portNumberTextField.resignFirstResponder()
+        navigationItem.rightBarButtonItem = nil
+    }
 }
