@@ -5,11 +5,14 @@
 //  Created by Ruslan Iskhakov on 11.11.2022.
 //
 
-import Foundation
+import RxSwift
+import RxRelay
 
 class SocketServerModel: BaseModelInitialisable, SocketServerModelProtocol {
 
     weak var appModel: AppModelProtocol?
+
+    let clientLocation = PublishRelay<LocationBody>()
 
     private var server: WebSocketServer?
 
@@ -18,16 +21,23 @@ class SocketServerModel: BaseModelInitialisable, SocketServerModelProtocol {
 
         let portNumber = self.appModel?.appSettingsModel.portNumber ?? "8080"
         let port = UInt16(portNumber) ?? 8080
-        self.server = WebSocketServer(
+        let server = WebSocketServer(
             port: port,
             delegate: self.appModel?.audioModel
         )
-        self.server?.startServer()
+
+        server.clientLocation
+            .bind(to: self.clientLocation)
+            .disposed(by: self.disposeBag)
+
+        server.startServer()
+        self.server = server
     }
 
     func stopServer() {
         print("SocketServerModel.stopServer()")
 
+        self.disposeBag = DisposeBag()
         self.server?.stopServer()
     }
 }

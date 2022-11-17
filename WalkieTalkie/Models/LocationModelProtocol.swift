@@ -11,6 +11,7 @@ import RxRelay
 protocol LocationModelProtocol: AnyObject {
     var appModel: AppModelProtocol? {get set}
     var lastLocation: BehaviorRelay<LocationBody?> {get}
+    var peerDistance: BehaviorRelay<Int?> {get}
 
     func startTracking()
     func stopTracking()

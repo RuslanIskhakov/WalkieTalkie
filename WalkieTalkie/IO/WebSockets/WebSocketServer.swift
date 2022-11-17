@@ -8,6 +8,7 @@
 
 import Foundation
 import Network
+import RxSwift
 
 class WebSocketServer: BaseIOInitialisable {
     private var listener: NWListener
@@ -15,6 +16,8 @@ class WebSocketServer: BaseIOInitialisable {
     private let serverQueue = DispatchQueue(label: "ServerQueue")
 
     private weak var delegate: WebSocketServerDelegate?
+
+    let clientLocation = PublishSubject<LocationBody>()
 
     required init(port: UInt16, delegate: WebSocketServerDelegate? = nil) {
 
@@ -118,6 +121,7 @@ class WebSocketServer: BaseIOInitialisable {
 
         if let location = try? JSONDecoder().decode(LocationBody.self, from: data) {
             print("dstest received location: \(location)")
+            self.clientLocation.onNext(location)
             self.sendLocationAckToClient(connection: connection)
             return true
         }

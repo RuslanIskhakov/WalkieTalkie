@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import RxRelay
 
 final class SwiftWebSocketClient: NSObject {
 
@@ -20,7 +21,7 @@ final class SwiftWebSocketClient: NSObject {
 
     private var connectionId = -1
 
-    let connectionEvents = PublishSubject<MessageType>()
+    let connectionEvents = PublishRelay<MessageType>()
 
     init(ipAddress: String, port: String) {
         self.urlString = "ws://\(ipAddress):\(port)"
@@ -56,7 +57,7 @@ final class SwiftWebSocketClient: NSObject {
                             switch(messageType) {
                             case .connected:
                                 completion("dstest Connected")
-                                self.connectionEvents.onNext(.connectionAck)
+                                self.connectionEvents.accept(.connectionAck)
                             case .failed:
                                 self.opened = false
                                 completion("dstest Failed")
@@ -65,7 +66,7 @@ final class SwiftWebSocketClient: NSObject {
                                 self.connectionId = ack.connectionId
                             case .locationAck:
                                 completion("dstest location ack")
-                                self.connectionEvents.onNext(.locationAck)
+                                self.connectionEvents.accept(.locationAck)
                             }
                         }
 

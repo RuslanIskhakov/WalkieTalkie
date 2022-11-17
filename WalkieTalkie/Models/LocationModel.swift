@@ -6,12 +6,14 @@
 //
 
 import CoreLocation
+import RxSwift
 import RxRelay
 
 class LocationModel: BaseModelInitialisable, LocationModelProtocol {
     weak var appModel: AppModelProtocol?
 
     let lastLocation = BehaviorRelay<LocationBody?>(value: nil)
+    let peerDistance = BehaviorRelay<Int?>(value: nil)
 
     private let queue = DispatchQueue(label: "LocationModel", qos: .utility)
 
@@ -33,10 +35,31 @@ class LocationModel: BaseModelInitialisable, LocationModelProtocol {
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.startUpdatingLocation()
         locationManager.startMonitoringSignificantLocationChanges()
+
+        self.appModel?.serverModel.clientLocation
+            .subscribe(on: SerialDispatchQueueScheduler(qos: .utility))
+            .observe(on: SerialDispatchQueueScheduler(qos: .utility))
+            .subscribe(onNext: { [unowned self] location in
+                guard let _lastLocation = self.lastLocation.value else { return }
+                let lastLocation = CLLocation(
+                    latitude: _lastLocation.latitude,
+                    longitude: _lastLocation.longitude
+                )
+                let peerLocation = CLLocation(
+                    latitude: location.latitude,
+                    longitude: location.longitude
+                )
+                self.peerDistance.accept(
+                    Int(lastLocation.distance(from: peerLocation))
+                )
+            })
+            .disposed(by: self.disposeBag)
     }
     func stopTracking() {
+        self.peerDistance.accept(nil)
+        self.disposeBag = DisposeBag()
         self.locationManager.stopUpdatingLocation()
-        locationManager.stopMonitoringSignificantLocationChanges()
+        self.locationManager.stopMonitoringSignificantLocationChanges()
     }
 }
 
