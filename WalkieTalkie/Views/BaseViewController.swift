@@ -20,6 +20,19 @@ class BaseViewController: UIViewController {
         super.init(coder: coder)
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        if #available(iOS 13, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.backgroundColor = .systemGreen
+            navBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+
+            self.navigationController?.navigationBar.standardAppearance = navBarAppearance;
+            self.navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance;
+        }
+    }
+
     deinit {
         print("deinit for \(String(describing: type(of: self)))")
     }
