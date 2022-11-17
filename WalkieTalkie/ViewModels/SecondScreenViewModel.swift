@@ -6,6 +6,7 @@
 //
 
 import RxRelay
+import RxSwift
 
 class SecondScreenViewModel: BaseViewModel, SecondScreenViewModelProtocol {
 
@@ -21,6 +22,7 @@ class SecondScreenViewModel: BaseViewModel, SecondScreenViewModelProtocol {
 
     let wkState = BehaviorRelay<WalkieTalkieState>(value: .idle)
     let connectivityState = BehaviorRelay<ConnectivityState>(value: .ok)
+    let peerDistance = BehaviorRelay<String>(value: "")
 
     func viewDidAppear() {
         self.appModel.serverModel.startServer()
@@ -51,5 +53,13 @@ class SecondScreenViewModel: BaseViewModel, SecondScreenViewModelProtocol {
         self.appModel.audioModel.wkState
             .bind(to: self.wkState)
             .disposed(by: self.disposeBag)
+
+        self.appModel.locationModel.peerDistance
+            .observe(on: MainScheduler.instance)
+            .subscribe(on: MainScheduler.instance)
+            .subscribe(onNext: {[weak self] distance in
+                guard let self else { return }
+                self.peerDistance.accept("Расстояние: \(distance == nil ? "?" : String(distance ?? 0)) м.")
+            }).disposed(by: self.disposeBag)
     }
 }

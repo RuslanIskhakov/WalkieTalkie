@@ -17,6 +17,7 @@ protocol SecondScreenViewModelProtocol {
 
     var wkState: BehaviorRelay<WalkieTalkieState> {get}
     var connectivityState: BehaviorRelay<ConnectivityState> {get}
+    var peerDistance: BehaviorRelay<String> {get}
 
     func viewDidAppear()
     func viewWillDisappear()

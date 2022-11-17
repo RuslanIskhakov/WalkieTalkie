@@ -11,7 +11,8 @@ import RxSwift
 class SecondViewController: BaseViewController {
 
     @IBOutlet weak var pttButton: UIButton!
-
+    @IBOutlet weak var distanceLabel: UILabel!
+    
     private var viewModel: SecondScreenViewModelProtocol?
 
     override func viewDidLoad() {
@@ -75,6 +76,14 @@ class SecondViewController: BaseViewController {
                     borderColor = .red
                 }
                 self.pttButton.layer.borderColor = borderColor.cgColor
+            }).disposed(by: self.disposeBag)
+
+        self.viewModel?.peerDistance
+            .observe(on: MainScheduler.instance)
+            .subscribe(on: MainScheduler.instance)
+            .subscribe(onNext: {[weak self] text in
+                guard let self else { return }
+                self.distanceLabel.text = text
             }).disposed(by: self.disposeBag)
     }
 
