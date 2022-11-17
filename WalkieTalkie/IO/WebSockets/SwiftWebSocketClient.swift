@@ -21,7 +21,7 @@ final class SwiftWebSocketClient: NSObject {
 
     private var connectionId = -1
 
-    let connectionEvents = PublishRelay<MessageType>()
+    let connectionEvents = PublishRelay<(MessageType, LocationBody?)>()
 
     init(ipAddress: String, port: String) {
         self.urlString = "ws://\(ipAddress):\(port)"
@@ -53,21 +53,23 @@ final class SwiftWebSocketClient: NSObject {
                     case .string:
                         completion("")
                     case .data(let data):
-                        if let messageType = self.getMessageType(from: data) {
-                            switch(messageType) {
-                            case .connected:
-                                completion("dstest Connected")
-                                self.connectionEvents.accept(.connectionAck)
-                            case .failed:
-                                self.opened = false
-                                completion("dstest Failed")
-                            case .connectionAck:
-                                let ack = try! JSONDecoder().decode(ConnectionAck.self, from: data)
-                                self.connectionId = ack.connectionId
-                            case .locationAck:
-                                completion("dstest location ack")
-                                self.connectionEvents.accept(.locationAck)
-                            }
+                        if
+                            let message = self.getConnectionAck(from: data),
+                            let messageType = MessageType(rawValue: message.t) {
+
+                                switch messageType {
+                                case .connected:
+                                    completion("dstest Connected")
+                                case .failed:
+                                    self.opened = false
+                                    completion("dstest Failed")
+                                case .connectionAck:
+                                    let ack = try! JSONDecoder().decode(ConnectionAck.self, from: data)
+                                    self.connectionId = ack.connectionId
+                                case .locationAck:
+                                    completion("dstest location ack")
+                                }
+                                self.connectionEvents.accept((messageType, message.location))
                         }
 
                         self.subscribeToService(with: completion)
@@ -114,11 +116,8 @@ final class SwiftWebSocketClient: NSObject {
         }
     }
 
-    private func getMessageType(from jsonData: Data) -> MessageType? {
-        if let messageType = (try? JSONDecoder().decode(GenericSocketResponse.self, from: jsonData))?.t {
-            return MessageType(rawValue: messageType)
-        }
-        return nil
+    private func getConnectionAck(from jsonData: Data) -> ConnectionAck? {
+        return try? JSONDecoder().decode(ConnectionAck.self, from: jsonData)
     }
 
     private func openWebSocket() {

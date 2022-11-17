@@ -9,6 +9,7 @@
 import Foundation
 import Network
 import RxSwift
+import RxRelay
 
 class WebSocketServer: BaseIOInitialisable {
     private var listener: NWListener
@@ -18,6 +19,7 @@ class WebSocketServer: BaseIOInitialisable {
     private weak var delegate: WebSocketServerDelegate?
 
     let clientLocation = PublishSubject<LocationBody>()
+    let lastLocation = BehaviorRelay<LocationBody?>(value: nil)
 
     required init(port: UInt16, delegate: WebSocketServerDelegate? = nil) {
 
@@ -131,14 +133,22 @@ class WebSocketServer: BaseIOInitialisable {
     }
 
     private func sendAckToClient(connection: NWConnection) {
-        let model = ConnectionAck(t: "connect.ack", connectionId: self.connectedClients.count - 1)
+        let model = ConnectionAck(
+            t: "connect.ack",
+            connectionId: self.connectedClients.count - 1,
+            location: nil
+        )
         let data = try! JSONEncoder().encode(model)
 
         try! self.sendMessageToClient(data: data, client: connection)
     }
 
     private func sendLocationAckToClient(connection: NWConnection) {
-        let model = ConnectionAck(t: "location.ack", connectionId: self.connectedClients.count - 1)
+        let model = ConnectionAck(
+            t: "location.ack",
+            connectionId: self.connectedClients.count - 1,
+            location: self.lastLocation.value
+        )
         let data = try! JSONEncoder().encode(model)
 
         try! self.sendMessageToClient(data: data, client: connection)
@@ -153,4 +163,5 @@ struct LocationBody: Codable {
 struct ConnectionAck: Codable {
     let t: String
     let connectionId: Int
+    let location: LocationBody?
 }

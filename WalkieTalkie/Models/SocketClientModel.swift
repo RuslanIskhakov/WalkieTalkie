@@ -23,11 +23,14 @@ class SocketClientModel: BaseModelInitialisable, SocketClientModelProtocol {
             .subscribe(on: SerialDispatchQueueScheduler(qos: .utility))
             .observe(on: SerialDispatchQueueScheduler(qos: .utility))
             .subscribe(onNext: { [unowned self] event in
-                switch event {
+                switch event.0 {
                 case .connectionAck:
                     guard let location = self.appModel?.locationModel.lastLocation.value else { return }
                     self.client?.sendLocation(location)
                 case .locationAck:
+                    if let location = event.1 {
+                        self.appModel?.serverModel.clientLocation.accept(location)
+                    }
                     self.locationSent = true
                 default: break
                 }

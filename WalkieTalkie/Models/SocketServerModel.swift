@@ -30,6 +30,10 @@ class SocketServerModel: BaseModelInitialisable, SocketServerModelProtocol {
             .bind(to: self.clientLocation)
             .disposed(by: self.disposeBag)
 
+        self.appModel?.locationModel.lastLocation
+            .bind(to: server.lastLocation)
+            .disposed(by: self.disposeBag)
+
         server.startServer()
         self.server = server
     }
