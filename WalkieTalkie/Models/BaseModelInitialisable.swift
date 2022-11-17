@@ -7,8 +7,9 @@
 
 import RxSwift
 
-class BaseModelInitialisable {
-    init() {
+class BaseModelInitialisable: NSObject {
+    override init() {
+        super.init()
         print("\(String(describing: type(of: self))) initialised")
     }
 

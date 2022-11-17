@@ -11,6 +11,8 @@
 		9368C2BDE5BB58ACED3375B0 /* Pods_WalkieTalkie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54849E8B6805C8AE8E3CEF30 /* Pods_WalkieTalkie.framework */; };
 		BA33F14B29260A33006425BF /* UIColor+RGBInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA33F14A29260A33006425BF /* UIColor+RGBInit.swift */; };
 		BA33F14E29260E64006425BF /* FeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA33F14D29260E64006425BF /* FeedbackGenerator.swift */; };
+		BA33F15029261EAF006425BF /* LocationModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA33F14F29261EAF006425BF /* LocationModelProtocol.swift */; };
+		BA33F15229261F05006425BF /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA33F15129261F05006425BF /* LocationModel.swift */; };
 		BA457984292106BE00ED781E /* AudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA457983292106BE00ED781E /* AudioSessionManager.swift */; };
 		BA7B1F5529226F5E00621B63 /* ConnectivityUtilsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B1F5429226F5E00621B63 /* ConnectivityUtilsProtocol.swift */; };
 		BA7B1F5729226F8A00621B63 /* ConnectivityUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B1F5629226F8A00621B63 /* ConnectivityUtils.swift */; };
@@ -80,6 +82,8 @@
 		A68529E100EC5B3C4B004641 /* Pods_WalkieTalkieTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkieTalkieTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA33F14A29260A33006425BF /* UIColor+RGBInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+RGBInit.swift"; sourceTree = "<group>"; };
 		BA33F14D29260E64006425BF /* FeedbackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackGenerator.swift; sourceTree = "<group>"; };
+		BA33F14F29261EAF006425BF /* LocationModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModelProtocol.swift; sourceTree = "<group>"; };
+		BA33F15129261F05006425BF /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
 		BA457983292106BE00ED781E /* AudioSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSessionManager.swift; sourceTree = "<group>"; };
 		BA7B1F5429226F5E00621B63 /* ConnectivityUtilsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityUtilsProtocol.swift; sourceTree = "<group>"; };
 		BA7B1F5629226F8A00621B63 /* ConnectivityUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityUtils.swift; sourceTree = "<group>"; };
@@ -286,6 +290,8 @@
 				BA7B1F5A2922715400621B63 /* BaseModelInitialisable.swift */,
 				BA7B1F5C29227FF200621B63 /* AppSettingsModelProtocol.swift */,
 				BA7B1F5E2922802800621B63 /* AppSettingsModel.swift */,
+				BA33F14F29261EAF006425BF /* LocationModelProtocol.swift */,
+				BA33F15129261F05006425BF /* LocationModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -554,12 +560,14 @@
 				BA7BD1FF291E593D00231570 /* SocketServerModel.swift in Sources */,
 				BA7BD1FB291E4D5B00231570 /* WebSocketServer.swift in Sources */,
 				BA7BD1AE291E3EE200231570 /* ViewController.swift in Sources */,
+				BA33F15029261EAF006425BF /* LocationModelProtocol.swift in Sources */,
 				BA7BD1AA291E3EE200231570 /* AppDelegate.swift in Sources */,
 				BA7BD1E8291E400300231570 /* SecondScreenViewModel.swift in Sources */,
 				BA7BD1F1291E401200231570 /* AppModel.swift in Sources */,
 				BA33F14E29260E64006425BF /* FeedbackGenerator.swift in Sources */,
 				BA33F14B29260A33006425BF /* UIColor+RGBInit.swift in Sources */,
 				BA7BD1FD291E591800231570 /* SocketServerModelProtocol.swift in Sources */,
+				BA33F15229261F05006425BF /* LocationModel.swift in Sources */,
 				BA8863F929237C5600709971 /* AudioTransforms.swift in Sources */,
 				BA8863FF2923888A00709971 /* CircledSamplesBuffer.swift in Sources */,
 				BA8864012923C02200709971 /* AudioTransformsDelegate.swift in Sources */,

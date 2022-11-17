@@ -13,4 +13,5 @@ protocol AppModelProtocol: AnyObject {
     var audioModel: AudioModelProtocol {get}
     var connectivityUtils: ConnectivityUtilsProtocol {get}
     var appSettingsModel: AppSettingsModelProtocol {get}
+    var locationModel: LocationModelProtocol {get}
 }

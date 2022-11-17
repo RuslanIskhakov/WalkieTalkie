@@ -4,6 +4,10 @@
 <dict>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Please grant access to microphone</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Please enable location updates</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Please enable location updates</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

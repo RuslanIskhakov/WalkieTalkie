@@ -14,7 +14,8 @@ class AppModelConfigurator {
             clientModel: SocketClientModel(),
             audioModel: AudioModel(),
             connectivityUtils: ConnectivityUtils(),
-            appSettingsModel: AppSettingsModel()
+            appSettingsModel: AppSettingsModel(),
+            locationModel: LocationModel()
         )
     }
 }

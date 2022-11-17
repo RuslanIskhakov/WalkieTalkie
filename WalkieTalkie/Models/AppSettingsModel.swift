@@ -14,7 +14,7 @@ class AppSettingsModel: BaseModelInitialisable, AppSettingsModelProtocol {
     private let peerIPAddressKey = "peeripaddress"
     private let portNumberKey = "portnumber"
 
-    var appModel: AppModelProtocol?
+    weak var appModel: AppModelProtocol?
     var peerIPAddress: String {
         set {
             self.defaults.set(newValue, forKey: self.peerIPAddressKey)

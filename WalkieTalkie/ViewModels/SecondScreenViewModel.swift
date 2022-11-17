@@ -24,10 +24,12 @@ class SecondScreenViewModel: BaseViewModel, SecondScreenViewModelProtocol {
 
     func viewDidAppear() {
         self.appModel.serverModel.startServer()
+        self.appModel.locationModel.startTracking()
     }
 
     func viewWillDisappear() {
         self.appModel.serverModel.stopServer()
+        self.appModel.locationModel.stopTracking()
     }
 
     func pttTouchDown() {
