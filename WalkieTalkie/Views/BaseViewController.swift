@@ -25,7 +25,7 @@ class BaseViewController: UIViewController {
 
         if #available(iOS 13, *) {
             let navBarAppearance = UINavigationBarAppearance()
-            navBarAppearance.backgroundColor = .systemGreen
+            navBarAppearance.backgroundColor = UIColor(red: 241, green: 154, blue: 35)
             navBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
 
             self.navigationController?.navigationBar.standardAppearance = navBarAppearance;

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		66E1E8EB0767C61F2B7000D9 /* Pods_WalkieTalkieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A68529E100EC5B3C4B004641 /* Pods_WalkieTalkieTests.framework */; };
 		9368C2BDE5BB58ACED3375B0 /* Pods_WalkieTalkie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54849E8B6805C8AE8E3CEF30 /* Pods_WalkieTalkie.framework */; };
+		BA33F14B29260A33006425BF /* UIColor+RGBInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA33F14A29260A33006425BF /* UIColor+RGBInit.swift */; };
 		BA457984292106BE00ED781E /* AudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA457983292106BE00ED781E /* AudioSessionManager.swift */; };
 		BA7B1F5529226F5E00621B63 /* ConnectivityUtilsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B1F5429226F5E00621B63 /* ConnectivityUtilsProtocol.swift */; };
 		BA7B1F5729226F8A00621B63 /* ConnectivityUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B1F5629226F8A00621B63 /* ConnectivityUtils.swift */; };
@@ -76,6 +77,7 @@
 		7B7610FA94B54BE90C22E3FE /* Pods-WalkieTalkie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkieTalkie.release.xcconfig"; path = "Target Support Files/Pods-WalkieTalkie/Pods-WalkieTalkie.release.xcconfig"; sourceTree = "<group>"; };
 		96BA9815C60FC8384FB3FBD8 /* Pods-WalkieTalkieTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkieTalkieTests.debug.xcconfig"; path = "Target Support Files/Pods-WalkieTalkieTests/Pods-WalkieTalkieTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A68529E100EC5B3C4B004641 /* Pods_WalkieTalkieTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkieTalkieTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA33F14A29260A33006425BF /* UIColor+RGBInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+RGBInit.swift"; sourceTree = "<group>"; };
 		BA457983292106BE00ED781E /* AudioSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSessionManager.swift; sourceTree = "<group>"; };
 		BA7B1F5429226F5E00621B63 /* ConnectivityUtilsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityUtilsProtocol.swift; sourceTree = "<group>"; };
 		BA7B1F5629226F8A00621B63 /* ConnectivityUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityUtils.swift; sourceTree = "<group>"; };
@@ -161,6 +163,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		BA33F14929260A13006425BF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BA33F14A29260A33006425BF /* UIColor+RGBInit.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		BA7B1F5329226F2E00621B63 /* Connectivity */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +205,7 @@
 		BA7BD1A8291E3EE200231570 /* WalkieTalkie */ = {
 			isa = PBXGroup;
 			children = (
+				BA33F14929260A13006425BF /* Extensions */,
 				BA7BD1F8291E4D3100231570 /* IO */,
 				BA7BD1DB291E3F6A00231570 /* Models */,
 				BA7BD1DA291E3F6200231570 /* ViewModels */,
@@ -535,6 +546,7 @@
 				BA7BD1AA291E3EE200231570 /* AppDelegate.swift in Sources */,
 				BA7BD1E8291E400300231570 /* SecondScreenViewModel.swift in Sources */,
 				BA7BD1F1291E401200231570 /* AppModel.swift in Sources */,
+				BA33F14B29260A33006425BF /* UIColor+RGBInit.swift in Sources */,
 				BA7BD1FD291E591800231570 /* SocketServerModelProtocol.swift in Sources */,
 				BA8863F929237C5600709971 /* AudioTransforms.swift in Sources */,
 				BA8863FF2923888A00709971 /* CircledSamplesBuffer.swift in Sources */,
