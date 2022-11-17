@@ -6,9 +6,12 @@
 //
 
 import CoreLocation
+import RxRelay
 
 class LocationModel: BaseModelInitialisable, LocationModelProtocol {
     weak var appModel: AppModelProtocol?
+
+    let lastLocation = BehaviorRelay<LocationBody?>(value: nil)
 
     private let queue = DispatchQueue(label: "LocationModel", qos: .utility)
 
@@ -39,6 +42,13 @@ class LocationModel: BaseModelInitialisable, LocationModelProtocol {
 
 extension LocationModel: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let lastLocation = locations.last {
+            self.lastLocation.accept(
+                LocationBody(
+                    latitude: lastLocation.coordinate.latitude,
+                    longitude: lastLocation.coordinate.longitude)
+            )
+        }
 
     }
 }

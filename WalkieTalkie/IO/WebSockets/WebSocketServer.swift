@@ -12,7 +12,6 @@ import Network
 class WebSocketServer: BaseIOInitialisable {
     private var listener: NWListener
     private var connectedClients: [NWConnection] = []
-    private var timer: Timer?
     private let serverQueue = DispatchQueue(label: "ServerQueue")
 
     private weak var delegate: WebSocketServerDelegate?
@@ -51,13 +50,15 @@ class WebSocketServer: BaseIOInitialisable {
             func receive() {
                 newConnection.receiveMessage { (data, context, isComplete, error) in
                     if let data = data, let context = context {
-                        if let decodedArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? Array<SampleFormat> {
-                            print("Received a new message from client of length:\(decodedArray.count)")
-                            self.delegate?.receivedSamples(decodedArray)
-                        } else {
-                            print("Cannot decode data")
+                        let someMessage = try? self.handleMessageFromClient(data: data, context: context, stringVal: "", connection: newConnection)
+                        if someMessage != true {
+                            if let decodedArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? Array<SampleFormat> {
+                                print("Received a new message from client of length:\(decodedArray.count)")
+                                self.delegate?.receivedSamples(decodedArray)
+                            } else {
+                                print("Cannot decode data")
+                            }
                         }
-                        //try! self.handleMessageFromClient(data: data, context: context, stringVal: "", connection: newConnection)
                         receive()
                     }
                 }
@@ -94,33 +95,10 @@ class WebSocketServer: BaseIOInitialisable {
         }
 
         listener.start(queue: serverQueue)
-        //startTimer()
     }
 
     func stopServer() {
-        timer?.invalidate()
         listener.cancel()
-    }
-
-    private func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true, block: { timer in
-
-            guard !self.connectedClients.isEmpty else {
-                return
-            }
-
-            self.sendMessageToAllClients()
-
-        })
-        timer?.fire()
-    }
-
-    private func sendMessageToAllClients() {
-        let data = getTradingQuoteData()
-        for (index, client) in self.connectedClients.enumerated() {
-            print("Sending message to client number \(index)")
-            try! self.sendMessageToClient(data: data, client: client)
-        }
     }
 
     private func sendMessageToClient(data: Data, client: NWConnection) throws {
@@ -136,40 +114,16 @@ class WebSocketServer: BaseIOInitialisable {
         }))
     }
 
-    private func getTradingQuoteData() -> Data {
-        let data = SocketQuoteResponse(t: "trading.quote", body: QuoteResponseBody(securityId: "100", currentPrice: String(Int.random(in: 1...1000))))
-        return try! JSONEncoder().encode(data)
-    }
+    private func handleMessageFromClient(data: Data, context: NWConnection.ContentContext, stringVal: String, connection: NWConnection) throws -> Bool {
 
-    private func handleMessageFromClient(data: Data, context: NWConnection.ContentContext, stringVal: String, connection: NWConnection) throws {
-
-        if let message = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-            if message["subscribeTo"] != nil {
-
-                print("Appending new connection to connectedClients")
-
-                self.connectedClients.append(connection)
-
-                self.sendAckToClient(connection: connection)
-
-                let tradingQuoteData = self.getTradingQuoteData()
-                try! self.sendMessageToClient(data: tradingQuoteData, client: connection)
-
-            } else if message["unsubscribeFrom"] != nil {
-
-                print("Removing old connection from connectedClients")
-
-                if let id = message["unsubscribeFrom"] as? Int {
-                    let connection = self.connectedClients.remove(at: id)
-                    connection.cancel()
-                    print("Cancelled old connection with id \(id)")
-                } else {
-                    print("Invalid Payload")
-                }
-            }
-        } else {
-            print("Invalid value from client")
+        if let location = try? JSONDecoder().decode(LocationBody.self, from: data) {
+            print("dstest received location: \(location)")
+            self.sendLocationAckToClient(connection: connection)
+            return true
         }
+
+        print("Invalid value from client")
+        return false
     }
 
     private func sendAckToClient(connection: NWConnection) {
@@ -178,16 +132,18 @@ class WebSocketServer: BaseIOInitialisable {
 
         try! self.sendMessageToClient(data: data, client: connection)
     }
+
+    private func sendLocationAckToClient(connection: NWConnection) {
+        let model = ConnectionAck(t: "location.ack", connectionId: self.connectedClients.count - 1)
+        let data = try! JSONEncoder().encode(model)
+
+        try! self.sendMessageToClient(data: data, client: connection)
+    }
 }
 
-struct SocketQuoteResponse: Codable {
-    let t: String
-    let body: QuoteResponseBody
-}
-
-struct QuoteResponseBody: Codable {
-    let securityId: String
-    let currentPrice: String
+struct LocationBody: Codable {
+    let latitude: Double
+    let longitude: Double
 }
 
 struct ConnectionAck: Codable {

@@ -6,7 +6,7 @@
 //  based on https://github.com/jayesh15111988/SwiftWebSocket/tree/master
 //
 
-import Foundation
+import RxSwift
 
 final class SwiftWebSocketClient: NSObject {
 
@@ -14,11 +14,13 @@ final class SwiftWebSocketClient: NSObject {
 
     private var webSocket: URLSessionWebSocketTask?
 
-    var opened = false
+    private var opened = false
 
     private var urlString = ""
 
-    var connectionId = -1
+    private var connectionId = -1
+
+    let connectionEvents = PublishSubject<MessageType>()
 
     init(ipAddress: String, port: String) {
         self.urlString = "ws://\(ipAddress):\(port)"
@@ -26,71 +28,89 @@ final class SwiftWebSocketClient: NSObject {
     }
 
     func subscribeToService(with completion: @escaping (String?) -> Void) {
-        if !opened {
-            openWebSocket()
-            print("SwiftWebSocketClient: socket is opened \(self.webSocket?.state)")
-        }
 
-        guard let webSocket = webSocket else {
-            completion("webSocket is nil!!!")
-            return
-        }
-
-        webSocket.receive(completionHandler: { [weak self] result in
-
-            guard let self = self else { return }
-
-            switch result {
-            case .failure(let error):
-                completion(error.localizedDescription)
-            case .success(let webSocketTaskMessage):
-                switch webSocketTaskMessage {
-                case .string:
-                    completion("")
-                case .data(let data):
-                    if let messageType = self.getMessageType(from: data) {
-                        switch(messageType) {
-                        case .connected:
-                            completion("dstest Connected")
-                            //self.subscribeToServer(completion: completion)
-                        case .failed:
-                            self.opened = false
-                            completion("dstest Failed")
-                        case .tradingQuote:
-                            if let currentQuote = self.getCurrentQuoteResponseData(from: data) {
-                                completion(currentQuote.body.currentPrice)
-                            } else {
-                                completion("excepted trading quote")
-                            }
-                        case .connectionAck:
-                            let ack = try! JSONDecoder().decode(ConnectionAck.self, from: data)
-                            self.connectionId = ack.connectionId
-                            completion("dstest .connectionAck")
-                        }
-                    }
-
-                    self.subscribeToService(with: completion)
-                default:
-                    fatalError("Failed. Received unknown data format. Expected String")
-                }
+        self.queue.async {[unowned self] in
+            if !self.opened {
+                self.openWebSocket()
+                print("SwiftWebSocketClient: socket is opened \(self.webSocket?.state)")
             }
-        })
+
+            guard let webSocket = self.webSocket else {
+                completion("webSocket is nil!!!")
+                return
+            }
+
+            webSocket.receive(completionHandler: { [weak self] result in
+
+                guard let self = self else { return }
+
+                switch result {
+                case .failure(let error):
+                    completion(error.localizedDescription)
+                case .success(let webSocketTaskMessage):
+                    switch webSocketTaskMessage {
+                    case .string:
+                        completion("")
+                    case .data(let data):
+                        if let messageType = self.getMessageType(from: data) {
+                            switch(messageType) {
+                            case .connected:
+                                completion("dstest Connected")
+                                self.connectionEvents.onNext(.connectionAck)
+                            case .failed:
+                                self.opened = false
+                                completion("dstest Failed")
+                            case .connectionAck:
+                                let ack = try! JSONDecoder().decode(ConnectionAck.self, from: data)
+                                self.connectionId = ack.connectionId
+                            case .locationAck:
+                                completion("dstest location ack")
+                                self.connectionEvents.onNext(.locationAck)
+                            }
+                        }
+
+                        self.subscribeToService(with: completion)
+                    default:
+                        fatalError("Failed. Received unknown data format. Expected String")
+                    }
+                }
+            })
+        }
     }
 
     func sendData(_ buffer: CircledSamplesBuffer<SampleFormat>) {
         //print("dstest sendData: \(buffer.available)")
-        guard let webSocket = webSocket else {
-            return
-        }
 
-        let encodedData = NSKeyedArchiver.archivedData(withRootObject: buffer.getAllSamples())
+        self.queue.async {[unowned self] in
+            guard let webSocket = self.webSocket else {
+                return
+            }
 
-        webSocket.send(URLSessionWebSocketTask.Message.data(encodedData)) { error in
-            if let error = error {
-                print("Failed to send data with Error \(error.localizedDescription)")
+            let encodedData = NSKeyedArchiver.archivedData(withRootObject: buffer.getAllSamples())
+
+            webSocket.send(URLSessionWebSocketTask.Message.data(encodedData)) { error in
+                if let error = error {
+                    print("Failed to send data with Error \(error.localizedDescription)")
+                }
             }
         }
 
+    }
+
+    func sendLocation(_ location: LocationBody) {
+        self.queue.async {[unowned self] in
+            guard let webSocket = self.webSocket else {
+                return
+            }
+            print("dstest sending location: \(location)")
+            if let data = try? JSONEncoder().encode(location) {
+                webSocket.send(URLSessionWebSocketTask.Message.data(data)) {error in
+                    if let error = error {
+                        print("dstest sendLocation error: \(error.localizedDescription)")
+                    }
+                }
+            }
+        }
     }
 
     private func getMessageType(from jsonData: Data) -> MessageType? {
@@ -98,39 +118,6 @@ final class SwiftWebSocketClient: NSObject {
             return MessageType(rawValue: messageType)
         }
         return nil
-    }
-
-    private func getCurrentQuoteResponseData(from jsonData: Data) -> SocketQuoteResponse? {
-        do {
-            return try JSONDecoder().decode(SocketQuoteResponse.self, from: jsonData)
-        } catch {
-            return nil
-        }
-    }
-
-    private func subscriptionPayload(for productID: String) -> String? {
-        let payload = ["subscribeTo": "trading.product.\(productID)"]
-        if let jsonData = try? JSONSerialization.data(withJSONObject: payload, options: []) {
-            return String(data: jsonData, encoding: .utf8)
-        }
-        return nil
-    }
-
-    private func subscribeToServer(completion: @escaping (String?) -> Void) {
-
-        guard let webSocket = webSocket else {
-            return
-        }
-
-        if let subscriptionPayload = self.subscriptionPayload(for: "100") {
-            webSocket.send(URLSessionWebSocketTask.Message.string(subscriptionPayload)) { error in
-                if let error = error {
-                    print("Failed with Error \(error.localizedDescription)")
-                }
-            }
-        } else {
-            completion(nil)
-        }
     }
 
     private func openWebSocket() {
@@ -147,10 +134,12 @@ final class SwiftWebSocketClient: NSObject {
     }
 
     func closeSocket() {
-        webSocket?.cancel(with: .goingAway, reason: nil)
-        opened = false
-        webSocket = nil
-        print("SwiftWebSocketClient: socket is closed")
+        self.queue.sync {
+            self.webSocket?.cancel(with: .goingAway, reason: nil)
+            self.opened = false
+            self.webSocket = nil
+            print("SwiftWebSocketClient: socket is closed")
+        }
     }
 }
 
@@ -174,6 +163,6 @@ struct GenericSocketResponse: Decodable {
 enum MessageType: String {
     case connected = "connect.connected"
     case failed =  "connect.failed"
-    case tradingQuote = "trading.quote"
     case connectionAck = "connect.ack"
+    case locationAck = "location.ack"
 }
