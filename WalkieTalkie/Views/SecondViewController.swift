@@ -46,15 +46,20 @@ class SecondViewController: BaseViewController {
             .subscribe(onNext: {[weak self] state in
                 guard let self else { return }
                 let buttonColor: UIColor
+                let isEnabled: Bool
                 switch state {
                 case .idle:
                     buttonColor = .green
+                    isEnabled = true
                 case .receiving:
                     buttonColor = .gray
+                    isEnabled = false
                 case .transmitting:
                     buttonColor = .yellow
+                    isEnabled = true
                 }
                 self.pttButton.backgroundColor = buttonColor
+                self.pttButton.isEnabled = isEnabled
             }).disposed(by: self.disposeBag)
 
         self.viewModel?.connectivityState
