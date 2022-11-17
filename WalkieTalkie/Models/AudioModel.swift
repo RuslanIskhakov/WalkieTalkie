@@ -19,7 +19,7 @@ class AudioModel: BaseModelInitialisable, AudioModelProtocol {
     private var audioSessionManager: AudioSessionManager?
     private var audioTransforms: AudioTransforms?
 
-    private var timer: Timer?
+    private var feedbackGenerator = FeedbackGenerator()
 
     override init() {
         super.init()
@@ -32,6 +32,17 @@ class AudioModel: BaseModelInitialisable, AudioModelProtocol {
     }
 
     private func setupBindings() {
+
+        // haptic feedback
+        self.wkState
+            .subscribe(on: SerialDispatchQueueScheduler(qos: .utility))
+            .observe(on: SerialDispatchQueueScheduler(qos: .utility))
+            .distinctUntilChanged()
+            .subscribe(onNext: { [unowned self]  _ in
+                self.feedbackGenerator.makeFeedback()
+            }).disposed(by: self.disposeBag)
+
+        // toggle modes
         self.wkState
             .subscribe(on: SerialDispatchQueueScheduler(qos: .utility))
             .observe(on: SerialDispatchQueueScheduler(qos: .utility))
@@ -52,6 +63,7 @@ class AudioModel: BaseModelInitialisable, AudioModelProtocol {
                 }
             }).disposed(by: self.disposeBag)
 
+        // return to idle after receiving timeout
         self.wkState
             .asObservable()
             .subscribe(on: SerialDispatchQueueScheduler(qos: .utility))
