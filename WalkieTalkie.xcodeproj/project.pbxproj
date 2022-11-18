@@ -44,7 +44,7 @@
 		BA7BD1FB291E4D5B00231570 /* WebSocketServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1FA291E4D5B00231570 /* WebSocketServer.swift */; };
 		BA7BD1FD291E591800231570 /* SocketServerModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1FC291E591800231570 /* SocketServerModelProtocol.swift */; };
 		BA7BD1FF291E593D00231570 /* SocketServerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD1FE291E593D00231570 /* SocketServerModel.swift */; };
-		BA7BD201291ECF9500231570 /* SwiftWebSocketClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD200291ECF9500231570 /* SwiftWebSocketClient.swift */; };
+		BA7BD201291ECF9500231570 /* WebSocketClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD200291ECF9500231570 /* WebSocketClient.swift */; };
 		BA7BD203291ED74D00231570 /* SocketCleintModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD202291ED74D00231570 /* SocketCleintModelProtocol.swift */; };
 		BA7BD205291ED76600231570 /* SocketClientModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD204291ED76600231570 /* SocketClientModel.swift */; };
 		BA805E8F291FD078008F1E0D /* AudioModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA805E8E291FD078008F1E0D /* AudioModelProtocol.swift */; };
@@ -119,7 +119,7 @@
 		BA7BD1FA291E4D5B00231570 /* WebSocketServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketServer.swift; sourceTree = "<group>"; };
 		BA7BD1FC291E591800231570 /* SocketServerModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketServerModelProtocol.swift; sourceTree = "<group>"; };
 		BA7BD1FE291E593D00231570 /* SocketServerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketServerModel.swift; sourceTree = "<group>"; };
-		BA7BD200291ECF9500231570 /* SwiftWebSocketClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftWebSocketClient.swift; sourceTree = "<group>"; };
+		BA7BD200291ECF9500231570 /* WebSocketClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketClient.swift; sourceTree = "<group>"; };
 		BA7BD202291ED74D00231570 /* SocketCleintModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketCleintModelProtocol.swift; sourceTree = "<group>"; };
 		BA7BD204291ED76600231570 /* SocketClientModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketClientModel.swift; sourceTree = "<group>"; };
 		BA805E8E291FD078008F1E0D /* AudioModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioModelProtocol.swift; sourceTree = "<group>"; };
@@ -312,7 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				BA7BD1FA291E4D5B00231570 /* WebSocketServer.swift */,
-				BA7BD200291ECF9500231570 /* SwiftWebSocketClient.swift */,
+				BA7BD200291ECF9500231570 /* WebSocketClient.swift */,
 				BA8864022923C2AA00709971 /* WebSocketServerDelegate.swift */,
 			);
 			path = WebSockets;
@@ -593,7 +593,7 @@
 				BA7BD205291ED76600231570 /* SocketClientModel.swift in Sources */,
 				BA7BD1EA291E400300231570 /* FirstScreenViewModelProtocol.swift in Sources */,
 				BA7BD1EB291E400300231570 /* FirstScreenViewModel.swift in Sources */,
-				BA7BD201291ECF9500231570 /* SwiftWebSocketClient.swift in Sources */,
+				BA7BD201291ECF9500231570 /* WebSocketClient.swift in Sources */,
 				BA7BD1F5291E401200231570 /* AppModelProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

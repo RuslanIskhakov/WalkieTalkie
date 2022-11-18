@@ -10,28 +10,37 @@ import RxSwift
 class SocketClientModel: BaseModelInitialisable, SocketClientModelProtocol {
     weak var appModel: AppModelProtocol?
 
-    private var client: SwiftWebSocketClient?
+    private var client: WebSocketClient?
     private var locationSent = false
 
     func startClient() {
-        print("Starting SwiftWebSocketClient")
+        print("Starting WebSocketClient")
         let peerIPAddress = self.appModel?.appSettingsModel.peerIPAddress ?? ""
         let portNumber = self.appModel?.appSettingsModel.portNumber ?? "8080"
-        self.client = SwiftWebSocketClient(ipAddress: peerIPAddress, port: portNumber)
+        self.client = WebSocketClient(ipAddress: peerIPAddress, port: portNumber)
 
         self.client?.connectionEvents
             .subscribe(on: SerialDispatchQueueScheduler(qos: .utility))
             .observe(on: SerialDispatchQueueScheduler(qos: .utility))
-            .subscribe(onNext: { [unowned self] event in
+            .subscribe(onNext: { [weak self] event in
+                guard let self else { return }
                 switch event {
-                case .connectionAck:
+                case .connected:
                     guard let location = self.appModel?.locationModel.lastLocation.value else { return }
                     self.client?.sendLocation(location)
                 case .locationAck:
                     self.locationSent = true
-                default: break
                 }
 
+            })
+            .disposed(by: self.disposeBag)
+
+        self.client?.serverLocation
+            .subscribe(on: SerialDispatchQueueScheduler(qos: .utility))
+            .observe(on: SerialDispatchQueueScheduler(qos: .utility))
+            .subscribe(onNext: { [weak self] location in
+                guard let self else { return }
+                self.appModel?.serverModel.clientLocation.accept(location)
             })
             .disposed(by: self.disposeBag)
 

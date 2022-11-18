@@ -9,6 +9,7 @@
 import Foundation
 import Network
 import RxSwift
+import RxRelay
 
 class WebSocketServer: BaseIOInitialisable {
     private var listener: NWListener
@@ -18,6 +19,7 @@ class WebSocketServer: BaseIOInitialisable {
     private weak var delegate: WebSocketServerDelegate?
 
     let clientLocation = PublishSubject<LocationBody>()
+    let lastLocation = BehaviorRelay<LocationBody?>(value: nil)
 
     required init(port: UInt16, delegate: WebSocketServerDelegate? = nil) {
 
@@ -72,7 +74,7 @@ class WebSocketServer: BaseIOInitialisable {
                 switch state {
                 case .ready:
                     print("Client ready")
-                    try! self.sendMessageToClient(data: JSONEncoder().encode(["t": "connect.connected"]), client: newConnection)
+                    self.sendConnectionAckToClient(connection: newConnection)
                 case .failed(let error):
                     print("Client connection failed \(error.localizedDescription)")
                 case .waiting(let error):
@@ -130,15 +132,23 @@ class WebSocketServer: BaseIOInitialisable {
         return false
     }
 
-    private func sendAckToClient(connection: NWConnection) {
-        let model = ConnectionAck(t: "connect.ack", connectionId: self.connectedClients.count - 1)
+    private func sendConnectionAckToClient(connection: NWConnection) {
+
+        let model = ConnectionAck(
+            t: MessageType.connected.rawValue,
+            lastLocation: self.lastLocation.value
+        )
         let data = try! JSONEncoder().encode(model)
 
         try! self.sendMessageToClient(data: data, client: connection)
     }
 
     private func sendLocationAckToClient(connection: NWConnection) {
-        let model = ConnectionAck(t: "location.ack", connectionId: self.connectedClients.count - 1)
+
+        let model = ConnectionAck(
+            t: MessageType.locationAck.rawValue,
+            lastLocation: self.lastLocation.value
+        )
         let data = try! JSONEncoder().encode(model)
 
         try! self.sendMessageToClient(data: data, client: connection)
@@ -152,5 +162,5 @@ struct LocationBody: Codable {
 
 struct ConnectionAck: Codable {
     let t: String
-    let connectionId: Int
+    let lastLocation: LocationBody?
 }

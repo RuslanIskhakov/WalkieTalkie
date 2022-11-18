@@ -1,5 +1,5 @@
 //
-//  SwiftWebSocketClient.swift
+//  WebSocketClient.swift
 //  WalkieTalkie
 //
 //  Created by Ruslan Iskhakov on 11.11.2022.
@@ -9,9 +9,9 @@
 import RxSwift
 import RxRelay
 
-final class SwiftWebSocketClient: NSObject {
+final class WebSocketClient: NSObject {
 
-    private let queue = DispatchQueue(label: "SwiftWebSocketClient", qos: .utility)
+    private let queue = DispatchQueue(label: "WebSocketClient", qos: .utility)
 
     private var webSocket: URLSessionWebSocketTask?
 
@@ -19,13 +19,12 @@ final class SwiftWebSocketClient: NSObject {
 
     private var urlString = ""
 
-    private var connectionId = -1
-
     let connectionEvents = PublishRelay<MessageType>()
+    let serverLocation = PublishRelay<LocationBody>()
 
     init(ipAddress: String, port: String) {
         self.urlString = "ws://\(ipAddress):\(port)"
-        print("SwiftWebSocketClient init: \(self.urlString)")
+        print("WebSocketClient init: \(self.urlString)")
     }
 
     func subscribeToService(with completion: @escaping (String?) -> Void) {
@@ -33,7 +32,7 @@ final class SwiftWebSocketClient: NSObject {
         self.queue.async {[unowned self] in
             if !self.opened {
                 self.openWebSocket()
-                print("SwiftWebSocketClient: socket is opened \(self.webSocket?.state)")
+                print("WebSocketClient: socket is opened \(self.webSocket?.state)")
             }
 
             guard let webSocket = self.webSocket else {
@@ -57,13 +56,12 @@ final class SwiftWebSocketClient: NSObject {
                             switch(messageType) {
                             case .connected:
                                 completion("dstest Connected")
-                                self.connectionEvents.accept(.connectionAck)
-                            case .failed:
-                                self.opened = false
-                                completion("dstest Failed")
-                            case .connectionAck:
-                                let ack = try! JSONDecoder().decode(ConnectionAck.self, from: data)
-                                self.connectionId = ack.connectionId
+
+                                if let location = try? JSONDecoder().decode(ConnectionAck.self, from: data).lastLocation {
+                                    self.serverLocation.accept(location)
+                                }
+
+                                self.connectionEvents.accept(.connected)
                             case .locationAck:
                                 completion("dstest location ack")
                                 self.connectionEvents.accept(.locationAck)
@@ -115,7 +113,7 @@ final class SwiftWebSocketClient: NSObject {
     }
 
     private func getMessageType(from jsonData: Data) -> MessageType? {
-        if let messageType = (try? JSONDecoder().decode(GenericSocketResponse.self, from: jsonData))?.t {
+        if let messageType = (try? JSONDecoder().decode(ConnectionAck.self, from: jsonData))?.t {
             return MessageType(rawValue: messageType)
         }
         return nil
@@ -139,12 +137,12 @@ final class SwiftWebSocketClient: NSObject {
             self.webSocket?.cancel(with: .goingAway, reason: nil)
             self.opened = false
             self.webSocket = nil
-            print("SwiftWebSocketClient: socket is closed")
+            print("WebSocketClient: socket is closed")
         }
     }
 }
 
-extension SwiftWebSocketClient: URLSessionWebSocketDelegate {
+extension WebSocketClient: URLSessionWebSocketDelegate {
     func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didOpenWithProtocol protocol: String?) {
         opened = true
     }
@@ -163,7 +161,5 @@ struct GenericSocketResponse: Decodable {
 
 enum MessageType: String {
     case connected = "connect.connected"
-    case failed =  "connect.failed"
-    case connectionAck = "connect.ack"
     case locationAck = "location.ack"
 }
