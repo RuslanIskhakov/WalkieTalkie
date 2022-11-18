@@ -39,8 +39,8 @@ class LocationModel: BaseModelInitialisable, LocationModelProtocol {
         self.appModel?.serverModel.clientLocation
             .subscribe(on: SerialDispatchQueueScheduler(qos: .utility))
             .observe(on: SerialDispatchQueueScheduler(qos: .utility))
-            .subscribe(onNext: { [unowned self] location in
-                guard let _lastLocation = self.lastLocation.value else { return }
+            .subscribe(onNext: { [weak self] location in
+                guard let self, let _lastLocation = self.lastLocation.value else { return }
                 let lastLocation = CLLocation(
                     latitude: _lastLocation.latitude,
                     longitude: _lastLocation.longitude
