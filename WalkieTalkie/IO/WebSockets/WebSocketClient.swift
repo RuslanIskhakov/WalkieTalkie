@@ -153,13 +153,3 @@ extension WebSocketClient: URLSessionWebSocketDelegate {
         self.opened = false
     }
 }
-
-
-struct GenericSocketResponse: Decodable {
-    let t: String
-}
-
-enum MessageType: String {
-    case connected = "connect.connected"
-    case locationAck = "location.ack"
-}

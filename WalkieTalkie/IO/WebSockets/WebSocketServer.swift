@@ -164,3 +164,8 @@ struct ConnectionAck: Codable {
     let t: String
     let lastLocation: LocationBody?
 }
+
+enum MessageType: String {
+    case connected = "connect.connected"
+    case locationAck = "location.ack"
+}
