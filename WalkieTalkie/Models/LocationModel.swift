@@ -32,34 +32,40 @@ class LocationModel: BaseModelInitialisable, LocationModelProtocol {
     }()
 
     func startTracking() {
-        self.locationManager.requestAlwaysAuthorization()
-        self.locationManager.startUpdatingLocation()
-        locationManager.startMonitoringSignificantLocationChanges()
 
-        self.appModel?.serverModel.clientLocation
-            .subscribe(on: SerialDispatchQueueScheduler(qos: .utility))
-            .observe(on: SerialDispatchQueueScheduler(qos: .utility))
-            .subscribe(onNext: { [weak self] location in
-                guard let self, let _lastLocation = self.lastLocation.value else { return }
-                let lastLocation = CLLocation(
-                    latitude: _lastLocation.latitude,
-                    longitude: _lastLocation.longitude
-                )
-                let peerLocation = CLLocation(
-                    latitude: location.latitude,
-                    longitude: location.longitude
-                )
-                self.peerDistance.accept(
-                    Int(lastLocation.distance(from: peerLocation))
-                )
-            })
-            .disposed(by: self.disposeBag)
+        self.queue.async {[unowned self] in
+            self.locationManager.requestAlwaysAuthorization()
+            self.locationManager.startUpdatingLocation()
+            locationManager.startMonitoringSignificantLocationChanges()
+
+            self.appModel?.serverModel.clientLocation
+                .subscribe(on: SerialDispatchQueueScheduler(qos: .utility))
+                .observe(on: SerialDispatchQueueScheduler(qos: .utility))
+                .subscribe(onNext: { [weak self] location in
+                    guard let self, let _lastLocation = self.lastLocation.value else { return }
+                    let lastLocation = CLLocation(
+                        latitude: _lastLocation.latitude,
+                        longitude: _lastLocation.longitude
+                    )
+                    let peerLocation = CLLocation(
+                        latitude: location.latitude,
+                        longitude: location.longitude
+                    )
+                    self.peerDistance.accept(
+                        Int(lastLocation.distance(from: peerLocation))
+                    )
+                })
+                .disposed(by: self.disposeBag)
+        }
     }
+
     func stopTracking() {
-        self.peerDistance.accept(nil)
-        self.disposeBag = DisposeBag()
-        self.locationManager.stopUpdatingLocation()
-        self.locationManager.stopMonitoringSignificantLocationChanges()
+        self.queue.async {[unowned self] in
+            self.peerDistance.accept(nil)
+            self.disposeBag = DisposeBag()
+            self.locationManager.stopUpdatingLocation()
+            self.locationManager.stopMonitoringSignificantLocationChanges()
+        }
     }
 }
 

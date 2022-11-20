@@ -85,6 +85,36 @@ class SecondViewController: BaseViewController {
                 guard let self else { return }
                 self.distanceLabel.text = text
             }).disposed(by: self.disposeBag)
+
+        self.viewModel?.connectivityState
+            .observe(on: MainScheduler.instance)
+            .subscribe(on: MainScheduler.instance)
+            .subscribe(onNext: {[weak self] state in
+                guard let self else { return }
+                let borderColor: UIColor
+                switch state {
+                case .ok:
+                    borderColor = . green
+                case .noConnection:
+                    borderColor = .red
+                }
+                self.pttButton.layer.borderColor = borderColor.cgColor
+            }).disposed(by: self.disposeBag)
+
+        self.viewModel?.errorDialogMessage
+            .observe(on: MainScheduler.instance)
+            .subscribe(on: MainScheduler.instance)
+            .subscribe(onNext: {[weak self] text in
+                guard let self else { return }
+                let dialog = UIAlertController(title: "Ошибка", message: text, preferredStyle: .alert)
+
+                let ok = UIAlertAction(title: "ОК", style: .default, handler: { _ in
+                    self.navigationController?.popViewController(animated: true)
+                })
+
+                dialog.addAction(ok)
+                self.present(dialog, animated: true, completion: nil)
+            }).disposed(by: self.disposeBag)
     }
 
     @IBAction func pttTouchUpInside(_ sender: Any) {

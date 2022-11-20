@@ -9,6 +9,15 @@
 import RxSwift
 import RxRelay
 
+enum WebSocketClientStateEvents {
+    case initial
+    case errorMessage(String)
+    case error(Error)
+    case sendDataError
+    case opened(String)
+    case event(String)
+}
+
 final class WebSocketClient: NSObject {
 
     private let queue = DispatchQueue(label: "WebSocketClient", qos: .utility)
@@ -21,22 +30,23 @@ final class WebSocketClient: NSObject {
 
     let connectionEvents = PublishRelay<MessageType>()
     let serverLocation = PublishRelay<LocationBody>()
+    let stateEvents = BehaviorRelay<WebSocketClientStateEvents>(value: .initial)
 
     init(ipAddress: String, port: String) {
         self.urlString = "ws://\(ipAddress):\(port)"
         print("WebSocketClient init: \(self.urlString)")
     }
 
-    func subscribeToService(with completion: @escaping (String?) -> Void) {
+    func subscribeToService() {
 
         self.queue.async {[unowned self] in
             if !self.opened {
                 self.openWebSocket()
-                print("WebSocketClient: socket is opened \(self.webSocket?.state)")
+                self.stateEvents.accept(.opened("WebSocketClient: socket is opened \(String(describing: self.webSocket?.state))"))
             }
 
             guard let webSocket = self.webSocket else {
-                completion("webSocket is nil!!!")
+                self.stateEvents.accept(.errorMessage("webSocket is nil!!!"))
                 return
             }
 
@@ -46,16 +56,16 @@ final class WebSocketClient: NSObject {
 
                 switch result {
                 case .failure(let error):
-                    completion(error.localizedDescription)
+                    self.stateEvents.accept(.errorMessage(error.localizedDescription))
                 case .success(let webSocketTaskMessage):
                     switch webSocketTaskMessage {
                     case .string:
-                        completion("")
+                        self.stateEvents.accept(.event("string webSocketTaskMessage"))
                     case .data(let data):
                         if let messageType = self.getMessageType(from: data) {
                             switch(messageType) {
                             case .connected:
-                                completion("dstest Connected")
+                                self.stateEvents.accept(.event("Connected to server"))
 
                                 if let location = try? JSONDecoder().decode(ConnectionAck.self, from: data).lastLocation {
                                     self.serverLocation.accept(location)
@@ -63,14 +73,14 @@ final class WebSocketClient: NSObject {
 
                                 self.connectionEvents.accept(.connected)
                             case .locationAck:
-                                completion("dstest location ack")
+                                self.stateEvents.accept(.event("location ack"))
                                 self.connectionEvents.accept(.locationAck)
                             }
                         }
 
-                        self.subscribeToService(with: completion)
+                        self.subscribeToService()
                     default:
-                        fatalError("Failed. Received unknown data format. Expected String")
+                        self.stateEvents.accept(.event("Failed. Received unknown data format."))
                     }
                 }
             })
@@ -88,8 +98,8 @@ final class WebSocketClient: NSObject {
             let encodedData = NSKeyedArchiver.archivedData(withRootObject: buffer.getAllSamples())
 
             webSocket.send(URLSessionWebSocketTask.Message.data(encodedData)) { error in
-                if let error = error {
-                    print("Failed to send data with Error \(error.localizedDescription)")
+                if let error {
+                    self.stateEvents.accept(.sendDataError)
                 }
             }
         }
@@ -105,7 +115,7 @@ final class WebSocketClient: NSObject {
             if let data = try? JSONEncoder().encode(location) {
                 webSocket.send(URLSessionWebSocketTask.Message.data(data)) {error in
                     if let error = error {
-                        print("dstest sendLocation error: \(error.localizedDescription)")
+                        self.stateEvents.accept(.error(error))
                     }
                 }
             }
@@ -137,7 +147,7 @@ final class WebSocketClient: NSObject {
             self.webSocket?.cancel(with: .goingAway, reason: nil)
             self.opened = false
             self.webSocket = nil
-            print("WebSocketClient: socket is closed")
+            self.stateEvents.accept(.event("WebSocketClient: socket is closed"))
         }
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import RxRelay
+import RxSwift
 
 enum ConnectivityState {
     case ok
@@ -18,6 +19,7 @@ protocol SecondScreenViewModelProtocol {
     var wkState: BehaviorRelay<WalkieTalkieState> {get}
     var connectivityState: BehaviorRelay<ConnectivityState> {get}
     var peerDistance: BehaviorRelay<String> {get}
+    var errorDialogMessage: PublishSubject<String> {get}
 
     func viewDidAppear()
     func viewWillDisappear()
