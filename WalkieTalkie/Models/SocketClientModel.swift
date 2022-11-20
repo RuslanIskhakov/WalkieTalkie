@@ -73,6 +73,7 @@ class SocketClientModel: BaseModelInitialisable, SocketClientModelProtocol {
                 })
                 .disposed(by: self.disposeBag)
 
+            print("Subscribing to service")
             self.client?.subscribeToService()
         }
     }

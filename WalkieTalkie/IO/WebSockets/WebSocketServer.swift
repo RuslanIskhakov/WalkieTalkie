@@ -105,7 +105,7 @@ class WebSocketServer: BaseIOInitialisable {
             case .ready:
                 self.stateEvents.accept(.opened("Server Ready"))
             case .failed(let error):
-                self.stateEvents.accept(.error(error))
+                self.stateEvents.accept(.errorMessage(error.localizedDescription))
             default:
                 break
             }
@@ -124,9 +124,9 @@ class WebSocketServer: BaseIOInitialisable {
 
         client.send(content: data, contentContext: context, isComplete: true, completion: .contentProcessed({ error in
             if let error = error {
-                print(error.localizedDescription)
+                self.stateEvents.accept(.error(error))
             } else {
-                // no-op
+                self.stateEvents.accept(.event("Message sent to client"))
             }
         }))
     }

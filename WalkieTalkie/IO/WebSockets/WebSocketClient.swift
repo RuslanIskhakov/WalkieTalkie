@@ -61,6 +61,7 @@ final class WebSocketClient: NSObject {
                     switch webSocketTaskMessage {
                     case .string:
                         self.stateEvents.accept(.event("string webSocketTaskMessage"))
+
                     case .data(let data):
                         if let messageType = self.getMessageType(from: data) {
                             switch(messageType) {
