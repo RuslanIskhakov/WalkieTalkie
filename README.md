@@ -4,7 +4,7 @@
 
 ![wk](https://user-images.githubusercontent.com/4405543/202900735-051723e2-1d1a-4072-bd6f-b7e8f765b20c.PNG)
 
-## Установка
+## Развертывание
 
 - Клонировать проект: `git clone https://github.com/RuslanIskhakov/WalkieTalkie`
 - Настроить зависимости проекта: `pod install`
