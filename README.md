@@ -2,7 +2,7 @@
 
 Приложение для общения в режиме рации с помощью двух iPhone.
 
-![wk](https://user-images.githubusercontent.com/4405543/202900735-051723e2-1d1a-4072-bd6f-b7e8f765b20c.PNG)
+![wk](https://user-images.githubusercontent.com/4405543/202902129-da0f9b6a-93d2-450a-a0b6-a8569d8cf736.PNG)
 
 ## Развертывание
 
