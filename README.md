@@ -13,3 +13,13 @@
 ## Советы по использованию
 - Для работы приложения требуется сеть Wi-Fi
 - Если в качестве сети Wi-Fi используется Personal Hotspot, IP-адрес iPhone, на котором включена Personal Hotspot, будет иметь последний четвертый октет равный 1: `xxx.xxx.xxx.1`
+
+## Технологический стек
+- Swift
+- CocoaPods
+- UIKit
+- WebSockets (server/client)
+- RxSwift
+- MVVM
+- Core Audio
+- Core Location
