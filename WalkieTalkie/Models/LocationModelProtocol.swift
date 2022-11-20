@@ -13,6 +13,7 @@ protocol LocationModelProtocol: AnyObject {
     var lastLocation: BehaviorRelay<LocationBody?> {get}
     var peerDistance: BehaviorRelay<Int?> {get}
 
+    func requestPermission()
     func startTracking()
     func stopTracking()
 }

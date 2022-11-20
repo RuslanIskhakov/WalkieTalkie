@@ -7,6 +7,7 @@
 
 import RxRelay
 import RxSwift
+import AVFAudio
 
 class AudioModel: BaseModelInitialisable, AudioModelProtocol {
 
@@ -84,6 +85,12 @@ class AudioModel: BaseModelInitialisable, AudioModelProtocol {
     func receivedSamples(_ samples: Array<SampleFormat>) {
         self.wkState.accept(.receiving)
         self.audioTransforms?.receivedSamples(samples)
+    }
+
+    func requestPermission() {
+        AVAudioSession.sharedInstance().requestRecordPermission(){granted in
+
+        }
     }
 }
 

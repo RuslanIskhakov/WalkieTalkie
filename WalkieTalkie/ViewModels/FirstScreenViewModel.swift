@@ -28,6 +28,9 @@ class FirstScreenViewModel: BaseViewModel, FirstScreenViewModelProtocol {
 
     func configureView() {
         self.refreshIPAddress()
+
+        self.appModel.locationModel.requestPermission()
+        self.appModel.audioModel.requestPermission()
     }
 
     func showSecondTap() {

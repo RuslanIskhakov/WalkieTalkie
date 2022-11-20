@@ -16,4 +16,5 @@ enum WalkieTalkieState {
 protocol AudioModelProtocol: WebSocketServerDelegate {
     var appModel: AppModelProtocol? {get set}
     var wkState: BehaviorRelay<WalkieTalkieState> {get set}
+    func requestPermission()
 }

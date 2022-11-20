@@ -31,6 +31,10 @@ class LocationModel: BaseModelInitialisable, LocationModelProtocol {
         return locationManager
     }()
 
+    func requestPermission() {
+        self.locationManager.requestAlwaysAuthorization()
+    }
+
     func startTracking() {
 
         self.queue.async {[unowned self] in
