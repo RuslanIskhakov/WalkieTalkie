@@ -74,7 +74,9 @@ class WebSocketServer: BaseIOInitialisable {
                                 self.stateEvents.accept(.event("Cannot decode data"))
                             }
                         }
-                        receive()
+                        self.serverQueue.asyncAfter(deadline: .now() + .microseconds(1000)) {
+                            receive()
+                        }
                     }
                 }
             }
